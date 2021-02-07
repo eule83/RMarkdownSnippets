@@ -26,7 +26,7 @@ library(kableExtra) # tables
 library(viridis) # palettes
 ```
 
-
+\twocolumn
 ### Mögliche Packages
 [rtcles](https://github.com/rstudio/rticles)
 
@@ -44,7 +44,7 @@ https://github.com/yihui/rmarkdown-cookbook/issues/19
 ##### Headline 5
 
 
-\twocolumn
+
 
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
@@ -65,13 +65,10 @@ WorldGeom <- World
 WorldData <- World %>% 
   sf::st_drop_geometry()
 ```
-
-
 ### Map
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-
-```{r echo=FALSE}
+```{r}
 # Data 
 mapData <- WorldGeom %>% 
   select(
@@ -93,7 +90,7 @@ mapData <- WorldGeom %>%
 
 
 # Plot
-  ggplot() +
+map <-  ggplot() +
     geom_sf(
       data = mapData, 
       aes(fill = income_grp)) +
@@ -141,17 +138,22 @@ mapData <- WorldGeom %>%
 
 ```
 
+
+```{r echo = FALSE}
+map
+```
+
 \newpage
 
-\twocolumn
+
 ### Scatter
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\onecolumn
-```{r}
+
+```{r echo = FALSE}
 # Manuelle Farbpalette
 PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
 
@@ -175,7 +177,7 @@ scatterData <- WorldData %>%
       "aufstrebend" = c("3. Emerging region: BRIC", "4. Emerging region: MIKT", "5. Emerging region: G20"),
       "nicht-entwickelt" = c("6. Developing region", "7. Least developed region")))
 
-  ggplot(scatterData) +
+scatter <-  ggplot(scatterData) +
   geom_point(
     aes(
       inequality, 
@@ -209,8 +211,15 @@ scatterData <- WorldData %>%
 
 ```
 
-\newpage
+\twocolumn
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+```{r echo = FALSE}
+scatter
+```
 
+
+\newpage
+\onecolumn
 ### kableExtra
 ```{r}
 kableData <- WorldData %>% 

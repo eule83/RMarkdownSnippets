@@ -185,6 +185,8 @@
 ## Loading required package: viridisLite
 \end{verbatim}
 
+\twocolumn
+
 \hypertarget{muxf6gliche-packages}{%
 \subsubsection{Mögliche Packages}\label{muxf6gliche-packages}}
 
@@ -210,8 +212,6 @@ Mögliche Lösungen für 2 Spalten:
 
 \hypertarget{headline-5}{%
 \subparagraph{Headline 5}\label{headline-5}}
-
-\twocolumn
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -281,11 +281,80 @@ sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
 ipsum dolor sit amet.
 
-\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-3-1.pdf}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Data }
+\NormalTok{mapData <-}\StringTok{ }\NormalTok{WorldGeom }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}
+\NormalTok{    name,}
+\NormalTok{    continent,}
+\NormalTok{    pop_est,}
+\NormalTok{    income_grp,}
+\NormalTok{    geometry) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(continent }\OperatorTok{==}\StringTok{ "Asia"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \CommentTok{# Vereinigung der 5 Kategorien zu 3}
+    \DataTypeTok{income_grp =}\NormalTok{ forcats}\OperatorTok{::}\KeywordTok{fct_collapse}\NormalTok{(income_grp,}
+      \DataTypeTok{Hoch =} \KeywordTok{c}\NormalTok{(}\StringTok{"1. High income: OECD"}\NormalTok{, }\StringTok{"2. High income: nonOECD"}\NormalTok{),}
+      \DataTypeTok{Mittel =} \KeywordTok{c}\NormalTok{(}\StringTok{"3. Upper middle income"}\NormalTok{, }\StringTok{"4. Lower middle income"}\NormalTok{),}
+      \DataTypeTok{Niedrig =} \KeywordTok{c}\NormalTok{(}\StringTok{"5. Low income"}\NormalTok{)))}
+
+
+
+
+
+\CommentTok{# Plot}
+\NormalTok{map <-}\StringTok{  }\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}
+      \DataTypeTok{data =}\NormalTok{ mapData, }
+      \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ income_grp)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{# Externe Farbpalette, Beispiel viridis}
+\StringTok{    }\CommentTok{# https://www.rdocumentation.org/packages/viridis/versions/0.5.1/topics/scale_color_viridis}
+\StringTok{    }\NormalTok{viridis}\OperatorTok{::}\KeywordTok{scale_fill_viridis}\NormalTok{(}
+      \CommentTok{# Diskrete Variable (Einkommensgruppen)}
+      \DataTypeTok{discrete =} \OtherTok{TRUE}\NormalTok{,}
+      \CommentTok{# Umkehr der Palette, damit dunkel = low income}
+      \DataTypeTok{direction =} \DecValTok{-1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}
+      \DataTypeTok{title =} \StringTok{"Titel"}\NormalTok{,}
+      \DataTypeTok{subtitle =} \StringTok{"Untertitel"}\NormalTok{,}
+      \DataTypeTok{caption =} \StringTok{"Fußnote"}\NormalTok{,}
+      \DataTypeTok{tag =} \StringTok{"label"}\NormalTok{,}
+      \DataTypeTok{fill =} \StringTok{"Titel Legende"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Beschriftung x"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Beschriftung y"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}
+      \DataTypeTok{data =} \KeywordTok{subset}\NormalTok{(mapData, income_grp }\OperatorTok{==}\StringTok{ "Niedrig"}\NormalTok{), }
+      \DataTypeTok{stat =} \StringTok{"sf_coordinates"}\NormalTok{,}
+      \KeywordTok{aes}\NormalTok{(}
+        \DataTypeTok{geometry =}\NormalTok{ geometry,}
+        \DataTypeTok{label =}\NormalTok{ name)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{# geom_sf_label(data = subset(mapData, income_grp == "5. Low income"), aes(label = name)) +}
+\StringTok{    }\KeywordTok{theme}\NormalTok{(}
+      \DataTypeTok{legend.position =} \StringTok{"top"}\NormalTok{,}
+      \CommentTok{# keine Achsenlinien}
+      \DataTypeTok{axis.line=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# keine Achsentitel}
+      \DataTypeTok{axis.title.x=}\KeywordTok{element_blank}\NormalTok{(),}
+      \DataTypeTok{axis.title.y=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# keine Achsen-Markierungen}
+      \DataTypeTok{axis.ticks=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# kein Achsentext}
+      \DataTypeTok{axis.text.x=}\KeywordTok{element_blank}\NormalTok{(),}
+      \DataTypeTok{axis.text.y=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# kein Hintergrund}
+      \DataTypeTok{panel.background=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# kein Hilfslinien}
+      \DataTypeTok{panel.grid.major=}\KeywordTok{element_blank}\NormalTok{(),}
+      \DataTypeTok{panel.grid.minor=}\KeywordTok{element_blank}\NormalTok{(),}
+      \CommentTok{# kein Hintergrund}
+      \DataTypeTok{plot.background=}\KeywordTok{element_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-4-1.pdf}
 
 \newpage
-
-\twocolumn
 
 \hypertarget{scatter}{%
 \subsubsection{Scatter}\label{scatter}}
@@ -302,70 +371,26 @@ voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
 clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
 amet.
 
-\twocolumn[
+\twocolumn
 
-```r
-# Manuelle Farbpalette
-PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
-scatterData <- WorldData %>% 
-    select(
-    name,
-    continent,
-    inequality,
-    well_being,
-    gdp_cap_est,
-    economy) %>% 
-  group_by(
-    continent) %>% 
-  mutate(avg_gdp = mean(gdp_cap_est, na.rm = TRUE)) %>% 
-  ungroup() %>% 
-  drop_na() %>% 
-  mutate(
-    # Vereinigung der Kategorien
-    economy = forcats::fct_collapse(economy,
-      "entwickelt" = c("1. Developed region: G7", "2. Developed region: nonG7"),
-      "aufstrebend" = c("3. Emerging region: BRIC", "4. Emerging region: MIKT", "5. Emerging region: G20"),
-      "nicht-entwickelt" = c("6. Developing region", "7. Least developed region")))
-
-  ggplot(scatterData) +
-  geom_point(
-    aes(
-      inequality, 
-      well_being,
-    colour = fct_reorder(continent, desc(avg_gdp))),
-    alpha = 0.8) + 
-  facet_wrap(
-    ~ economy, 
-    nrow = 2) +
-  scale_colour_manual(
-    values = PAL_well,
-    guide = guide_legend(
-                      title.position = "top",
-                      title="Kontinente",
-                      direction="horizontal",
-                      nrow = 3,
-                      ncol = 2)) +
-  geom_smooth(aes(x = inequality, y = well_being), method = "lm") +
-  theme_minimal() +
-  xlab("Wohlbefinden") +
-  ylab("Ungleichheit") +
-  theme(
-    # Legenden Position, Alternativ: "top", "bottom", "right", "left"
-    legend.position = c(0.72, 0.27),
-    # Legenden Schrift fett
-    legend.title = element_text(face="bold"),
-    # Abstand der Achsentitel zum Achsentext
-    axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
-    axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)))
-```
-
-```
+\begin{verbatim}
 ## `geom_smooth()` using formula 'y ~ x'
-```
+\end{verbatim}
 
-![](PDFoutputsamples\_files/figure-latex/unnamed-chunk-4-1.pdf) {]}
+\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-6-1.pdf}
+
 \newpage
+\onecolumn
 
 \hypertarget{kableextra}{%
 \subsubsection{kableExtra}\label{kableextra}}
