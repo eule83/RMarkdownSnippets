@@ -1,0 +1,206 @@
+---
+title: "Titel"
+subtitle: "Untertitel"
+author: "Autor"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(tmap)
+library(kableExtra)
+library(viridis)
+```
+
+### Data
+```{r}
+data("World")
+
+# Data mit geometry
+WorldGeom <- World
+# Data ohne
+WorldData <- World %>% 
+  sf::st_drop_geometry()
+```
+
+
+### Map
+```{r echo=FALSE}
+# Data 
+mapData <- WorldGeom %>% 
+  select(
+    name,
+    continent,
+    pop_est,
+    income_grp,
+    geometry) %>% 
+  filter(continent == "Asia") %>% 
+  mutate(
+    # Vereinigung der 5 Kategorien zu 3
+    income_grp = forcats::fct_collapse(income_grp,
+      Hoch = c("1. High income: OECD", "2. High income: nonOECD"),
+      Mittel = c("3. Upper middle income", "4. Lower middle income"),
+      Niedrig = c("5. Low income")))
+
+
+
+
+
+# Plot
+  ggplot() +
+    geom_sf(
+      data = mapData, 
+      aes(fill = income_grp)) +
+    # Externe Farbpalette, Beispiel viridis
+    # https://www.rdocumentation.org/packages/viridis/versions/0.5.1/topics/scale_color_viridis
+    viridis::scale_fill_viridis(
+      # Diskrete Variable (Einkommensgruppen)
+      discrete = TRUE,
+      # Umkehr der Palette, damit dunkel = low income
+      direction = -1) +
+    labs(
+      title = "Titel",
+      subtitle = "Untertitel",
+      caption = "Fußnote",
+      tag = "label",
+      fill = "Titel Legende") +
+    xlab("Beschriftung x") +
+    ylab("Beschriftung y") +
+    ggrepel::geom_label_repel(
+      data = subset(mapData, income_grp == "Niedrig"), 
+      stat = "sf_coordinates",
+      aes(
+        geometry = geometry,
+        label = name)) +
+    # geom_sf_label(data = subset(mapData, income_grp == "5. Low income"), aes(label = name)) +
+    theme(
+      legend.position = "top",
+      # keine Achsenlinien
+      axis.line=element_blank(),
+      # keine Achsentitel
+      axis.title.x=element_blank(),
+      axis.title.y=element_blank(),
+      # keine Achsen-Markierungen
+      axis.ticks=element_blank(),
+      # kein Achsentext
+      axis.text.x=element_blank(),
+      axis.text.y=element_blank(),
+      # kein Hintergrund
+      panel.background=element_blank(),
+      # kein Hilfslinien
+      panel.grid.major=element_blank(),
+      panel.grid.minor=element_blank(),
+      # kein Hintergrund
+      plot.background=element_blank())
+
+```
+
+\newpage
+
+### Scatter
+```{r}
+# Manuelle Farbpalette
+PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
+
+scatterData <- WorldData %>% 
+    select(
+    name,
+    continent,
+    inequality,
+    well_being,
+    gdp_cap_est,
+    economy) %>% 
+  group_by(
+    continent) %>% 
+  mutate(avg_gdp = mean(gdp_cap_est, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  drop_na() %>% 
+  mutate(
+    # Vereinigung der Kategorien
+    economy = forcats::fct_collapse(economy,
+      "entwickelt" = c("1. Developed region: G7", "2. Developed region: nonG7"),
+      "aufstrebend" = c("3. Emerging region: BRIC", "4. Emerging region: MIKT", "5. Emerging region: G20"),
+      "nicht-entwickelt" = c("6. Developing region", "7. Least developed region")))
+
+  ggplot(scatterData) +
+  geom_point(
+    aes(
+      inequality, 
+      well_being,
+    colour = fct_reorder(continent, desc(avg_gdp))),
+    alpha = 0.8) + 
+  facet_wrap(
+    ~ economy, 
+    nrow = 2) +
+  scale_colour_manual(
+    values = PAL_well,
+    guide = guide_legend(
+                      title.position = "top",
+                      title="Kontinente",
+                      direction="horizontal",
+                      nrow = 3,
+                      ncol = 2)) +
+  geom_smooth(aes(x = inequality, y = well_being), method = "lm") +
+  theme_minimal() +
+  xlab("Wohlbefinden") +
+  ylab("Ungleichheit") +
+  theme(
+    # Legenden Position, Alternativ: "top", "bottom", "right", "left"
+    legend.position = c(0.72, 0.27),
+    # Legenden Schrift fett
+    legend.title = element_text(face="bold"),
+    # Abstand der Achsentitel zum Achsentext
+    axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
+    axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)))
+
+
+```
+\newpage
+
+### kableExtra
+```{r}
+kableData <- WorldData %>% 
+  select(
+    continent,
+    pop_est_dens,
+    gdp_cap_est,
+    life_exp,
+    well_being,
+    inequality,
+    HPI) %>% 
+  group_by(continent) %>% 
+  summarise(
+    across(
+      pop_est_dens:HPI, 
+      ~round(
+        mean(., na.rm = TRUE)
+        ,1))) %>% 
+  filter(!is.na(well_being)) 
+
+  kableExtra::kbl(kableData,
+    col.names = c(
+      "Kontinent",
+      "Bevölkerungsdichte",
+      "BIP (pro Kopf)",
+      "Lebenserwartung",
+      "Wohlbefinden",
+      "Ungleichheit",
+      "Happy Planet"),
+    booktabs = T) %>% 
+  kableExtra::add_header_above(c(
+    " " = 4, 
+    "Index" = 3)) %>% 
+  kableExtra::kable_styling(latex_options = c(
+    "striped",
+    "scale_down",
+    "reapeat_header"))
+
+
+```
+
