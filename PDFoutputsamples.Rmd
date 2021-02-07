@@ -2,7 +2,10 @@
 title: "Formatting, Latex, plot and table samples "
 subtitle: "output: Rmarkdown PDF"
 author: "Fabian Koch"
-output: pdf_document
+output: 
+  pdf_document: 
+    template: "./template/dostat_pdf_print.latex"
+    latex_engine: "xelatex"
 ---
 
 ```{r setup, include=FALSE}
