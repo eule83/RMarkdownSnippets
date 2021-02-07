@@ -2,13 +2,16 @@
 title: "Formatting, Latex, plot and table samples "
 subtitle: "output: Rmarkdown PDF"
 mainfont: "Verdana"
+classoption: "twocolumn"
 author: "Fabian Koch"
 output: 
   pdf_document: 
+    keep_tex: true
     template: "./templates/dostat/dostat_pdf_print.latex"
     latex_engine: "xelatex"
----
 
+---
+\onecolumn
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -16,13 +19,42 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
-library(tidyverse)
-library(ggplot2)
-library(tmap)
-library(kableExtra)
-library(viridis)
+library(tidyverse) # import/wrangle
+library(ggplot2) # plot/maps
+library(tmap) # Dataset/Maps
+library(kableExtra) # tables
+library(viridis) # palettes
 ```
 
+
+### Mögliche Packages
+[rtcles](https://github.com/rstudio/rticles)
+
+Mögliche Lösungen für 2 Spalten:
+https://github.com/yihui/rmarkdown-cookbook/issues/19
+
+
+
+
+### Text
+# Headline 1
+## Headline 2
+### Headline 3
+#### Headline 4
+##### Headline 5
+
+
+\twocolumn
+
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\onecolumn
 ### Data
 ```{r}
 data("World")
@@ -36,8 +68,9 @@ WorldData <- World %>%
 
 
 ### Map
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-Test saoklögjhipoghqapeoighqiopgh
+
 ```{r echo=FALSE}
 # Data 
 mapData <- WorldGeom %>% 
@@ -110,7 +143,14 @@ mapData <- WorldGeom %>%
 
 \newpage
 
+\twocolumn
 ### Scatter
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\onecolumn
 ```{r}
 # Manuelle Farbpalette
 PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
@@ -168,6 +208,7 @@ scatterData <- WorldData %>%
 
 
 ```
+
 \newpage
 
 ### kableExtra
