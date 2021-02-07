@@ -167,7 +167,7 @@ $if(fonttheme)$
 \usefonttheme{$fonttheme$}
 $endif$
 $if(mainfont)$
-\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+\usefonttheme{sansfont} % use mainfont rather than sansfont for slide text
 $endif$
 $if(innertheme)$
 \useinnertheme{$innertheme$}
