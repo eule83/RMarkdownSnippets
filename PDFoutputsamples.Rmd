@@ -1,7 +1,7 @@
 ---
-title: "Titel"
-subtitle: "Untertitel"
-author: "Autor"
+title: "Formatting, Latex, plot and table samples "
+subtitle: "output: Rmarkdown PDF"
+author: "Fabian Koch"
 output: pdf_document
 ---
 
