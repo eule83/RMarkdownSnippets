@@ -2,25 +2,30 @@
 title: "Formatting, Latex, plot and table samples "
 subtitle: "output: Rmarkdown PDF"
 mainfont: "Verdana"
-classoption: "twocolumn"
 author: "Fabian Koch"
 header-includes:
-- \setlength{\columnsep}{18pt}
+  - \setlength{\columnsep}{18pt}
+  - \usepackage{multicol}
+  - \newcommand{\hideFromPandoc}[1]{#1} # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+  - \hideFromPandoc{
+      \let\Begin\begin
+      \let\End\end
+      }
 output: 
   pdf_document: 
+    extra_dependencies: ["multicol"]
     keep_tex: true
-    template: "./templates/dostat/dostat_pdf_print.latex"
     latex_engine: "xelatex"
 
 ---
-\onecolumn
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
 
-```{r}
+```{r message=FALSE}
 library(tidyverse) # import/wrangle
 library(ggplot2) # plot/maps
 library(tmap) # Dataset/Maps
@@ -29,7 +34,7 @@ library(viridis) # palettes
 ```
 
 
-```{r }
+```{r}
 data("World")
 
 # Data mit geometry
@@ -38,9 +43,8 @@ WorldGeom <- World
 WorldData <- World %>% 
   sf::st_drop_geometry()
 ```
+\newpage
 
-
-\twocolumn
 ### Mögliche Packages
 [rtcles](https://github.com/rstudio/rticles)
 
@@ -49,8 +53,9 @@ https://github.com/yihui/rmarkdown-cookbook/issues/19
 https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf
 
 package Multicol https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
-Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
+https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
 
+Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
 
 
 ### Text
@@ -66,11 +71,13 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\newpage
 
 
+# Gemischtes 1 und 2 Spalten Layout
 
-\twocolumn
+\Begin{multicols}{2}
 ```{r echo = FALSE}
 WorldData %>% 
   select(
@@ -84,9 +91,8 @@ WorldData %>%
   ylab("")
 
 ```
-
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-\newpage
+\columnbreak
 
 ```{r echo = FALSE}
 
@@ -106,11 +112,12 @@ WorldData %>%
 ```
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
+\End{multicols}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 
-
-
-\onecolumn
+\newpage
 
 ### Map
 
