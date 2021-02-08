@@ -4,6 +4,8 @@ subtitle: "output: Rmarkdown PDF"
 mainfont: "Verdana"
 classoption: "twocolumn"
 author: "Fabian Koch"
+header-includes:
+- \setlength{\columnsep}{18pt}
 output: 
   pdf_document: 
     keep_tex: true
@@ -26,13 +28,28 @@ library(kableExtra) # tables
 library(viridis) # palettes
 ```
 
+
+```{r }
+data("World")
+
+# Data mit geometry
+WorldGeom <- World
+# Data ohne
+WorldData <- World %>% 
+  sf::st_drop_geometry()
+```
+
+
 \twocolumn
 ### Mögliche Packages
 [rtcles](https://github.com/rstudio/rticles)
 
 Mögliche Lösungen für 2 Spalten:
 https://github.com/yihui/rmarkdown-cookbook/issues/19
+https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf
 
+package Multicol https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
+Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
 
 
 
@@ -44,9 +61,6 @@ https://github.com/yihui/rmarkdown-cookbook/issues/19
 ##### Headline 5
 
 
-
-
-
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
 
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -54,19 +68,51 @@ vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\onecolumn
-### Data
-```{r}
-data("World")
 
-# Data mit geometry
-WorldGeom <- World
-# Data ohne
-WorldData <- World %>% 
-  sf::st_drop_geometry()
+
+\twocolumn
+```{r echo = FALSE}
+WorldData %>% 
+  select(
+    name,
+    pop_est) %>% 
+  arrange(desc(pop_est)) %>% 
+  head(5) %>% 
+  ggplot() + 
+  geom_col(aes(x = pop_est, y = forcats::fct_reorder(name, pop_est))) +
+  xlab("Bevölkerung") +
+  ylab("")
+
 ```
-### Map
+
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\newpage
+
+```{r echo = FALSE}
+
+WorldData %>% 
+  select(
+    name,
+    pop_est) %>% 
+  arrange(desc(pop_est)) %>% 
+  head(5) %>% 
+  ggplot() + 
+  geom_col(aes(x = pop_est, y = forcats::fct_reorder(name, pop_est))) +
+  xlab("Bevölkerung") +
+  ylab("") +
+  theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"))
+
+```
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+
+
+\onecolumn
+
+### Map
 
 ```{r}
 # Data 
@@ -84,13 +130,8 @@ mapData <- WorldGeom %>%
       Hoch = c("1. High income: OECD", "2. High income: nonOECD"),
       Mittel = c("3. Upper middle income", "4. Lower middle income"),
       Niedrig = c("5. Low income")))
-
-
-
-
-
-# Plot
-map <-  ggplot() +
+  
+  ggplot() +
     geom_sf(
       data = mapData, 
       aes(fill = income_grp)) +
@@ -139,25 +180,17 @@ map <-  ggplot() +
 ```
 
 
-```{r echo = FALSE}
-map
-```
 
 \newpage
 
 
 ### Scatter
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-
-```{r echo = FALSE}
+```{r}
 # Manuelle Farbpalette
 PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
 
-scatterData <- WorldData %>% 
+WorldData %>% 
     select(
     name,
     continent,
@@ -175,9 +208,8 @@ scatterData <- WorldData %>%
     economy = forcats::fct_collapse(economy,
       "entwickelt" = c("1. Developed region: G7", "2. Developed region: nonG7"),
       "aufstrebend" = c("3. Emerging region: BRIC", "4. Emerging region: MIKT", "5. Emerging region: G20"),
-      "nicht-entwickelt" = c("6. Developing region", "7. Least developed region")))
-
-scatter <-  ggplot(scatterData) +
+      "nicht-entwickelt" = c("6. Developing region", "7. Least developed region"))) %>% 
+  ggplot() +
   geom_point(
     aes(
       inequality, 
@@ -208,21 +240,13 @@ scatter <-  ggplot(scatterData) +
     axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
     axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)))
 
-
 ```
-
-\twocolumn
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-```{r echo = FALSE}
-scatter
-```
-
 
 \newpage
-\onecolumn
+
 ### kableExtra
 ```{r}
-kableData <- WorldData %>% 
+WorldData %>% 
   select(
     continent,
     pop_est_dens,
@@ -238,9 +262,8 @@ kableData <- WorldData %>%
       ~round(
         mean(., na.rm = TRUE)
         ,1))) %>% 
-  filter(!is.na(well_being)) 
-
-  kableExtra::kbl(kableData,
+  filter(!is.na(well_being)) %>% 
+  kableExtra::kbl(
     col.names = c(
       "Kontinent",
       "Bevölkerungsdichte",

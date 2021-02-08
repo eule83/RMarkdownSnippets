@@ -99,6 +99,7 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\setlength{\columnsep}{18pt}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -185,6 +186,18 @@
 ## Loading required package: viridisLite
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(}\StringTok{"World"}\NormalTok{)}
+
+\CommentTok{# Data mit geometry}
+\NormalTok{WorldGeom <-}\StringTok{ }\NormalTok{World}
+\CommentTok{# Data ohne}
+\NormalTok{WorldData <-}\StringTok{ }\NormalTok{World }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{sf}\OperatorTok{::}\KeywordTok{st_drop_geometry}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
 \twocolumn
 
 \hypertarget{muxf6gliche-packages}{%
@@ -194,6 +207,12 @@
 
 Mögliche Lösungen für 2 Spalten:
 \url{https://github.com/yihui/rmarkdown-cookbook/issues/19}
+\url{https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf}
+
+package Multicol
+\url{https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page}
+Latex Page Breaks
+\url{https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml}
 
 \hypertarget{text}{%
 \subsubsection{Text}\label{text}}
@@ -251,25 +270,9 @@ dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
 justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
 takimata sanctus est Lorem ipsum dolor sit amet.
 
-\onecolumn
+\twocolumn
 
-\hypertarget{data}{%
-\subsubsection{Data}\label{data}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(}\StringTok{"World"}\NormalTok{)}
-
-\CommentTok{# Data mit geometry}
-\NormalTok{WorldGeom <-}\StringTok{ }\NormalTok{World}
-\CommentTok{# Data ohne}
-\NormalTok{WorldData <-}\StringTok{ }\NormalTok{World }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{sf}\OperatorTok{::}\KeywordTok{st_drop_geometry}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{map}{%
-\subsubsection{Map}\label{map}}
+\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-3-1.pdf}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -279,7 +282,26 @@ amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet. \newpage
+
+\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-4-1.pdf}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
 ipsum dolor sit amet.
+
+\onecolumn[{%
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.}]
+
+\onecolumn
+
+\hypertarget{map}{%
+\subsubsection{Map}\label{map}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -298,13 +320,8 @@ ipsum dolor sit amet.
       \DataTypeTok{Hoch =} \KeywordTok{c}\NormalTok{(}\StringTok{"1. High income: OECD"}\NormalTok{, }\StringTok{"2. High income: nonOECD"}\NormalTok{),}
       \DataTypeTok{Mittel =} \KeywordTok{c}\NormalTok{(}\StringTok{"3. Upper middle income"}\NormalTok{, }\StringTok{"4. Lower middle income"}\NormalTok{),}
       \DataTypeTok{Niedrig =} \KeywordTok{c}\NormalTok{(}\StringTok{"5. Low income"}\NormalTok{)))}
-
-
-
-
-
-\CommentTok{# Plot}
-\NormalTok{map <-}\StringTok{  }\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+  
+  \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}
       \DataTypeTok{data =}\NormalTok{ mapData, }
       \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ income_grp)) }\OperatorTok{+}
@@ -352,36 +369,69 @@ ipsum dolor sit amet.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \newpage
 
 \hypertarget{scatter}{%
 \subsubsection{Scatter}\label{scatter}}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Manuelle Farbpalette}
+\NormalTok{PAL_well <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#fc8d62"}\NormalTok{,}\StringTok{"#e78ac3"}\NormalTok{,}\StringTok{"#66c2a5"}\NormalTok{, }\StringTok{"#8da0cb"}\NormalTok{,}\StringTok{"#a6d854"}\NormalTok{,}\StringTok{"#ffd92f"}\NormalTok{,}\StringTok{"#e5c494"}\NormalTok{)}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet.
-
-\twocolumn
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+\NormalTok{WorldData }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(}
+\NormalTok{    name,}
+\NormalTok{    continent,}
+\NormalTok{    inequality,}
+\NormalTok{    well_being,}
+\NormalTok{    gdp_cap_est,}
+\NormalTok{    economy) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(}
+\NormalTok{    continent) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{avg_gdp =} \KeywordTok{mean}\NormalTok{(gdp_cap_est, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{drop_na}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \CommentTok{# Vereinigung der Kategorien}
+    \DataTypeTok{economy =}\NormalTok{ forcats}\OperatorTok{::}\KeywordTok{fct_collapse}\NormalTok{(economy,}
+      \StringTok{"entwickelt"}\NormalTok{ =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"1. Developed region: G7"}\NormalTok{, }\StringTok{"2. Developed region: nonG7"}\NormalTok{),}
+      \StringTok{"aufstrebend"}\NormalTok{ =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"3. Emerging region: BRIC"}\NormalTok{, }\StringTok{"4. Emerging region: MIKT"}\NormalTok{, }\StringTok{"5. Emerging region: G20"}\NormalTok{),}
+      \StringTok{"nicht-entwickelt"}\NormalTok{ =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"6. Developing region"}\NormalTok{, }\StringTok{"7. Least developed region"}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}
+    \KeywordTok{aes}\NormalTok{(}
+\NormalTok{      inequality, }
+\NormalTok{      well_being,}
+    \DataTypeTok{colour =} \KeywordTok{fct_reorder}\NormalTok{(continent, }\KeywordTok{desc}\NormalTok{(avg_gdp))),}
+    \DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}
+    \OperatorTok{~}\StringTok{ }\NormalTok{economy, }
+    \DataTypeTok{nrow =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_colour_manual}\NormalTok{(}
+    \DataTypeTok{values =}\NormalTok{ PAL_well,}
+    \DataTypeTok{guide =} \KeywordTok{guide_legend}\NormalTok{(}
+                      \DataTypeTok{title.position =} \StringTok{"top"}\NormalTok{,}
+                      \DataTypeTok{title=}\StringTok{"Kontinente"}\NormalTok{,}
+                      \DataTypeTok{direction=}\StringTok{"horizontal"}\NormalTok{,}
+                      \DataTypeTok{nrow =} \DecValTok{3}\NormalTok{,}
+                      \DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ inequality, }\DataTypeTok{y =}\NormalTok{ well_being), }\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Wohlbefinden"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Ungleichheit"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \CommentTok{# Legenden Position, Alternativ: "top", "bottom", "right", "left"}
+    \DataTypeTok{legend.position =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.72}\NormalTok{, }\FloatTok{0.27}\NormalTok{),}
+    \CommentTok{# Legenden Schrift fett}
+    \DataTypeTok{legend.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{face=}\StringTok{"bold"}\NormalTok{),}
+    \CommentTok{# Abstand der Achsentitel zum Achsentext}
+    \DataTypeTok{axis.title.x =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{t =} \DecValTok{15}\NormalTok{, }\DataTypeTok{r =} \DecValTok{0}\NormalTok{, }\DataTypeTok{b =} \DecValTok{0}\NormalTok{, }\DataTypeTok{l =} \DecValTok{0}\NormalTok{)),}
+    \DataTypeTok{axis.title.y =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{t =} \DecValTok{0}\NormalTok{, }\DataTypeTok{r =} \DecValTok{15}\NormalTok{, }\DataTypeTok{b =} \DecValTok{0}\NormalTok{, }\DataTypeTok{l =} \DecValTok{0}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 ## `geom_smooth()` using formula 'y ~ x'
@@ -390,14 +440,13 @@ ipsum dolor sit amet.
 \includegraphics{PDFoutputsamples_files/figure-latex/unnamed-chunk-6-1.pdf}
 
 \newpage
-\onecolumn
 
 \hypertarget{kableextra}{%
 \subsubsection{kableExtra}\label{kableextra}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{kableData <-}\StringTok{ }\NormalTok{WorldData }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{WorldData }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}
 \NormalTok{    continent,}
 \NormalTok{    pop_est_dens,}
@@ -413,17 +462,8 @@ ipsum dolor sit amet.
       \OperatorTok{~}\KeywordTok{round}\NormalTok{(}
         \KeywordTok{mean}\NormalTok{(., }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
 \NormalTok{        ,}\DecValTok{1}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(well_being)) }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## `summarise()` ungrouping output (override with `.groups` argument)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{  kableExtra}\OperatorTok{::}\KeywordTok{kbl}\NormalTok{(kableData,}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(well_being)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{kableExtra}\OperatorTok{::}\KeywordTok{kbl}\NormalTok{(}
     \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
       \StringTok{"Kontinent"}\NormalTok{,}
       \StringTok{"Bevölkerungsdichte"}\NormalTok{,}
@@ -442,6 +482,10 @@ ipsum dolor sit amet.
     \StringTok{"reapeat_header"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
 
 \begin{table}[H]
 \centering
