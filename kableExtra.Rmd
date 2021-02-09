@@ -1,0 +1,157 @@
+---
+title: "Formatting, Latex, plot and table samples "
+subtitle: "output: Rmarkdown PDF"
+mainfont: "Verdana"
+author: "Fabian Koch"
+header-includes:
+  - \setlength{\columnsep}{18pt}
+  - \usepackage{multicol}
+  - \newcommand{\hideFromPandoc}[1]{#1} # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+  - \hideFromPandoc{
+      \let\Begin\begin
+      \let\End\end
+      }
+output: 
+  pdf_document: 
+    extra_dependencies: ["multicol"]
+    keep_tex: true
+    latex_engine: "xelatex"
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r message=FALSE}
+library(tidyverse) # import/wrangle
+library(kableExtra) # tables
+library(viridis) # palettes
+library(tmap) # World Dataset
+```
+
+
+```{r}
+data("World")
+
+# Data mit geometry
+WorldGeom <- World
+# Data ohne
+WorldData <- World %>% 
+  sf::st_drop_geometry()
+```
+\newpage
+
+
+
+### package Info
+https://cran.r-project.org/web/packages/kableExtra/index.html
+
+Guide für PDF
+https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pdf.pdf
+
+Spaltenformatierung
+https://rdrr.io/cran/kableExtra/man/column_spec.html
+
+### Text
+# Headline 1
+## Headline 2
+### Headline 3
+#### Headline 4
+##### Headline 5
+
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+\newpage
+
+
+# Gemischtes 1 und 2 Spalten Layout
+
+\Begin{multicols}{2}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\columnbreak
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\End{multicols}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+```{r echo = FALSE}
+tabData <- WorldData %>% 
+  select(
+    continent,
+    pop_est_dens,
+    gdp_cap_est,
+    life_exp,
+    well_being,
+    inequality,
+    HPI) %>% 
+  group_by(continent) %>% 
+  summarise(
+    across(
+      pop_est_dens:HPI, 
+      ~round(
+        mean(., na.rm = TRUE)
+        ,1))) %>% 
+  ungroup() %>% 
+  filter(!is.na(well_being)) %>% 
+  mutate(Ungleichheit = case_when(
+    inequality < 0.2 ~ "geringe Ungleichheit",
+    inequality < 0.4 ~ "mittlere Ungleichheit",
+    inequality < 0.5 ~ "hohe Ungleichheit")) %>% 
+  mutate(
+    Ungleichheit = as.factor(Ungleichheit))
+
+  tabData %>% 
+    select(-Ungleichheit) %>% 
+    arrange(inequality) %>% 
+  kableExtra::kbl(
+    # Tabellentitel
+    caption = "Tabellentitel",
+    label = "Tabellenlabel",
+    # Umbenennen der Tabellenüberschriften
+    # Anzahl muss der Gesamtanzahl an Spalten entsprechen, leer über " "
+    col.names = c(
+      "Kontinent",
+      "Bevölkerungsdichte",
+      "BIP (pro Kopf)",
+      "Lebenserwartung",
+      "Wohlbefinden",
+      "Ungleichheit",
+      "Happy Planet"),
+    booktabs = T) %>% 
+  # Gruppenüberschrift
+  kableExtra::add_header_above(c(
+    " " = 4, 
+    "Index" = 3)) %>% 
+  kableExtra::kable_styling(latex_options = c(
+    # striped aktiviert abwechselnt in grau gefärbte Zeilen
+    # "striped",
+    "scale_down",
+    # würde bei Seitenumbruch den Tabellenkopf wiederholen
+    "reapeat_header")) %>% 
+  # pack_rows gruppiert über Zeilen Zahl
+  # arrange(inequality) oben, um die Länder aufsteigend nach Ungleichheit zu sortieren
+  # man kann manuell die Gruppen festlegen kableExtra::pack_rows("mittlere Ungleichheit", 3, 5)
+  # hier würde vorher im data.frame eine Gruppierungsspalte mit case_when erzeugt
+  # die kann dann über index = table(df$Gruppe) ausgewählt werden
+  kableExtra::pack_rows(index = table(tabData$Ungleichheit)) %>%
+  # Einzug
+  kableExtra::add_indent(3, level_of_indent = 2)
+
+
+tabData$Ungleichheit[order(Ungleichheit,)]
+```
+\newpage
+
+
