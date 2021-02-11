@@ -49,9 +49,150 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
+# ggplot2
+## Themes
+
+https://ggplot2.tidyverse.org/reference/theme.html
+
+
+```{r}
+
+
+
+
+PAL_Gliederung_Colour <- c(SR = "blue", UBZTP = "orange")
+PAL_Gebiet_fill <- c("yellow3", "black", "grey", "maroon3") 
+PAL_pal9GnPu <- c("#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837")
+PAL_virpal <- viridisLite::viridis(6)
+PAL_col6qual <- c("#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f")
+
+
+# Thema für Karten in ggplot
+# default_font_family <- "sans" entfällt wegen Latex settings
+default_font_color <- "black"
+default_background_color <- "white"
+
+theme_map <- function(...) {
+  theme_minimal()
+  theme(
+    text = element_text(
+      # family = default_font_family,
+      color = default_font_color),
+    # remove all axes
+    axis.line = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    # add a subtle grid
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    # background colors
+    plot.background = element_rect(fill = default_background_color,
+                                   color = NA),
+    panel.background = element_rect(fill = default_background_color,
+                                    color = NA),
+    legend.background = element_rect(fill = default_background_color,
+                                     color = NA),
+    # borders and margins
+    plot.margin = unit(c(0.1, -0.2, -0.3, -0.3), "cm"),
+    panel.border = element_blank(),
+    panel.spacing = unit(c(0, 0, 0, 0), "cm"),
+    # titles
+    legend.title = element_text(size = 7),
+    legend.text = element_text(size = 7, hjust = 0,
+                               color = default_font_color),
+    plot.title = element_text(size = 20, 
+                              color = default_font_color,
+                              face = "bold"),
+    plot.subtitle = element_text(size = 15, 
+                                 color = default_font_color,
+                                 margin = margin(b = -0.1,
+                                                 t = -0.1,
+                                                 l = 2,
+                                                 unit = "cm"),
+                                 debug = F),
+    # captions
+    plot.caption = element_text(size = 10,
+                                hjust = 0,
+                                margin = margin(t = 0.2,
+                                                b = 0,
+                                                unit = "cm"),
+                                color = "#939184"),
+    ...
+  )
+}
+
+
+
+```
+
+```{r}
+    labs(
+      title = "Titel",
+      subtitle = "Untertitel",
+      caption = "Fußnote",
+      tag = "label",
+      fill = "Titel Legende") +
+    xlab("Beschriftung x") +
+    ylab("Beschriftung y") +
+```
 
 
 \newpage
+
+```{r}
+mapData <- WorldGeom %>% 
+  select(
+    name,
+    continent,
+    pop_est,
+    income_grp,
+    geometry) %>% 
+  filter(continent == "Asia") %>% 
+  mutate(
+    # Vereinigung der 5 Kategorien zu 3
+    income_grp = forcats::fct_collapse(income_grp,
+      Hoch = c("1. High income: OECD", "2. High income: nonOECD"),
+      Mittel = c("3. Upper middle income", "4. Lower middle income"),
+      Niedrig = c("5. Low income")))
+  
+  ggplot() +
+    # da das data.frame eine geometry Spalte besitzt, kommt geom_sf ohne x und y bzw. Rechts- und Hochwerte aus
+    # data.frames mit Rechts- und Hochwerten können über sf::st_as_sf in dieses Format konvertiert werden
+    # https://www.rdocumentation.org/packages/sf/versions/0.9-7/topics/st_as_sf
+    # https://r-spatial.github.io/sf/reference/st_as_sf.html
+    geom_sf(
+      data = mapData, 
+      aes(fill = income_grp)) +
+    # Externe Farbpalette, Beispiel viridis
+    # https://www.rdocumentation.org/packages/viridis/versions/0.5.1/topics/scale_color_viridis
+    viridis::scale_fill_viridis(
+      # Diskrete Variable (Einkommensgruppen)
+      discrete = TRUE,
+      # Umkehr der Palette, damit dunkel = Niedrig
+      direction = -1) +
+    # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
+    ggrepel::geom_label_repel(
+      # man kann die ausgewählte Variable mit subset filtern
+      data = subset(mapData, income_grp == "Niedrig"), 
+      # ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten
+      stat = "sf_coordinates",
+      aes(
+        geometry = geometry,
+        label = name)) +
+    # siehe theme settings oben
+    theme_map() +
+    labs(
+      title = "Titel",
+      subtitle = "Untertitel",
+      caption = "Fußnote",
+      tag = "label",
+      fill = "Titel Legende") +
+    xlab("Beschriftung x") +
+    ylab("Beschriftung y") 
+
+
+```
 
 
 # Gemischtes 1 und 2 Spalten Layout
@@ -89,15 +230,6 @@ mapData <- WorldGeom %>%
       discrete = TRUE,
       # Umkehr der Palette, damit dunkel = Niedrig
       direction = -1) +
-    # Beschriftungen
-    labs(
-      title = "Titel",
-      subtitle = "Untertitel",
-      caption = "Fußnote",
-      tag = "label",
-      fill = "Titel Legende") +
-    xlab("Beschriftung x") +
-    ylab("Beschriftung y") +
     # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
     ggrepel::geom_label_repel(
       # man kann die ausgewählte Variable mit subset filtern

@@ -150,7 +150,6 @@ tabData <- WorldData %>%
   kableExtra::add_indent(3, level_of_indent = 2)
 
 
-tabData$Ungleichheit[order(Ungleichheit,)]
 ```
 \newpage
 
