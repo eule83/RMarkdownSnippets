@@ -1,6 +1,6 @@
 ---
-title: "Formatting, Latex, plot and table samples "
-subtitle: "output: Rmarkdown PDF"
+title: "ggplot2"
+subtitle: "Options, packages and examples for PDF print"
 mainfont: "Verdana"
 author: "Fabian Koch"
 header-includes:
@@ -126,15 +126,15 @@ theme_map <- function(...) {
 
 ```
 
-```{r}
-    labs(
-      title = "Titel",
-      subtitle = "Untertitel",
-      caption = "Fußnote",
-      tag = "label",
-      fill = "Titel Legende") +
-    xlab("Beschriftung x") +
-    ylab("Beschriftung y") +
+```{r }
+    # labs(
+    #   title = "Titel",
+    #   subtitle = "Untertitel",
+    #   caption = "Fußnote",
+    #   tag = "label",
+    #   fill = "Titel Legende") +
+    # xlab("Beschriftung x") +
+    # ylab("Beschriftung y") +
 ```
 
 

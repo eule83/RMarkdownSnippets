@@ -1,7 +1,8 @@
 ---
-title: "Formatting, Latex, plot and table samples "
-subtitle: "output: Rmarkdown PDF"
+title: "Latex, YAML, RMarkdown"
+subtitle: "Options, packages and examples for PDF print"
 mainfont: "Verdana"
+classoption: "twoside" # für unterschiedliche gerade und ungerade Seitenformatierungen
 author: "Fabian Koch"
 header-includes:
   - \setlength{\columnsep}{18pt}
@@ -11,21 +12,36 @@ header-includes:
       \let\Begin\begin
       \let\End\end
       }
+  - \definecolor{DoStat}{RGB}{184, 40, 60} #mit package xcolor (standardmäßig geladen)
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+  - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
+  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
+  # - \renewcommand{\headrulewidth}{0.4pt}
+  # - \renewcommand{\footrulewidth}{0.4pt}
+
 output: 
   pdf_document: 
-    extra_dependencies: ["multicol"]
     keep_tex: true
     latex_engine: "xelatex"
+    toc_depth: 2
 
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
 ```
 
+\newpage 
+\tableofcontents 
+<!-- \listoffigures -->
+<!-- \listoftables -->
+\newpage
 
-
-```{r message=FALSE}
+```{r echo = FALSE, message=FALSE}
 library(tidyverse) # import/wrangle
 library(ggplot2) # plot/maps
 library(tmap) # Dataset/Maps
@@ -34,7 +50,7 @@ library(viridis) # palettes
 ```
 
 
-```{r}
+```{r echo = FALSE}
 data("World")
 
 # Data mit geometry
@@ -45,16 +61,80 @@ WorldData <- World %>%
 ```
 \newpage
 
-### Mögliche Packages
+# Wiki
+
+### packages
+
+\Begin{multicols}{2}
+
+#### R - rticles
+Templates und Vorlagen wissenschaftlicher Journals
+
 [rtcles](https://github.com/rstudio/rticles)
+
+#### R - ymlthis 
+
+package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
+
+[Einführung](https://cran.r-project.org/web/packages/ymlthis/vignettes/introduction-to-ymlthis.html)
+
+[Refrence Manual](https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf)
+
+[YAML Field Guide](https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html)
+
+[yml_latex.R](https://github.com/r-lib/ymlthis/blob/master/R/yml_latex.R)
+
+[yml_latex_opts - Set LaTeX YAML options for PDF output ](https://rdrr.io/github/r-lib/ymlthis/man/yml_latex_opts.html)
+
+[yml_resource_files - Add external resource files to R Markdown document](https://www.rdocumentation.org/packages/ymlthis/versions/0.1.2/topics/yml_resource_files)
+
+[yml_output - Capture, validate, and write output YAML](https://github.com/r-lib/ymlthis/blob/master/R/yml_output.R)
+
+#### R - bookdown
+
+Authoring Books and Technical Documents with R Markdown
+
+Single Page Documents https://bookdown.org/yihui/bookdown/a-single-document.html
+
+customization https://bookdown.org/yihui/bookdown/customization.html
+\columnbreak
+
+#### Latex processors
+
+[Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex
+
+
+#### Latex - Multicol
+https://www.ctan.org/pkg/multicol
+
+
+https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
+
+https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
 
 Mögliche Lösungen für 2 Spalten:
 https://github.com/yihui/rmarkdown-cookbook/issues/19
+
 https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf
 
-package Multicol https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
-https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
 
+#### Latex - koma Script
+
+package und class  Sammlung https://www.ctan.org/pkg/koma-script
+
+inkl. Fußnoten package https://ctan.org/pkg/scrlayer-scrpage?lang=de
+
+#### Latex - fancyhdr
+[Kopf- und Fußzeilen](https://ctan.org/pkg/fancyhdr?lang=de)
+
+[User Guide](http://tug.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf)
+
+[Abschnitt aus "bookdown](https://bookdown.org/yihui/rmarkdown-cookbook/latex-header.html)
+
+\newpage
+
+### Formatierung
+#### Seitenwechsel 
 Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
 
 
@@ -67,6 +147,19 @@ Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.st
 
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+
+
+
+\End{multicols}
+
+
+
+
+
+
+
+
 
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
@@ -91,6 +184,7 @@ WorldData %>%
   ylab("")
 
 ```
+
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 \columnbreak
 
@@ -110,6 +204,7 @@ WorldData %>%
         axis.title=element_text(size=14,face="bold"))
 
 ```
+
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \End{multicols}
@@ -117,7 +212,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 
-```{r}
+```{r echo = FALSE}
 WorldData %>% 
   select(
     continent,
@@ -153,6 +248,4 @@ WorldData %>%
     "scale_down",
     "reapeat_header"))
 
-
 ```
-

@@ -2,7 +2,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-]{article}
+  twoside]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -36,52 +36,12 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={kableExtra},
+  pdftitle={Latex, YAML, RMarkdown},
   pdfauthor={Fabian Koch},
   pdfborder={0 0 0},
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -114,7 +74,14 @@
 \usepackage{multicol}
 \newcommand{\hideFromPandoc}[1]{#1}
 \hideFromPandoc{ \let\Begin\begin \let\End\end }
-\usepackage{multicol}
+\definecolor{DoStat}{RGB}{184, 40, 60}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+\fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+\fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
+\fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -130,7 +97,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
-\title{kableExtra}
+\title{Latex, YAML, RMarkdown}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
@@ -144,43 +111,113 @@
 \begin{document}
 \maketitle
 
-{
-\setcounter{tocdepth}{2}
+\newpage 
 \tableofcontents
-}
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse) }\CommentTok{# import/wrangle}
-\KeywordTok{library}\NormalTok{(kableExtra) }\CommentTok{# tables}
-\KeywordTok{library}\NormalTok{(viridis) }\CommentTok{# palettes}
-\KeywordTok{library}\NormalTok{(tmap) }\CommentTok{# World Dataset}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(}\StringTok{"World"}\NormalTok{)}
-
-\CommentTok{# Data mit geometry}
-\NormalTok{WorldGeom <-}\StringTok{ }\NormalTok{World}
-\CommentTok{# Data ohne}
-\NormalTok{WorldData <-}\StringTok{ }\NormalTok{World }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{sf}\OperatorTok{::}\KeywordTok{st_drop_geometry}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
 
 \newpage
 
-\hypertarget{package-info}{%
-\subsubsection{package Info}\label{package-info}}
+\newpage
 
-\url{https://cran.r-project.org/web/packages/kableExtra/index.html}
+\hypertarget{wiki}{%
+\section{Wiki}\label{wiki}}
 
-Guide für PDF
-\url{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pdf.pdf}
+\hypertarget{packages}{%
+\subsubsection{packages}\label{packages}}
 
-Spaltenformatierung
-\url{https://rdrr.io/cran/kableExtra/man/column_spec.html}
+\begin {multicols}{2}
+
+\hypertarget{r---rticles}{%
+\paragraph{R - rticles}\label{r---rticles}}
+
+Templates und Vorlagen wissenschaftlicher Journals
+
+\href{https://github.com/rstudio/rticles}{rtcles}
+
+\hypertarget{r---ymlthis}{%
+\paragraph{R - ymlthis}\label{r---ymlthis}}
+
+package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
+
+\href{https://cran.r-project.org/web/packages/ymlthis/vignettes/introduction-to-ymlthis.html}{Einführung}
+
+\href{https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf}{Refrence
+Manual}
+
+\href{https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html}{YAML
+Field Guide}
+
+\href{https://github.com/r-lib/ymlthis/blob/master/R/yml_latex.R}{yml\_latex.R}
+
+\href{https://rdrr.io/github/r-lib/ymlthis/man/yml_latex_opts.html}{yml\_latex\_opts
+- Set LaTeX YAML options for PDF output}
+
+\href{https://www.rdocumentation.org/packages/ymlthis/versions/0.1.2/topics/yml_resource_files}{yml\_resource\_files
+- Add external resource files to R Markdown document}
+
+\href{https://github.com/r-lib/ymlthis/blob/master/R/yml_output.R}{yml\_output
+- Capture, validate, and write output YAML}
+
+\hypertarget{r---bookdown}{%
+\paragraph{R - bookdown}\label{r---bookdown}}
+
+Authoring Books and Technical Documents with R Markdown
+
+Single Page Documents
+\url{https://bookdown.org/yihui/bookdown/a-single-document.html}
+
+customization
+\url{https://bookdown.org/yihui/bookdown/customization.html}
+\columnbreak
+
+\hypertarget{latex-processors}{%
+\paragraph{Latex processors}\label{latex-processors}}
+
+{[}Latex
+engines{]}(\url{https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex}
+
+\hypertarget{latex---multicol}{%
+\paragraph{Latex - Multicol}\label{latex---multicol}}
+
+\url{https://www.ctan.org/pkg/multicol}
+
+\url{https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page}
+
+\url{https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown}
+
+Mögliche Lösungen für 2 Spalten:
+\url{https://github.com/yihui/rmarkdown-cookbook/issues/19}
+
+\url{https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf}
+
+\hypertarget{latex---koma-script}{%
+\paragraph{Latex - koma Script}\label{latex---koma-script}}
+
+package und class Sammlung \url{https://www.ctan.org/pkg/koma-script}
+
+inkl. Fußnoten package
+\url{https://ctan.org/pkg/scrlayer-scrpage?lang=de}
+
+\hypertarget{latex---fancyhdr}{%
+\paragraph{Latex - fancyhdr}\label{latex---fancyhdr}}
+
+\href{https://ctan.org/pkg/fancyhdr?lang=de}{Kopf- und Fußzeilen}
+
+\href{http://tug.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf}{User
+Guide}
+
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-header.html}{Abschnitt
+aus "bookdown}
+
+\newpage
+
+\hypertarget{formatierung}{%
+\subsubsection{Formatierung}\label{formatierung}}
+
+\hypertarget{seitenwechsel}{%
+\paragraph{Seitenwechsel}\label{seitenwechsel}}
+
+Latex Page Breaks
+\url{https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml}
 
 \hypertarget{text}{%
 \subsubsection{Text}\label{text}}
@@ -208,6 +245,8 @@ amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
 nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua.
 
+\end {multicols}
+
 vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
 gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem
 ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
@@ -228,6 +267,8 @@ Layout}\label{gemischtes-1-und-2-spalten-layout}}
 
 \begin {multicols}{2}
 
+\includegraphics[width=1\linewidth]{PDF_Latex_files/figure-latex/unnamed-chunk-3-1}
+
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
 voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
@@ -237,6 +278,8 @@ nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
 sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
 ipsum dolor sit amet. \columnbreak
+
+\includegraphics[width=1\linewidth]{PDF_Latex_files/figure-latex/unnamed-chunk-4-1}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -264,9 +307,7 @@ ipsum dolor sit amet.
 ## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-\begin{table}
-
-\caption{\label{tab:Tabellenlabel}Tabellentitel}
+\begin{table}[H]
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrrrr}
@@ -275,21 +316,15 @@ ipsum dolor sit amet.
 \cmidrule(l{3pt}r{3pt}){5-7}
 Kontinent & Bevölkerungsdichte & BIP (pro Kopf) & Lebenserwartung & Wohlbefinden & Ungleichheit & Happy Planet\\
 \midrule
-\addlinespace[0.3em]
-\multicolumn{7}{l}{\textbf{geringe Ungleichheit}}\\
-\hspace{1em}Europe & 114.6 & 25960.5 & 77.9 & 6.1 & 0.1 & 27.2\\
-\hspace{1em}Oceania & 19.4 & 13074.2 & 78.3 & 7.0 & 0.1 & 31.0\\
-\addlinespace[0.3em]
-\multicolumn{7}{l}{\textbf{hohe Ungleichheit}}\\
-\hspace{2em}\hspace{1em}Asia & 176.0 & 13605.7 & 71.7 & 5.1 & 0.2 & 27.9\\
-\addlinespace[0.3em]
-\multicolumn{7}{l}{\textbf{mittlere Ungleichheit}}\\
-\hspace{1em}North America & 136.3 & 14725.4 & 73.9 & 6.1 & 0.2 & 32.2\\
-\hspace{1em}South America & 20.6 & 11045.6 & 74.2 & 6.3 & 0.2 & 32.3\\
-\hspace{1em}Africa & 60.4 & 3391.9 & 59.8 & 4.4 & 0.4 & 19.9\\
+\cellcolor{gray!6}{Africa} & \cellcolor{gray!6}{60.4} & \cellcolor{gray!6}{3391.9} & \cellcolor{gray!6}{59.8} & \cellcolor{gray!6}{4.4} & \cellcolor{gray!6}{0.4} & \cellcolor{gray!6}{19.9}\\
+Asia & 176.0 & 13605.7 & 71.7 & 5.1 & 0.2 & 27.9\\
+\cellcolor{gray!6}{Europe} & \cellcolor{gray!6}{114.6} & \cellcolor{gray!6}{25960.5} & \cellcolor{gray!6}{77.9} & \cellcolor{gray!6}{6.1} & \cellcolor{gray!6}{0.1} & \cellcolor{gray!6}{27.2}\\
+North America & 136.3 & 14725.4 & 73.9 & 6.1 & 0.2 & 32.2\\
+\cellcolor{gray!6}{Oceania} & \cellcolor{gray!6}{19.4} & \cellcolor{gray!6}{13074.2} & \cellcolor{gray!6}{78.3} & \cellcolor{gray!6}{7.0} & \cellcolor{gray!6}{0.1} & \cellcolor{gray!6}{31.0}\\
+\addlinespace
+South America & 20.6 & 11045.6 & 74.2 & 6.3 & 0.2 & 32.3\\
 \bottomrule
 \end{tabular}}
 \end{table}
-\newpage
 
 \end{document}

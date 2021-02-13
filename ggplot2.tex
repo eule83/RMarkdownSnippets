@@ -172,7 +172,150 @@ sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
 rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
 ipsum dolor sit amet.
 
+\hypertarget{ggplot2}{%
+\section{ggplot2}\label{ggplot2}}
+
+\hypertarget{themes}{%
+\subsection{Themes}\label{themes}}
+
+\url{https://ggplot2.tidyverse.org/reference/theme.html}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PAL_Gliederung_Colour <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{SR =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{UBZTP =} \StringTok{"orange"}\NormalTok{)}
+\NormalTok{PAL_Gebiet_fill <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"yellow3"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"grey"}\NormalTok{, }\StringTok{"maroon3"}\NormalTok{) }
+\NormalTok{PAL_pal9GnPu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#762a83"}\NormalTok{, }\StringTok{"#9970ab"}\NormalTok{, }\StringTok{"#c2a5cf"}\NormalTok{, }\StringTok{"#e7d4e8"}\NormalTok{, }\StringTok{"#f7f7f7"}\NormalTok{, }\StringTok{"#d9f0d3"}\NormalTok{, }\StringTok{"#a6dba0"}\NormalTok{, }\StringTok{"#5aae61"}\NormalTok{, }\StringTok{"#1b7837"}\NormalTok{)}
+\NormalTok{PAL_virpal <-}\StringTok{ }\NormalTok{viridisLite}\OperatorTok{::}\KeywordTok{viridis}\NormalTok{(}\DecValTok{6}\NormalTok{)}
+\NormalTok{PAL_col6qual <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#66c2a5"}\NormalTok{,}\StringTok{"#fc8d62"}\NormalTok{,}\StringTok{"#8da0cb"}\NormalTok{,}\StringTok{"#e78ac3"}\NormalTok{,}\StringTok{"#a6d854"}\NormalTok{,}\StringTok{"#ffd92f"}\NormalTok{)}
+
+
+\CommentTok{# Thema für Karten in ggplot}
+\CommentTok{# default_font_family <- "sans" entfällt wegen Latex settings}
+\NormalTok{default_font_color <-}\StringTok{ "black"}
+\NormalTok{default_background_color <-}\StringTok{ "white"}
+
+\NormalTok{theme_map <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(...) \{}
+  \KeywordTok{theme_minimal}\NormalTok{()}
+  \KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{text =} \KeywordTok{element_text}\NormalTok{(}
+      \CommentTok{# family = default_font_family,}
+      \DataTypeTok{color =}\NormalTok{ default_font_color),}
+    \CommentTok{# remove all axes}
+    \DataTypeTok{axis.line =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{axis.text.x =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{axis.ticks =} \KeywordTok{element_blank}\NormalTok{(),}
+    \CommentTok{# add a subtle grid}
+    \DataTypeTok{panel.grid.major =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{panel.grid.minor =} \KeywordTok{element_blank}\NormalTok{(),}
+    \CommentTok{# background colors}
+    \DataTypeTok{plot.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                   \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                    \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \DataTypeTok{legend.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                     \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \CommentTok{# borders and margins}
+    \DataTypeTok{plot.margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{-0.2}\NormalTok{, }\FloatTok{-0.3}\NormalTok{, }\FloatTok{-0.3}\NormalTok{), }\StringTok{"cm"}\NormalTok{),}
+    \DataTypeTok{panel.border =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{panel.spacing =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\StringTok{"cm"}\NormalTok{),}
+    \CommentTok{# titles}
+    \DataTypeTok{legend.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{7}\NormalTok{),}
+    \DataTypeTok{legend.text =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{7}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{,}
+                               \DataTypeTok{color =}\NormalTok{ default_font_color),}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{color =}\NormalTok{ default_font_color,}
+                              \DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{15}\NormalTok{, }
+                                 \DataTypeTok{color =}\NormalTok{ default_font_color,}
+                                 \DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{b =} \FloatTok{-0.1}\NormalTok{,}
+                                                 \DataTypeTok{t =} \FloatTok{-0.1}\NormalTok{,}
+                                                 \DataTypeTok{l =} \DecValTok{2}\NormalTok{,}
+                                                 \DataTypeTok{unit =} \StringTok{"cm"}\NormalTok{),}
+                                 \DataTypeTok{debug =}\NormalTok{ F),}
+    \CommentTok{# captions}
+    \DataTypeTok{plot.caption =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{,}
+                                \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{,}
+                                \DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{t =} \FloatTok{0.2}\NormalTok{,}
+                                                \DataTypeTok{b =} \DecValTok{0}\NormalTok{,}
+                                                \DataTypeTok{unit =} \StringTok{"cm"}\NormalTok{),}
+                                \DataTypeTok{color =} \StringTok{"#939184"}\NormalTok{),}
+\NormalTok{    ...}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \CommentTok{# labs(}
+    \CommentTok{#   title = "Titel",}
+    \CommentTok{#   subtitle = "Untertitel",}
+    \CommentTok{#   caption = "Fußnote",}
+    \CommentTok{#   tag = "label",}
+    \CommentTok{#   fill = "Titel Legende") +}
+    \CommentTok{# xlab("Beschriftung x") +}
+    \CommentTok{# ylab("Beschriftung y") +}
+\end{Highlighting}
+\end{Shaded}
+
 \newpage
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mapData <-}\StringTok{ }\NormalTok{WorldGeom }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}
+\NormalTok{    name,}
+\NormalTok{    continent,}
+\NormalTok{    pop_est,}
+\NormalTok{    income_grp,}
+\NormalTok{    geometry) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(continent }\OperatorTok{==}\StringTok{ "Asia"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
+    \CommentTok{# Vereinigung der 5 Kategorien zu 3}
+    \DataTypeTok{income_grp =}\NormalTok{ forcats}\OperatorTok{::}\KeywordTok{fct_collapse}\NormalTok{(income_grp,}
+      \DataTypeTok{Hoch =} \KeywordTok{c}\NormalTok{(}\StringTok{"1. High income: OECD"}\NormalTok{, }\StringTok{"2. High income: nonOECD"}\NormalTok{),}
+      \DataTypeTok{Mittel =} \KeywordTok{c}\NormalTok{(}\StringTok{"3. Upper middle income"}\NormalTok{, }\StringTok{"4. Lower middle income"}\NormalTok{),}
+      \DataTypeTok{Niedrig =} \KeywordTok{c}\NormalTok{(}\StringTok{"5. Low income"}\NormalTok{)))}
+  
+  \KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\CommentTok{# da das data.frame eine geometry Spalte besitzt, kommt geom_sf ohne x und y bzw. Rechts- und Hochwerte aus}
+\StringTok{    }\CommentTok{# data.frames mit Rechts- und Hochwerten können über sf::st_as_sf in dieses Format konvertiert werden}
+\StringTok{    }\CommentTok{# https://www.rdocumentation.org/packages/sf/versions/0.9-7/topics/st_as_sf}
+\StringTok{    }\CommentTok{# https://r-spatial.github.io/sf/reference/st_as_sf.html}
+\StringTok{    }\KeywordTok{geom_sf}\NormalTok{(}
+      \DataTypeTok{data =}\NormalTok{ mapData, }
+      \KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ income_grp)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{# Externe Farbpalette, Beispiel viridis}
+\StringTok{    }\CommentTok{# https://www.rdocumentation.org/packages/viridis/versions/0.5.1/topics/scale_color_viridis}
+\StringTok{    }\NormalTok{viridis}\OperatorTok{::}\KeywordTok{scale_fill_viridis}\NormalTok{(}
+      \CommentTok{# Diskrete Variable (Einkommensgruppen)}
+      \DataTypeTok{discrete =} \OtherTok{TRUE}\NormalTok{,}
+      \CommentTok{# Umkehr der Palette, damit dunkel = Niedrig}
+      \DataTypeTok{direction =} \DecValTok{-1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\CommentTok{# ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt}
+\StringTok{    }\NormalTok{ggrepel}\OperatorTok{::}\KeywordTok{geom_label_repel}\NormalTok{(}
+      \CommentTok{# man kann die ausgewählte Variable mit subset filtern}
+      \DataTypeTok{data =} \KeywordTok{subset}\NormalTok{(mapData, income_grp }\OperatorTok{==}\StringTok{ "Niedrig"}\NormalTok{), }
+      \CommentTok{# ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten}
+      \DataTypeTok{stat =} \StringTok{"sf_coordinates"}\NormalTok{,}
+      \KeywordTok{aes}\NormalTok{(}
+        \DataTypeTok{geometry =}\NormalTok{ geometry,}
+        \DataTypeTok{label =}\NormalTok{ name)) }\OperatorTok{+}
+\StringTok{    }\CommentTok{# siehe theme settings oben}
+\StringTok{    }\KeywordTok{theme_map}\NormalTok{() }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{(}
+      \DataTypeTok{title =} \StringTok{"Titel"}\NormalTok{,}
+      \DataTypeTok{subtitle =} \StringTok{"Untertitel"}\NormalTok{,}
+      \DataTypeTok{caption =} \StringTok{"Fußnote"}\NormalTok{,}
+      \DataTypeTok{tag =} \StringTok{"label"}\NormalTok{,}
+      \DataTypeTok{fill =} \StringTok{"Titel Legende"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Beschriftung x"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Beschriftung y"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \hypertarget{gemischtes-1-und-2-spalten-layout}{%
 \section{Gemischtes 1 und 2 Spalten
@@ -180,13 +323,13 @@ Layout}\label{gemischtes-1-und-2-spalten-layout}}
 
 \begin {multicols}{2}
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-3-1.pdf} Lorem
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-6-1.pdf} Lorem
 ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
 voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 \columnbreak
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-4-1.pdf} Lorem
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-7-1.pdf} Lorem
 ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
 voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
@@ -197,6 +340,6 @@ voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 ## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-5-1.pdf}
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 \end{document}
