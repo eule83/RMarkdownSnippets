@@ -15,6 +15,7 @@ output:
   pdf_document: 
     keep_tex: true
     latex_engine: "xelatex"
+    toc_depth: 4
 
 ---
 
@@ -22,57 +23,137 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\newpage 
+\tableofcontents 
+<!-- \listoffigures -->
+<!-- \listoftables -->
+\newpage
 
-
-```{r message=FALSE}
-library(tidyverse) # import/wrangle
+```{r echo = FALSE, message=FALSE}
 library(ggplot2) # plot/maps
 library(tmap) # Dataset/Maps
 library(viridis) # palettes
+library(wpp2015) # Provides data from the United Nation's World Population Prospects 2015, https://cran.r-project.org/web/packages/wpp2015/wpp2015.pdf
+library(tidyverse) # import/wrangle
 ```
 
-
-```{r}
+# Data
+```{r echo = FALSE}
 data("World")
 
 # Data mit geometry
-WorldGeom <- World
+data_WorldGeom <- World
 # Data ohne
-WorldData <- World %>% 
+data_WorldData <- World %>% 
+  # entfernt die geometry Spalte und konvertiert so in normalen Data.frame
+  # select(-*) hilft hier nicht
   sf::st_drop_geometry()
+
+
+
+# population data
+# https://cran.r-project.org/web/packages/wpp2015/wpp2015.pdf
+# Age- and sex-specific populationestimates and projections 
+
+data("popF") # Daten weiblich
+data("popM") # Daten männlich
+data("UNlocations") # Schlüsselliste
+
+popFemal <- popF %>% mutate(gender = "F")
+
+
+# gemergte Daten für männlich und weiblich, dazu join von Kontinenten und Gruppierungen nach UN Definition
+data_popFM <- popM %>% 
+  mutate(gender = "M") %>% 
+  bind_rows(popFemal) %>% 
+  left_join(
+    select(
+      UNlocations,
+      country_code,
+      reg_code,
+      reg_name,
+      area_code,
+      area_name),
+    by = "country_code") 
+
+
+
+# im long format
+data_popFM_long <- data_popFM %>% 
+  pivot_longer(
+    # es werden die Spalten ent-pivotiert, die 4 Zahlen beinhalten (also bspw. 1950, 2015), also die yeares Spalten 
+    cols = matches("[0-9]{4}"),
+    values_to = "population",
+    names_to = "year") %>% 
+  mutate(
+    year = as.numeric(year),
+    age = factor(
+      age,
+      ordered = TRUE,
+      levels = c(
+        "0-4",
+        "5-9",
+        "10-14",
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49",
+        "50-54",
+        "55-59",
+        "60-64",
+        "65-69",
+        "70-74",
+        "75-79",
+        "80-84",
+        "85-89",
+        "90-94",
+        "95-99",
+        "100+")),
+    population = as.integer(population*1000))
+
+
 ```
 \newpage
 
+# Informationen
+## package Infos, repositories, links
 
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+# Vorlagen
+## color palettes
 
-vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-# ggplot2
-## Themes
-
-https://ggplot2.tidyverse.org/reference/theme.html
-
-
-```{r}
-
-
-
-
+```{r }
 PAL_Gliederung_Colour <- c(SR = "blue", UBZTP = "orange")
 PAL_Gebiet_fill <- c("yellow3", "black", "grey", "maroon3") 
 PAL_pal9GnPu <- c("#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837")
 PAL_virpal <- viridisLite::viridis(6)
 PAL_col6qual <- c("#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f")
+PAL_div_lowcontrast <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
+```
+
+## Themes
+
+[Refrence Manual](https://ggplot2.tidyverse.org/reference/theme.html)
+
+Hier werden themes für unterschiedliche Plot Typen und Größen festgelegt.
+
+Vorschlag für eine Syntax:\
+theme_package (ggplot, plotly etc.)_Plottyp(bspw. map oder barchart)_Format(print oder HTML)_Seitenformat (DINA4 oder A5 etc.)_SpaltenLayout (1, 2 oder 3-spaltig)
+
+Beispiel für ein Theme für ein ggplot2 plot, Typ Karte, für Printfassungen im A4 Format, 1-spaltig:\
+theme_ggplot2_map_print_A4_1c
 
 
+```{r echo = FALSE}
 # Thema für Karten in ggplot
 # default_font_family <- "sans" entfällt wegen Latex settings
 default_font_color <- "black"
 default_background_color <- "white"
 
-theme_map <- function(...) {
+theme_ggplot2_map_print_A4_1C <- function(...) {
   theme_minimal()
   theme(
     text = element_text(
@@ -121,12 +202,14 @@ theme_map <- function(...) {
     ...
   )
 }
-
-
-
 ```
+/newpage
 
-```{r }
+## Snippets
+### Beschriftungen
+
+```{r echo = FALSE}
+# Snippet für Beschriftungen
     # labs(
     #   title = "Titel",
     #   subtitle = "Untertitel",
@@ -138,10 +221,12 @@ theme_map <- function(...) {
 ```
 
 
-\newpage
 
-```{r}
-mapData <- WorldGeom %>% 
+\newpage
+### Plots
+#### Karte
+```{r plot map}
+mapData <- data_WorldGeom %>% 
   select(
     name,
     continent,
@@ -152,11 +237,16 @@ mapData <- WorldGeom %>%
   mutate(
     # Vereinigung der 5 Kategorien zu 3
     income_grp = forcats::fct_collapse(income_grp,
-      Hoch = c("1. High income: OECD", "2. High income: nonOECD"),
-      Mittel = c("3. Upper middle income", "4. Lower middle income"),
-      Niedrig = c("5. Low income")))
+      Hoch = c(
+        "1. High income: OECD", 
+        "2. High income: nonOECD"),
+      Mittel = c(
+        "3. Upper middle income", 
+        "4. Lower middle income"),
+      Niedrig = c(
+        "5. Low income")))
   
-  ggplot() +
+mapPlot <- ggplot(mapData) +
     # da das data.frame eine geometry Spalte besitzt, kommt geom_sf ohne x und y bzw. Rechts- und Hochwerte aus
     # data.frames mit Rechts- und Hochwerten können über sf::st_as_sf in dieses Format konvertiert werden
     # https://www.rdocumentation.org/packages/sf/versions/0.9-7/topics/st_as_sf
@@ -173,7 +263,7 @@ mapData <- WorldGeom %>%
       direction = -1) +
     # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
     ggrepel::geom_label_repel(
-      # man kann die ausgewählte Variable mit subset filtern
+      # man kann die ausgewählte Variable in ggplot vorab mit "subset" filtern
       data = subset(mapData, income_grp == "Niedrig"), 
       # ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten
       stat = "sf_coordinates",
@@ -181,7 +271,8 @@ mapData <- WorldGeom %>%
         geometry = geometry,
         label = name)) +
     # siehe theme settings oben
-    theme_map() +
+    theme_ggplot2_map_print_A4_1C() +
+    # Beschriftungen
     labs(
       title = "Titel",
       subtitle = "Untertitel",
@@ -194,99 +285,9 @@ mapData <- WorldGeom %>%
 
 ```
 
-
-# Gemischtes 1 und 2 Spalten Layout
-
-\Begin{multicols}{2}
-```{r echo = FALSE}
-# Data 
-mapData <- WorldGeom %>% 
-  select(
-    name,
-    continent,
-    pop_est,
-    income_grp,
-    geometry) %>% 
-  filter(continent == "Asia") %>% 
-  mutate(
-    # Vereinigung der 5 Kategorien zu 3
-    income_grp = forcats::fct_collapse(income_grp,
-      Hoch = c("1. High income: OECD", "2. High income: nonOECD"),
-      Mittel = c("3. Upper middle income", "4. Lower middle income"),
-      Niedrig = c("5. Low income")))
-  
-  ggplot() +
-    # da das data.frame eine geometry Spalte besitzt, kommt geom_sf ohne x und y bzw. Rechts- und Hochwerte aus
-    # data.frames mit Rechts- und Hochwerten können über sf::st_as_sf in dieses Format konvertiert werden
-    # https://www.rdocumentation.org/packages/sf/versions/0.9-7/topics/st_as_sf
-    # https://r-spatial.github.io/sf/reference/st_as_sf.html
-    geom_sf(
-      data = mapData, 
-      aes(fill = income_grp)) +
-    # Externe Farbpalette, Beispiel viridis
-    # https://www.rdocumentation.org/packages/viridis/versions/0.5.1/topics/scale_color_viridis
-    viridis::scale_fill_viridis(
-      # Diskrete Variable (Einkommensgruppen)
-      discrete = TRUE,
-      # Umkehr der Palette, damit dunkel = Niedrig
-      direction = -1) +
-    # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
-    ggrepel::geom_label_repel(
-      # man kann die ausgewählte Variable mit subset filtern
-      data = subset(mapData, income_grp == "Niedrig"), 
-      # ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten
-      stat = "sf_coordinates",
-      aes(
-        geometry = geometry,
-        label = name)) +
-    theme(
-      legend.position = "top",
-      # keine Achsenlinien
-      axis.line=element_blank(),
-      # keine Achsentitel
-      axis.title.x=element_blank(),
-      axis.title.y=element_blank(),
-      # keine Achsen-Markierungen
-      axis.ticks=element_blank(),
-      # kein Achsentext
-      axis.text.x=element_blank(),
-      axis.text.y=element_blank(),
-      # kein Hintergrund
-      panel.background=element_blank(),
-      # kein Hilfslinien
-      panel.grid.major=element_blank(),
-      panel.grid.minor=element_blank(),
-      # kein Hintergrund
-      plot.background=element_blank())
-
-```
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-\columnbreak
-
-```{r echo = FALSE}
-WorldData %>% 
-  select(
-    name,
-    pop_est) %>% 
-  arrange(desc(pop_est)) %>% 
-  head(5) %>% 
-  ggplot() + 
-  geom_col(aes(x = pop_est, y = forcats::fct_reorder(name, pop_est))) +
-  xlab("Bevölkerung") +
-  ylab("") +
-  theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=14,face="bold"))
-
-```
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-
-\End{multicols}
-
-```{r echo = FALSE}
-# Manuelle Farbpalette
-PAL_well <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ffd92f","#e5c494")
-
-WorldData %>% 
+#### Scatter Plot mit Facet Wrap
+```{r plot Scatter}
+ScatterData <- data_WorldData %>% 
     select(
     name,
     continent,
@@ -302,21 +303,31 @@ WorldData %>%
   mutate(
     # Vereinigung der Kategorien
     economy = forcats::fct_collapse(economy,
-      "entwickelt" = c("1. Developed region: G7", "2. Developed region: nonG7"),
-      "aufstrebend" = c("3. Emerging region: BRIC", "4. Emerging region: MIKT", "5. Emerging region: G20"),
-      "nicht-entwickelt" = c("6. Developing region", "7. Least developed region"))) %>% 
-  ggplot() +
+      entwickelt = c(
+        "1. Developed region: G7", 
+        "2. Developed region: nonG7"),
+      aufstrebend = c(
+        "3. Emerging region: BRIC", 
+        "4. Emerging region: MIKT", 
+        "5. Emerging region: G20"),
+      "nicht-entwickelt" = c(
+        "6. Developing region", 
+        "7. Least developed region"))) 
+  
+ScatterPlot <-   
+  ggplot(ScatterData) +
   geom_point(
     aes(
       inequality, 
       well_being,
-    colour = fct_reorder(continent, desc(avg_gdp))),
+    # Anordung der Kontinente nach absteigender, durchschnittlicher Bevölkerung
+    colour = forcats::fct_reorder(continent, desc(avg_gdp))),
     alpha = 0.8) + 
   facet_wrap(
     ~ economy, 
     nrow = 2) +
   scale_colour_manual(
-    values = PAL_well,
+    values = PAL_div_lowcontrast,
     guide = guide_legend(
                       title.position = "top",
                       title="Kontinente",
@@ -335,5 +346,250 @@ WorldData %>%
     # Abstand der Achsentitel zum Achsentext
     axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
     axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)))
+```
+
+#### Population Pyramid
+```{r plot pop pyramid, echo = FALSE}
+
+popPyData <- data_popFM_long %>% 
+  # filtert Kontinente und Länder Gruppen heraus
+  filter(!country_code >= 900) %>% 
+  dplyr::group_by(
+    year,
+    country,
+    gender) %>% 
+  dplyr::mutate(
+    percPop_country_gender = round(population/sum(population)*100,1)) %>% 
+  ungroup() %>% 
+  mutate(perc_MF = ifelse(gender == "F", percPop_country_gender*-1, percPop_country_gender)) %>% 
+  filter(
+    year == "2015"
+    & country == "Germany")
+
+
+popPyplot <- popPyData %>%
+  ggplot(aes(x = age, color = gender))+
+  geom_linerange(
+    data = popPyData[popPyData$gender=="F",],
+    aes(
+      # damit der Abstand zu der sich in der Mitte befindenden label Spalte passt 
+      # wird ymin und ymax entsprechend angepasst
+      ymin = -0.5, 
+      ymax = -0.5+perc_MF), 
+    size = 3, 
+    alpha = 0.8) +
+  geom_linerange(
+    data = popPyData[popPyData$gender=="M",],
+    aes(
+      ymin = 0.5, 
+      ymax = 0.5+perc_MF), 
+    size = 3, 
+    alpha = 0.8) +
+  geom_label(
+    aes(
+      x = age, 
+      y = 0, 
+      label = age),
+    inherit.aes = F,
+    size = 3.5, 
+    label.padding = unit(0, "lines"), 
+    label.size = 0,
+    label.r = unit(0.0, "lines"), 
+    fill = "#EFF2F4", 
+    alpha = 0.9, 
+    color = "#5D646F") +
+   # scale_y_discrete(
+   #   breaks = c(
+   #     c(-2, -1.5, -1, -0.5, 0) + -0.3,
+   #     c(0, 0.5, 1, 1.5, 2) + 0.3),
+   #   labels = c("2", "1.5", "1", "0.5", "0", "0", "0.5", "1", "1.5", "2")) +
+    coord_flip() +
+   # labs(title = "Anteile der Bevölkerung",
+   #  subtitle = "nach Geschlecht und Altersgruppe",
+   #  caption = "Datenset wpp2015")+
+   #    scale_color_manual(
+   #      name = "",
+   #      values = c(male = "3E606F", female = "8C3F4D"),
+   #      labels = c("männlich", "weiblich")) +
+    theme_minimal()+
+    theme(
+      text = element_text(color = "#3A3F4A"),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_line(linetype = "dotted", size = 0.3, color = "#3A3F4A"),
+      axis.title = element_blank(),
+      plot.title = element_text(face = "bold", size = 36, margin = margin(b = 10), hjust = 0.030),
+      plot.subtitle = element_text(size = 16, margin = margin(b = 20), hjust = 0.030),
+      plot.caption = element_text(size = 14, margin = margin(b = 10, t = 50), color = "#5D646F"),
+      axis.text.x = element_text(size = 12, color = "#5D646F"),
+      axis.text.y = element_blank(),
+      strip.text = element_text(color = "#5D646F", size = 18, face = "bold", hjust = 0.030),
+      plot.background = element_rect(fill = "#EFF2F4"),
+      plot.margin = unit(c(2, 2, 2, 2), "cm"),
+      legend.position = "top",
+      legend.spacing  = unit(0.1, "lines"),
+      legend.text  = element_text(size = 14),
+      legend.text.align = 0)
 
 ```
+
+
+#### Bar Charts
+```{r}
+countryList <- c("Germany","Romania","Bulgaria","Syrian Arab Republic")
+
+BarData <- data_popFM_long %>% 
+  # filtert Kontinente und Länder Gruppen heraus
+  filter(!country_code >= 900) %>% 
+  dplyr::group_by(
+    year,
+    country,
+    gender) %>% 
+  dplyr::mutate(
+    percPop_country_gender = round(population/sum(population)*100,1)) %>% 
+  filter(year == "2015") %>% 
+  filter(country %in% countryList)
+t <- data_popFM_long %>% select(country) %>% distinct()
+plotBarGrouped <- BarData %>% 
+    ggplot( 
+      aes(
+        x=age, 
+        y=percPop_country_gender, 
+        group=gender, 
+        fill=gender)) +
+    geom_bar(
+      position = "dodge", width=0.7,
+      stat = "identity") +
+    scale_fill_manual(labels = c("weiblich", "männlich"), values = c("blue", "red")) +
+    scale_x_discrete(guide = guide_axis(angle = 90)) +
+    labs(
+      title = "Anteile der Bevölkerung nach Geschlecht und Altersgruppe",
+      subtitle = "in West-europäischen Ländern, 2015",
+      caption = "Datenset wpp2015, Age- and sex-specific populationestimates and projections ",
+      tag = "Abb. 01",
+      fill = "Geschlecht") +
+    xlab("Altersgruppen") +
+    ylab("Anteil an geschlechtsspezifischer Hauptwohnbevölkerung") +
+  facet_wrap(~ country) +
+  theme_minimal()
+
+
+
+plotBarFill <- BarData %>% 
+    ggplot() +
+    geom_bar(
+      data = subset(BarData, gender == "F"), 
+      aes(
+        x=age, 
+        y=percPop_country_gender),
+      fill = NA,
+      color = "Black",
+      # position = "identity",
+      stat="identity") +
+    geom_bar(
+      data = subset(BarData, gender == "M"), 
+      aes(
+        x=age, 
+        y=percPop_country_gender),
+      alpha = 0.3,
+      # position = "identity",
+      stat="identity") +
+    scale_x_discrete(guide = guide_axis(angle = 90)) +
+    # scale_colour_manual(labels = c("männlich", "weiblich"), values=gender, aesthetics = c("colour", "fill")) +
+    scale_colour_manual(labels = c("männlich", "weiblich"), values=c("lightblue4", "red")) +
+    labs(
+      title = "Anteile der Bevölkerung nach Geschlecht und Altersgruppe",
+      subtitle = "in West-europäischen Ländern, 2015",
+      caption = "Datenset wpp2015, Age- and sex-specific populationestimates and projections ",
+      tag = "Abb. 01",
+      fill = "Geschlecht") +
+    xlab("Altersgruppen") +
+    ylab("Anteil an geschlechtsspezifischer Hauptwohnbevölkerung") +
+  facet_wrap(~ country, nrow = 2, ncol = 2) +
+  theme_minimal()
+
+
+plotBarOverlay <- BarData %>% 
+    ggplot(      
+      aes(
+        x=age, 
+        y=percPop_country_gender,
+        fill = gender
+        # color = gender,
+        # alpha = gender
+        )) +
+    geom_bar(
+      alpha = 0.6,
+      position = "identity",
+      stat="identity") +
+  # scale_colour_manual(values=c("lightblue4", "red")) +
+  scale_fill_manual(
+    labels = c("männlich", "weiblich"),
+    values=c("lightblue", "pink")) +
+  scale_x_discrete(guide = guide_axis(angle = 90)) +
+  # scale_alpha_manual(values=c(.3, .8)) +
+    labs(
+      title = "Anteile der Bevölkerung nach Geschlecht und Altersgruppe",
+      subtitle = "in West-europäischen Ländern, 2015",
+      caption = "Datenset wpp2015, Age- and sex-specific populationestimates and projections ",
+      tag = "Abb. 01",
+      fill = "Geschlecht") +
+    xlab("Altersgruppen") +
+    ylab("Anteil an geschlechtsspezifischer Hauptwohnbevölkerung") +
+  facet_wrap(~ country, nrow = 2, ncol = 2) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+```
+
+\newpage
+
+# Plot - Layout
+## Gemischtes 1 und 2 Spalten Layout
+
+\Begin{multicols}{2}
+```{r echo = FALSE}
+# Data 
+mapPlot
+```
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
+
+\columnbreak
+
+```{r echo = FALSE}
+data_WorldData %>% 
+  select(
+    name,
+    pop_est) %>% 
+  arrange(desc(pop_est)) %>% 
+  head(5) %>% 
+  ggplot() + 
+  geom_col(aes(x = pop_est, y = forcats::fct_reorder(name, pop_est))) +
+  xlab("Bevölkerung") +
+  ylab("") +
+  theme(axis.text=element_text(size=12),
+        axis.title=element_text(size=14,face="bold"))
+
+```
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+
+\End{multicols}
+
+```{r echo = FALSE, message=FALSE}
+ScatterPlot
+```
+
+
+```{r echo = FALSE}
+popPyplot
+```
+
+```{r}
+plotBarOverlay
+```
+```{r}
+plotBarFill
+```
+

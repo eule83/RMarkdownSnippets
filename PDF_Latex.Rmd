@@ -99,7 +99,9 @@ Single Page Documents https://bookdown.org/yihui/bookdown/a-single-document.html
 customization https://bookdown.org/yihui/bookdown/customization.html
 \columnbreak
 
-#### Latex processors
+#### Template Info
+
+[R Markdown Document Templates](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)
 
 [Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex
 
