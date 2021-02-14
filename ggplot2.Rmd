@@ -586,10 +586,10 @@ ScatterPlot
 popPyplot
 ```
 
-```{r}
+```{r echo = FALSE}
 plotBarOverlay
 ```
-```{r}
+```{recho = FALSE}
 plotBarFill
 ```
 
