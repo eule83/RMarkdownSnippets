@@ -1,7 +1,9 @@
 \PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
+  a4paper,
   twoside]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -37,11 +39,19 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Latex, YAML, RMarkdown},
-  pdfauthor={Fabian Koch},
-  pdfborder={0 0 0},
+  pdfauthor={Dortmunder Statistik},
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=gray,
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -54,7 +64,7 @@
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-2}
+\setcounter{secnumdepth}{5}
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -74,7 +84,7 @@
 \usepackage{multicol}
 \newcommand{\hideFromPandoc}[1]{#1}
 \hideFromPandoc{ \let\Begin\begin \let\End\end }
-\definecolor{DoStat}{RGB}{184, 40, 60}
+\definecolor{DoStat}{RGB}{4, 72, 145}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -82,6 +92,7 @@
 \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
 \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
 \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
+\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -105,78 +116,110 @@
 }
 \makeatother
 \subtitle{Options, packages and examples for PDF print}
-\author{Fabian Koch}
+\author{Dortmunder Statistik}
 \date{}
 
 \begin{document}
 \maketitle
 
-\newpage 
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{4}
 \tableofcontents
-
+}
 \newpage
 
-\newpage
+\begin {multicols}{2}
 
 \hypertarget{wiki}{%
 \section{Wiki}\label{wiki}}
 
+\hypertarget{allgemeines}{%
+\subsection{Allgemeines}\label{allgemeines}}
+
+\hypertarget{yaml-settings-uxfcbersicht}{%
+\subsubsection{YAML settings Übersicht}\label{yaml-settings-uxfcbersicht}}
+
+\begin{itemize}
+\tightlist
+\item
+  rmarkdown::default\_output\_format() zeigt die aktuelle YAML output Konfiguration
+\end{itemize}
+
+\begin{verbatim}
+## $name
+## [1] "bookdown::pdf_document2"
+## 
+## $options
+## $options$...
+## 
+## 
+## $options$keep_tex
+## [1] TRUE
+## 
+## $options$latex_engine
+## [1] "xelatex"
+## 
+## $options$toc
+## [1] TRUE
+## 
+## $options$toc_depth
+## [1] 4
+\end{verbatim}
+
+\hypertarget{template-info}{%
+\subsubsection{Template Info}\label{template-info}}
+
+\href{https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html}{R Markdown Document Templates}
+
+\href{https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex}{Latex engines}
+
 \hypertarget{packages}{%
-\subsubsection{packages}\label{packages}}
+\subsection{packages}\label{packages}}
 
-\begin {multicols}{2}
+\hypertarget{r}{%
+\subsubsection{R}\label{r}}
 
-\hypertarget{r---rticles}{%
-\paragraph{R - rticles}\label{r---rticles}}
+\hypertarget{rticles---vorlagen}{%
+\paragraph{rticles - Vorlagen}\label{rticles---vorlagen}}
 
 Templates und Vorlagen wissenschaftlicher Journals
 
 \href{https://github.com/rstudio/rticles}{rtcles}
 
-\hypertarget{r---ymlthis}{%
-\paragraph{R - ymlthis}\label{r---ymlthis}}
+\hypertarget{ymlthis--yaml-package}{%
+\paragraph{ymlthis- YAML package}\label{ymlthis--yaml-package}}
 
 package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
 
 \href{https://cran.r-project.org/web/packages/ymlthis/vignettes/introduction-to-ymlthis.html}{Einführung}
 
-\href{https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf}{Refrence
-Manual}
+\href{https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf}{Reference Manual}
 
-\href{https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html}{YAML
-Field Guide}
+\href{https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html}{YAML Field Guide}
 
 \href{https://github.com/r-lib/ymlthis/blob/master/R/yml_latex.R}{yml\_latex.R}
 
-\href{https://rdrr.io/github/r-lib/ymlthis/man/yml_latex_opts.html}{yml\_latex\_opts
-- Set LaTeX YAML options for PDF output}
+\href{https://rdrr.io/github/r-lib/ymlthis/man/yml_latex_opts.html}{yml\_latex\_opts - Set LaTeX YAML options for PDF output}
 
-\href{https://www.rdocumentation.org/packages/ymlthis/versions/0.1.2/topics/yml_resource_files}{yml\_resource\_files
-- Add external resource files to R Markdown document}
+\href{https://www.rdocumentation.org/packages/ymlthis/versions/0.1.2/topics/yml_resource_files}{yml\_resource\_files - Add external resource files to R Markdown document}
 
-\href{https://github.com/r-lib/ymlthis/blob/master/R/yml_output.R}{yml\_output
-- Capture, validate, and write output YAML}
+\href{https://github.com/r-lib/ymlthis/blob/master/R/yml_output.R}{yml\_output - Capture, validate, and write output YAML}
 
-\hypertarget{r---bookdown}{%
-\paragraph{R - bookdown}\label{r---bookdown}}
+\hypertarget{bookdown}{%
+\paragraph{bookdown}\label{bookdown}}
 
 Authoring Books and Technical Documents with R Markdown
 
-Single Page Documents
-\url{https://bookdown.org/yihui/bookdown/a-single-document.html}
+Single Page Documents \url{https://bookdown.org/yihui/bookdown/a-single-document.html}
 
-customization
-\url{https://bookdown.org/yihui/bookdown/customization.html}
-\columnbreak
+customization \url{https://bookdown.org/yihui/bookdown/customization.html}
 
-\hypertarget{latex-processors}{%
-\paragraph{Latex processors}\label{latex-processors}}
+\hypertarget{latex}{%
+\subsubsection{Latex}\label{latex}}
 
-{[}Latex
-engines{]}(\url{https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex}
-
-\hypertarget{latex---multicol}{%
-\paragraph{Latex - Multicol}\label{latex---multicol}}
+\hypertarget{multicol---mehrspaltige-layouts}{%
+\paragraph{Multicol - mehrspaltige Layouts}\label{multicol---mehrspaltige-layouts}}
 
 \url{https://www.ctan.org/pkg/multicol}
 
@@ -187,121 +230,173 @@ engines{]}(\url{https://tex.stackexchange.com/questions/36/differences-between-l
 Mögliche Lösungen für 2 Spalten:
 \url{https://github.com/yihui/rmarkdown-cookbook/issues/19}
 
+Alternativen:
+
 \url{https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf}
 
-\hypertarget{latex---koma-script}{%
-\paragraph{Latex - koma Script}\label{latex---koma-script}}
+\hypertarget{geometry---dokumentformatierung}{%
+\paragraph{geometry - Dokumentformatierung}\label{geometry---dokumentformatierung}}
 
-package und class Sammlung \url{https://www.ctan.org/pkg/koma-script}
+\href{https://ctan.org/pkg/geometry?lang=en}{Flexible and complete interface to document dimensions}
 
-inkl. Fußnoten package
-\url{https://ctan.org/pkg/scrlayer-scrpage?lang=de}
+\href{http://mirrors.ctan.org/macros/latex/contrib/geometry/geometry-de.pdf}{Dokumentation}
 
-\hypertarget{latex---fancyhdr}{%
-\paragraph{Latex - fancyhdr}\label{latex---fancyhdr}}
+ymlthis::yml\_latex\_opts() erlaubt die Einstellung über das package ymlthis zu konfigurieren
+
+\hypertarget{pdfpages---einbindung-externe-pdf}{%
+\paragraph{pdfpages - Einbindung externe PDF}\label{pdfpages---einbindung-externe-pdf}}
+
+\href{https://ctan.org/pkg/pdfpages}{Einbindung von PDF Dokumenten in Latex}
+
+\begin{itemize}
+\tightlist
+\item
+  ggf. eine Lösung für Umschlag?
+\end{itemize}
+
+\hypertarget{koma-script---sammlung}{%
+\paragraph{KOMA Script - Sammlung}\label{koma-script---sammlung}}
+
+\href{https://www.ctan.org/pkg/koma-script}{package und class Sammlung}
+
+\href{https://ctan.org/pkg/scrlayer-scrpage?lang=de}{inkl. Fußnoten package (z.Z. wird aber fancyhdr bevorzugt)}
+
+\hypertarget{fancyhdr---kopf--fuuxdfzeile}{%
+\paragraph{fancyhdr - Kopf- /Fußzeile}\label{fancyhdr---kopf--fuuxdfzeile}}
 
 \href{https://ctan.org/pkg/fancyhdr?lang=de}{Kopf- und Fußzeilen}
 
-\href{http://tug.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf}{User
-Guide}
+\href{http://tug.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf}{User Guide}
 
-\href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-header.html}{Abschnitt
-aus "bookdown}
+\href{https://bookdown.org/yihui/rmarkdown-cookbook/latex-header.html}{Abschnitt aus "bookdown}
+
+\hypertarget{fontspec---schrift}{%
+\paragraph{fontspec - Schrift}\label{fontspec---schrift}}
+
+\href{https://www.ctan.org/pkg/fontspec}{Erweiterte Schrift Auswahl und Konfiguration}
+
+\hypertarget{inhaltsverzeichnisse}{%
+\paragraph{Inhaltsverzeichnisse}\label{inhaltsverzeichnisse}}
+
+\hypertarget{tocloft---toc}{%
+\subparagraph{tocloft - TOC}\label{tocloft---toc}}
+
+\href{https://www.ctan.org/pkg/tocloft}{Erweiterte Optionen für Inhaltsverzeichnisse}
+
+Beispiel \url{https://www.kronto.org/thesis/tips/format-toc.html}
+
+\hypertarget{enumitem---toc}{%
+\subparagraph{enumitem - TOC}\label{enumitem---toc}}
+
+\href{https://ctan.org/pkg/enumitem?lang=de}{Manuelle Definition von TOCs}
+
+\hypertarget{titlesec---uxfcberschriften}{%
+\paragraph{titlesec - Überschriften}\label{titlesec---uxfcberschriften}}
+
+\href{https://ctan.org/pkg/titlesec?lang=de}{Erweiterte Optionen für Überschriften}
+
+\hypertarget{beispiele}{%
+\subparagraph{Beispiele}\label{beispiele}}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://tex.stackexchange.com/questions/225943/how-to-create-a-custom-table-of-contents}
+\item
+  \url{https://tex.stackexchange.com/questions/404103/customize-the-table-of-contents}
+\item
+  \url{https://cmry.github.io/notes/latextoc} - Sektionen ohne Nummerierung
+\item
+  \url{https://www.kronto.org/thesis/tips/format-toc.html}
+\end{itemize}
+
+\end {multicols}
 
 \newpage
 
 \hypertarget{formatierung}{%
-\subsubsection{Formatierung}\label{formatierung}}
+\subsection{Formatierung}\label{formatierung}}
+
+\hypertarget{pandoc-variablen}{%
+\subsubsection{Pandoc Variablen}\label{pandoc-variablen}}
+
+\href{https://pandoc.org/MANUAL.html\#variables-for-latex}{Anleitung}
+
+\hypertarget{schriften}{%
+\subsubsection{Schriften}\label{schriften}}
+
+\href{https://tug.org/FontCatalogue/}{Schrift Katalog}
 
 \hypertarget{seitenwechsel}{%
-\paragraph{Seitenwechsel}\label{seitenwechsel}}
+\subsubsection{Seitenwechsel}\label{seitenwechsel}}
 
-Latex Page Breaks
-\url{https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml}
+Latex Page Breaks \url{https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml}
 
-\hypertarget{text}{%
-\subsubsection{Text}\label{text}}
+\hypertarget{logo-fuxfcr-titelseiten}{%
+\subsubsection{Logo für Titelseiten}\label{logo-fuxfcr-titelseiten}}
 
-\hypertarget{headline-1}{%
-\section{Headline 1}\label{headline-1}}
+\url{https://bookdown.org/yihui/rmarkdown-cookbook/latex-logo.html\#latex-logo}
 
-\hypertarget{headline-2}{%
-\subsection{Headline 2}\label{headline-2}}
+Über includegraphics, Alternative siehe Latex package pdfpages
 
-\hypertarget{headline-3}{%
-\subsubsection{Headline 3}\label{headline-3}}
+\hypertarget{nicht-nummerierte-kapitel}{%
+\subsubsection{Nicht nummerierte Kapitel}\label{nicht-nummerierte-kapitel}}
 
-\hypertarget{headline-4}{%
-\paragraph{Headline 4}\label{headline-4}}
+\url{https://bookdown.org/yihui/rmarkdown-cookbook/unnumbered-sections.html}
 
-\hypertarget{headline-5}{%
-\subparagraph{Headline 5}\label{headline-5}}
+\hypertarget{inhaltsverzeichnis}{%
+\subsubsection{Inhaltsverzeichnis}\label{inhaltsverzeichnis}}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua.
+\href{https://texblog.org/2011/09/09/10-ways-to-customize-tocloflot/}{10 Wege Inhaltsverzeichnisse zu formatieren}
 
-\end {multicols}
+\hypertarget{farbpaletten}{%
+\subsubsection{Farbpaletten}\label{farbpaletten}}
 
-vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem
-ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+Neben frei zu definierenden Farben (siehe YAML xcolor settings, bzw. für \href{https://www.latextemplates.com/svgnames-colors}{Farbennamen} können Farben aus der Farbpalette ausgewählt werden
+
+\includegraphics[width=30px]{latexcolor.png}
+
+\hypertarget{allgemeine-hinweise}{%
+\subsubsection{Allgemeine Hinweise}\label{allgemeine-hinweise}}
+
+\begin{itemize}
+\tightlist
+\item
+  Zeilenumbruch mit neuem Abschnitt: In Markdown muss eine zusätzlicher Zeilenumbruch eingefügt werden,
+\end{itemize}
+
+um diesen zu erzeugen. Es entsteht ein erhöhter Zeilenabstand.
+
+\begin{itemize}
+\item
+  Zeilenumbruch ohne neuen Abschitt: man fügt 2 Leerzeichen in der Zeile ein,\\
+  in der der Umbruch stattfinden soll
+\item
+  ein Spaltenumbruch in einem mehrspaltigen Layout wird mit ``columnbreak'' erzeugt
+\end{itemize}
 
 \newpage
 
+\hypertarget{beispiele-1}{%
+\section{Beispiele}\label{beispiele-1}}
+
 \hypertarget{gemischtes-1-und-2-spalten-layout}{%
-\section{Gemischtes 1 und 2 Spalten
-Layout}\label{gemischtes-1-und-2-spalten-layout}}
+\subsection{Gemischtes 1 und 2 Spalten Layout}\label{gemischtes-1-und-2-spalten-layout}}
 
 \begin {multicols}{2}
 
-\includegraphics[width=1\linewidth]{PDF_Latex_files/figure-latex/unnamed-chunk-3-1}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet. \columnbreak
-
 \includegraphics[width=1\linewidth]{PDF_Latex_files/figure-latex/unnamed-chunk-4-1}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\columnbreak
+
+\includegraphics[width=1\linewidth]{PDF_Latex_files/figure-latex/unnamed-chunk-5-1}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \end {multicols}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \begin{verbatim}
 ## `summarise()` ungrouping output (override with `.groups` argument)

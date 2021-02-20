@@ -1,18 +1,51 @@
 ---
+# Dokument Informationen
 title: "Latex, YAML, RMarkdown"
 subtitle: "Options, packages and examples for PDF print"
+email: "info.statistik@stadtdo.de"
+author: "Dortmunder Statistik"
+# abstract:
+# subject:
+# category: 
+# abstract:
+# lot: no # Tabellenverzeichnis
+# lof: no # Abbildungsverzeichnis
+
+  
+# Schrift
 mainfont: "Verdana"
+# sansfont:
+# monofont:
+# mathfont:
+linkcolor: "blue"
+urlcolor: "gray"
+
+  
+# Layout Optionen
+# margin_left: 
+# margin_right:
+papersize: "A4"
 classoption: "twoside" # für unterschiedliche gerade und ungerade Seitenformatierungen
-author: "Fabian Koch"
+
+# Latex Optionen
 header-includes:
+  # Mehrspaltiges Layout
+  # Abstand zwischen Spalten
   - \setlength{\columnsep}{18pt}
+  # multicol - package für mehrspaltige Layouts
   - \usepackage{multicol}
-  - \newcommand{\hideFromPandoc}[1]{#1} # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+  # Work around für pandoc markdown
+  # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+  - \newcommand{\hideFromPandoc}[1]{#1} 
   - \hideFromPandoc{
       \let\Begin\begin
       \let\End\end
       }
-  - \definecolor{DoStat}{RGB}{184, 40, 60} #mit package xcolor (standardmäßig geladen)
+      
+  # Farbpalette    
+  - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
+  
+  # fancyhdr: Kopf- und Fußzeilen Einstellungen
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
@@ -22,12 +55,19 @@ header-includes:
   - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
   # - \renewcommand{\headrulewidth}{0.4pt}
   # - \renewcommand{\footrulewidth}{0.4pt}
+  - \usepackage{graphicx} # für includegraphics
 
 output: 
-  pdf_document: 
-    keep_tex: true
-    latex_engine: "xelatex"
-    toc_depth: 2
+  bookdown::pdf_document2:
+    # extra_dependencies: ["xcolor", "multicol"] # Verwendete Latex packages, Alternative zu \usepackage
+    # clean: # remove intermediate files
+    keep_tex: true # wirft zusätzlich eine .tex Datei aus
+    latex_engine: "xelatex" # erlaubt die Verwnedung lokal installierter Schrifttypen
+    # Inhaltsverzeichnis
+    toc: true
+    toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
+  toc-title: "Titel Inhaltsverzeichnis"
+
 
 ---
 
@@ -35,11 +75,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
 ```
 
+
+
+<!-- 
+OPTIONAL
 \newpage 
-\tableofcontents 
-<!-- \listoffigures -->
-<!-- \listoftables -->
-\newpage
+\tableofcontents man kann auch in YAML das Inhaltsverzeichnis aktivieren, allerdings wird es dann auf einer Seite mit dem Titel ausgeworfen 
+\listoffigures
+\listoftables
+\newpage 
+--> 
 
 ```{r echo = FALSE, message=FALSE}
 library(tidyverse) # import/wrangle
@@ -47,6 +92,7 @@ library(ggplot2) # plot/maps
 library(tmap) # Dataset/Maps
 library(kableExtra) # tables
 library(viridis) # palettes
+library(bookdown)
 ```
 
 
@@ -61,24 +107,41 @@ WorldData <- World %>%
 ```
 \newpage
 
+\Begin{multicols}{2}
 # Wiki
 
-### packages
+## Allgemeines
 
-\Begin{multicols}{2}
+### YAML settings Übersicht
 
-#### R - rticles
+- rmarkdown::default_output_format() zeigt die aktuelle YAML output Konfiguration
+
+```{r echo = FALSE}
+rmarkdown::default_output_format("./PDF_Latex.Rmd", output_yaml = TRUE)
+```
+
+### Template Info
+
+[R Markdown Document Templates](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)
+
+[Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex)
+
+## packages
+
+### R
+
+#### rticles - Vorlagen
 Templates und Vorlagen wissenschaftlicher Journals
 
 [rtcles](https://github.com/rstudio/rticles)
 
-#### R - ymlthis 
+#### ymlthis- YAML package
 
 package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
 
 [Einführung](https://cran.r-project.org/web/packages/ymlthis/vignettes/introduction-to-ymlthis.html)
 
-[Refrence Manual](https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf)
+[Reference Manual](https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf)
 
 [YAML Field Guide](https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html)
 
@@ -90,25 +153,19 @@ package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
 
 [yml_output - Capture, validate, and write output YAML](https://github.com/r-lib/ymlthis/blob/master/R/yml_output.R)
 
-#### R - bookdown
+#### bookdown
 
 Authoring Books and Technical Documents with R Markdown
 
 Single Page Documents https://bookdown.org/yihui/bookdown/a-single-document.html
 
 customization https://bookdown.org/yihui/bookdown/customization.html
-\columnbreak
-
-#### Template Info
-
-[R Markdown Document Templates](https://rstudio.github.io/rstudio-extensions/rmarkdown_templates.html)
-
-[Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex
 
 
-#### Latex - Multicol
+### Latex
+
+#### Multicol - mehrspaltige Layouts
 https://www.ctan.org/pkg/multicol
-
 
 https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
 
@@ -117,60 +174,130 @@ https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-m
 Mögliche Lösungen für 2 Spalten:
 https://github.com/yihui/rmarkdown-cookbook/issues/19
 
+Alternativen:
+
 https://stackoverflow.com/questions/34808612/how-make-2-column-layout-in-r-markdown-when-rendering-pdf
 
+#### geometry - Dokumentformatierung
 
-#### Latex - koma Script
+[Flexible and complete interface to document dimensions](https://ctan.org/pkg/geometry?lang=en)
 
-package und class  Sammlung https://www.ctan.org/pkg/koma-script
+[Dokumentation](http://mirrors.ctan.org/macros/latex/contrib/geometry/geometry-de.pdf)
 
-inkl. Fußnoten package https://ctan.org/pkg/scrlayer-scrpage?lang=de
+ymlthis::yml_latex_opts() erlaubt die Einstellung über das package ymlthis zu konfigurieren
 
-#### Latex - fancyhdr
+
+#### pdfpages - Einbindung externe PDF
+
+[Einbindung von PDF Dokumenten in Latex](https://ctan.org/pkg/pdfpages)
+
+- ggf. eine Lösung für Umschlag?
+
+#### KOMA Script - Sammlung
+
+[package und class Sammlung](https://www.ctan.org/pkg/koma-script)
+
+[inkl. Fußnoten package (z.Z. wird aber fancyhdr bevorzugt)](https://ctan.org/pkg/scrlayer-scrpage?lang=de)
+
+#### fancyhdr - Kopf- /Fußzeile
+
 [Kopf- und Fußzeilen](https://ctan.org/pkg/fancyhdr?lang=de)
 
 [User Guide](http://tug.ctan.org/tex-archive/macros/latex/contrib/fancyhdr/fancyhdr.pdf)
 
 [Abschnitt aus "bookdown](https://bookdown.org/yihui/rmarkdown-cookbook/latex-header.html)
 
-\newpage
 
-### Formatierung
-#### Seitenwechsel 
-Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
+#### fontspec - Schrift
 
+[Erweiterte Schrift Auswahl und Konfiguration](https://www.ctan.org/pkg/fontspec)
 
-### Text
-# Headline 1
-## Headline 2
-### Headline 3
-#### Headline 4
-##### Headline 5
+#### Inhaltsverzeichnisse
 
+##### tocloft - TOC
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+[Erweiterte Optionen für Inhaltsverzeichnisse](https://www.ctan.org/pkg/tocloft)
 
+Beispiel https://www.kronto.org/thesis/tips/format-toc.html
 
+##### enumitem - TOC
 
+[Manuelle Definition von TOCs](https://ctan.org/pkg/enumitem?lang=de)
+
+#### titlesec - Überschriften
+
+[Erweiterte Optionen für Überschriften](https://ctan.org/pkg/titlesec?lang=de)
+
+##### Beispiele
+
+- https://tex.stackexchange.com/questions/225943/how-to-create-a-custom-table-of-contents
+- https://tex.stackexchange.com/questions/404103/customize-the-table-of-contents
+- https://cmry.github.io/notes/latextoc - Sektionen ohne Nummerierung
+- https://www.kronto.org/thesis/tips/format-toc.html
 
 \End{multicols}
 
+\newpage
 
 
 
+## Formatierung
+
+### Pandoc Variablen
+
+[Anleitung](https://pandoc.org/MANUAL.html#variables-for-latex)
 
 
+### Schriften
+
+[Schrift Katalog](https://tug.org/FontCatalogue/)
+
+### Seitenwechsel 
+
+Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml
 
 
+### Logo für Titelseiten
 
-vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+https://bookdown.org/yihui/rmarkdown-cookbook/latex-logo.html#latex-logo
+
+Über includegraphics, Alternative siehe Latex package pdfpages 
+
+### Nicht nummerierte Kapitel
+
+https://bookdown.org/yihui/rmarkdown-cookbook/unnumbered-sections.html
+
+
+### Inhaltsverzeichnis
+
+[10 Wege Inhaltsverzeichnisse zu formatieren](https://texblog.org/2011/09/09/10-ways-to-customize-tocloflot/)
+
+
+### Farbpaletten
+
+Neben frei zu definierenden Farben (siehe YAML xcolor settings, bzw. für [Farbennamen](https://www.latextemplates.com/svgnames-colors) können Farben aus der Farbpalette ausgewählt werden
+
+
+\includegraphics{latexcolor.png}
+
+### Allgemeine Hinweise
+
+- Zeilenumbruch mit neuem Abschnitt: In Markdown muss eine zusätzlicher Zeilenumbruch eingefügt werden, 
+
+um diesen zu erzeugen. Es entsteht ein erhöhter Zeilenabstand.
+
+- Zeilenumbruch ohne neuen Abschitt: man fügt 2 Leerzeichen in der Zeile ein,  
+in der der Umbruch stattfinden soll
+
+- ein Spaltenumbruch in einem mehrspaltigen Layout wird mit "columnbreak" erzeugt
 
 
 
 \newpage
 
+# Beispiele
 
-# Gemischtes 1 und 2 Spalten Layout
+## Gemischtes 1 und 2 Spalten Layout
 
 \Begin{multicols}{2}
 ```{r echo = FALSE}
