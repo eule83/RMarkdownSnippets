@@ -384,7 +384,19 @@ popPyData <- data_popFM_long %>%
 
 ##### Population Pyramid with Bar Charts
 
+
 ```{r}
+
+data <- popPyData
+scale_variable <- c("percPop_country_gender")
+
+scale_max <-   
+  data %>% 
+  select(all_of(scale_variable)) %>% 
+  distinct() %>% 
+  max() %>% 
+  round(., 0)
+
 theme_ggplot2_popPy_print_A4_1C <- function(...) {
   theme_minimal()
   theme(
@@ -393,9 +405,11 @@ theme_ggplot2_popPy_print_A4_1C <- function(...) {
       color = default_font_color),
     # remove all axes
     axis.line = element_blank(),
-    axis.text.x = element_text(size = 7, hjust = 0,
-                               color = default_font_color),
-    axis.text.y = element_blank(),
+    axis.text.x = element_text(
+      size = 7, hjust = 0,
+      color = default_font_color),
+    axis.text.y = element_text(
+      margin = unit(c(t = 0, r = -0.7, b = 0, l = 0), "cm")),
     axis.ticks = element_blank(),
     axis.title.y=element_blank(),
     # panel.grid.major = element_blank(),
@@ -408,8 +422,6 @@ theme_ggplot2_popPy_print_A4_1C <- function(...) {
     legend.background = element_rect(fill = default_background_color,
                                      color = NA),
     # borders and margins
-    # Syntax = top, right, bottom, left
-    plot.margin = unit(c(t = 0, r = 0, b = 0, l = 0), "cm"),
     panel.border = element_blank(),
     panel.spacing = unit(c(0, 0, 0, 0), "cm"),
     # titles
@@ -437,63 +449,13 @@ theme_ggplot2_popPy_print_A4_1C <- function(...) {
   ) 
     
 }
-```
-
-```{r}
-
-data <- popPyData
-scale_variable <- c("percPop_country_gender")
-
-scale_max <-   
-  data %>% 
-  select(all_of(scale_variable)) %>% 
-  distinct() %>% 
-  max() %>% 
-  round(., 0)
-
-
-
-
-AgeBrackets <- ggplot(
-  data = popPyData[popPyData$gender=="M",],
-  aes(x = age)) +
-  geom_col(
-    data = popPyData[popPyData$gender=="M",], 
-    aes(
-      y = 0,
-      fill = alpha("white", 0))) +
-  geom_text(
-    aes(
-      y = 0,
-      label = as.character(age)),
-    size = 3) +
-  coord_flip() +
-  theme(
-     # title = element_text("Alter"),
-     legend.position = "none",
-     axis.text.y = element_blank(),
-     axis.title.y = element_blank(),
-     axis.text.x = element_blank(),
-     axis.ticks = element_blank(),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank(),
-    # background colors
-    plot.background = element_rect(fill = default_background_color,
-                                   color = NA),
-    panel.background = element_rect(fill = default_background_color,
-                                    color = NA),
-    legend.background = element_rect(fill = default_background_color,
-                                     color = NA)) +
-  ylab("Alter")
-
-
 
 Male <- ggplot(
   data = popPyData[popPyData$gender=="M",], 
   aes(
     x = percPop_country_gender,
     y = age)) +
-  geom_col() +
+  geom_col(fill = "cornflowerblue") +
   theme_ggplot2_popPy_print_A4_1C() +
   scale_x_continuous(
     name = "", 
@@ -503,8 +465,9 @@ Male <- ggplot(
   theme(
     # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
     # müssen die margins separat gesetzt werden
-    plot.margin = unit(c(t = -0.2, r = 0.5, b = 0.5, l = -1.5), "cm")) 
-  
+    plot.margin = unit(c(t = 0, r = -0.5, b = 0, l = -0.5), "cm")) +
+  ylab("Anteil") 
+   
 
 
 
@@ -513,7 +476,7 @@ Female <- ggplot(
   aes(
     x = percPop_country_gender,
     y = age)) +
-  geom_col() +
+  geom_col(fill = "darkseagreen2") +
   theme_ggplot2_popPy_print_A4_1C() +
   scale_x_reverse(
     name = "", 
@@ -525,22 +488,29 @@ Female <- ggplot(
   theme(
     # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
     # müssen die margins separat gesetzt werden
-    plot.margin = unit(c(t = -0.2, r = -1.5, b = 0.5, l = 0.5), "cm")) 
+    plot.margin = unit(c(t = 0, r = 0, b = 0, l = -0.5), "cm"),
+        axis.text.y = element_blank()) +
+  ylab("Angaben in %") 
 
 
 
-grid.arrange(
+gridExtra::grid.arrange(
   Female,
-  AgeBrackets,
   Male,
-  widths=c(0.4,0.2,0.4),
-    ncol=3)
+  widths=c(0.5,0.5),
+  ncol=2,
+  # https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/grid.text
+  top = grid::textGrob(
+    "Alterspyramide",
+    hjust = 3,
+    gp=grid::gpar(
+      fontsize=10,
+      font=2)))
 
 ```
 
-```{r}
-install.packages("gridExtra")
-```
+
+
 
 
 #### Bar Charts
@@ -569,7 +539,7 @@ plotBarGrouped <- BarData %>%
     geom_bar(
       position = "dodge", width=0.7,
       stat = "identity") +
-    scale_fill_manual(labels = c("männlich", "weiblich"), values = c("blue", "green")) +
+    scale_fill_manual(labels = c("männlich", "weiblich"), values = c("cornflowerblue", "darkseagreen2")) +
     scale_x_discrete(guide = guide_axis(angle = 90)) +
     labs(
       title = "Anteile der Bevölkerung nach Geschlecht und Altersgruppe",
@@ -669,20 +639,20 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 \columnbreak
 
 ```{r echo = FALSE}
-data_WorldData %>% 
-  select(
-    name,
-    pop_est) %>% 
-  arrange(desc(pop_est)) %>% 
-  head(5) %>% 
-  ggplot() + 
-  geom_col(aes(x = pop_est, y = forcats::fct_reorder(name, pop_est))) +
-  xlab("Bevölkerung") +
-  ylab("") +
-  theme(axis.text=element_text(size=12),
-        axis.title=element_text(size=14,face="bold"))
-
+gridExtra::grid.arrange(
+  Female,
+  Male,
+  widths=c(0.5,0.5),
+  ncol=2,
+  # https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/grid.text
+  top = grid::textGrob(
+    "Alterspyramide",
+    hjust = 3,
+    gp=grid::gpar(
+      fontsize=10,
+      font=2)))
 ```
+
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
@@ -693,9 +663,7 @@ ScatterPlot
 ```
 
 
-```{r echo = FALSE}
-popPyplot
-```
+## 1 Spaltiges Layout
 
 #### Alternativen zur Population Pyramid
 ```{r}
@@ -705,7 +673,9 @@ plotBarGrouped
 ```{r echo = FALSE}
 plotBarOverlay
 ```
-```{recho = FALSE}
+```{r echo = FALSE}
 plotBarFill
 ```
+
+
 

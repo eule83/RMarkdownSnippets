@@ -146,6 +146,11 @@
 \subsection{package Infos, repositories,
 links}\label{package-infos-repositories-links}}
 
+\hypertarget{scales}{%
+\subsubsection{scales}\label{scales}}
+
+package zur Berechnung von Skalen, bspw. für Achseneinteilungen etc.
+
 \hypertarget{vorlagen}{%
 \section{Vorlagen}\label{vorlagen}}
 
@@ -154,6 +159,7 @@ links}\label{package-infos-repositories-links}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Beispiel für manuelle Festlegung diskreter Variablen}
 \NormalTok{PAL_Gliederung_Colour <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{SR =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{UBZTP =} \StringTok{"orange"}\NormalTok{)}
 \NormalTok{PAL_Gebiet_fill <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"yellow3"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"grey"}\NormalTok{, }\StringTok{"maroon3"}\NormalTok{) }
 \NormalTok{PAL_pal9GnPu <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"#762a83"}\NormalTok{, }\StringTok{"#9970ab"}\NormalTok{, }\StringTok{"#c2a5cf"}\NormalTok{, }\StringTok{"#e7d4e8"}\NormalTok{, }\StringTok{"#f7f7f7"}\NormalTok{, }\StringTok{"#d9f0d3"}\NormalTok{, }\StringTok{"#a6dba0"}\NormalTok{, }\StringTok{"#5aae61"}\NormalTok{, }\StringTok{"#1b7837"}\NormalTok{)}
@@ -173,13 +179,16 @@ Hier werden themes für unterschiedliche Plot Typen und Größen
 festgelegt.
 
 Vorschlag für eine Syntax:\\
-theme\_package (ggplot, plotly etc.)\_Plottyp(bspw. map oder
+theme\_package (ggplot, plotly etc.)\_Plottyp (bspw. map oder
 barchart)\_Format(print oder HTML)\_Seitenformat (DINA4 oder A5
 etc.)\_SpaltenLayout (1, 2 oder 3-spaltig)
 
 Beispiel für ein Theme für ein ggplot2 plot, Typ Karte, für
 Printfassungen im A4 Format, 1-spaltig:\\
 theme\_ggplot2\_map\_print\_A4\_1c
+
+ggf. später zu vereinfachen, wenn sich heraustellt, dass keine
+individuellen Anpassungen zwischen 1- und 2 spaltig erfolgen müssen
 
 /newpage
 
@@ -188,6 +197,8 @@ theme\_ggplot2\_map\_print\_A4\_1c
 
 \hypertarget{beschriftungen}{%
 \subsubsection{Beschriftungen}\label{beschriftungen}}
+
+Copy/Paste Vorlage für labs()
 
 \newpage
 
@@ -325,8 +336,161 @@ Wrap}\label{scatter-plot-mit-facet-wrap}}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{population-pyramid}{%
-\paragraph{Population Pyramid}\label{population-pyramid}}
+\hypertarget{population-pyramid-varianten}{%
+\paragraph{population Pyramid
+Varianten}\label{population-pyramid-varianten}}
+
+\hypertarget{data-1}{%
+\subparagraph{data}\label{data-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{popPyData <-}\StringTok{ }\NormalTok{data_popFM_long }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\CommentTok{# filtert Kontinente und Länder Gruppen heraus}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\NormalTok{country_code }\OperatorTok{>=}\StringTok{ }\DecValTok{900}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(}
+\NormalTok{    year,}
+\NormalTok{    country,}
+\NormalTok{    gender) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}
+    \DataTypeTok{percPop_country_gender =} \KeywordTok{round}\NormalTok{(population}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(population)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{perc_MF =} \KeywordTok{ifelse}\NormalTok{(gender }\OperatorTok{==}\StringTok{ "F"}\NormalTok{, percPop_country_gender}\OperatorTok{*-}\DecValTok{1}\NormalTok{, percPop_country_gender)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(}
+\NormalTok{    year }\OperatorTok{==}\StringTok{ "2015"}
+    \OperatorTok{&}\StringTok{ }\NormalTok{country }\OperatorTok{==}\StringTok{ "Germany"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{population-pyramid-with-bar-charts}{%
+\subparagraph{Population Pyramid with Bar
+Charts}\label{population-pyramid-with-bar-charts}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\NormalTok{popPyData}
+\NormalTok{scale_variable <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"percPop_country_gender"}\NormalTok{)}
+
+\NormalTok{scale_max <-}\StringTok{   }
+\StringTok{  }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{all_of}\NormalTok{(scale_variable)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{max}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{round}\NormalTok{(., }\DecValTok{0}\NormalTok{)}
+
+\NormalTok{theme_ggplot2_popPy_print_A4_1C <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(...) \{}
+  \KeywordTok{theme_minimal}\NormalTok{()}
+  \KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{text =} \KeywordTok{element_text}\NormalTok{(}
+      \CommentTok{# family = default_font_family,}
+      \DataTypeTok{color =}\NormalTok{ default_font_color),}
+    \CommentTok{# remove all axes}
+    \DataTypeTok{axis.line =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{axis.text.x =} \KeywordTok{element_text}\NormalTok{(}
+      \DataTypeTok{size =} \DecValTok{7}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{,}
+      \DataTypeTok{color =}\NormalTok{ default_font_color),}
+    \DataTypeTok{axis.text.y =} \KeywordTok{element_text}\NormalTok{(}
+      \DataTypeTok{margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DataTypeTok{t =} \DecValTok{0}\NormalTok{, }\DataTypeTok{r =} \FloatTok{-0.7}\NormalTok{, }\DataTypeTok{b =} \DecValTok{0}\NormalTok{, }\DataTypeTok{l =} \DecValTok{0}\NormalTok{), }\StringTok{"cm"}\NormalTok{)),}
+    \DataTypeTok{axis.ticks =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{axis.title.y=}\KeywordTok{element_blank}\NormalTok{(),}
+    \CommentTok{# panel.grid.major = element_blank(),}
+    \CommentTok{# panel.grid.minor = element_blank(),}
+    \CommentTok{# background colors}
+    \DataTypeTok{plot.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                   \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \DataTypeTok{panel.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                    \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \DataTypeTok{legend.background =} \KeywordTok{element_rect}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ default_background_color,}
+                                     \DataTypeTok{color =} \OtherTok{NA}\NormalTok{),}
+    \CommentTok{# borders and margins}
+    \DataTypeTok{panel.border =} \KeywordTok{element_blank}\NormalTok{(),}
+    \DataTypeTok{panel.spacing =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\StringTok{"cm"}\NormalTok{),}
+    \CommentTok{# titles}
+    \DataTypeTok{legend.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{7}\NormalTok{),}
+    \DataTypeTok{legend.text =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{7}\NormalTok{, }\DataTypeTok{hjust =} \DecValTok{0}\NormalTok{,}
+                               \DataTypeTok{color =}\NormalTok{ default_font_color),}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{20}\NormalTok{, }
+                              \DataTypeTok{color =}\NormalTok{ default_font_color,}
+                              \DataTypeTok{face =} \StringTok{"bold"}\NormalTok{),}
+    \DataTypeTok{plot.subtitle =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{15}\NormalTok{, }
+                                 \DataTypeTok{color =}\NormalTok{ default_font_color,}
+                                 \DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{b =} \FloatTok{-0.1}\NormalTok{,}
+                                                 \DataTypeTok{t =} \FloatTok{-0.1}\NormalTok{,}
+                                                 \DataTypeTok{l =} \DecValTok{2}\NormalTok{,}
+                                                 \DataTypeTok{unit =} \StringTok{"cm"}\NormalTok{),}
+                                 \DataTypeTok{debug =}\NormalTok{ F),}
+    \CommentTok{# captions}
+    \DataTypeTok{plot.caption =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{size =} \DecValTok{10}\NormalTok{,}
+                                \DataTypeTok{hjust =} \DecValTok{0}\NormalTok{,}
+                                \DataTypeTok{margin =} \KeywordTok{margin}\NormalTok{(}\DataTypeTok{t =} \FloatTok{0.2}\NormalTok{,}
+                                                \DataTypeTok{b =} \DecValTok{0}\NormalTok{,}
+                                                \DataTypeTok{unit =} \StringTok{"cm"}\NormalTok{),}
+                                \DataTypeTok{color =} \StringTok{"#939184"}\NormalTok{),}
+\NormalTok{    ...}
+\NormalTok{  ) }
+    
+\NormalTok{\}}
+
+\NormalTok{Male <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ popPyData[popPyData}\OperatorTok{$}\NormalTok{gender}\OperatorTok{==}\StringTok{"M"}\NormalTok{,], }
+  \KeywordTok{aes}\NormalTok{(}
+    \DataTypeTok{x =}\NormalTok{ percPop_country_gender,}
+    \DataTypeTok{y =}\NormalTok{ age)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"cornflowerblue"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_ggplot2_popPy_print_A4_1C}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}
+    \DataTypeTok{name =} \StringTok{""}\NormalTok{, }
+    \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, scale_max), }
+    \DataTypeTok{breaks=}\NormalTok{ scales}\OperatorTok{::}\KeywordTok{breaks_pretty}\NormalTok{(}\DecValTok{5}\NormalTok{), }
+    \DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\OperatorTok{+}\StringTok{   }
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \CommentTok{# durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots}
+    \CommentTok{# müssen die margins separat gesetzt werden}
+    \DataTypeTok{plot.margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DataTypeTok{t =} \DecValTok{0}\NormalTok{, }\DataTypeTok{r =} \FloatTok{-0.5}\NormalTok{, }\DataTypeTok{b =} \DecValTok{0}\NormalTok{, }\DataTypeTok{l =} \FloatTok{-0.5}\NormalTok{), }\StringTok{"cm"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Anteil"}\NormalTok{) }
+   
+
+
+
+\NormalTok{Female <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}
+  \DataTypeTok{data =}\NormalTok{ popPyData[popPyData}\OperatorTok{$}\NormalTok{gender}\OperatorTok{==}\StringTok{"F"}\NormalTok{,], }
+  \KeywordTok{aes}\NormalTok{(}
+    \DataTypeTok{x =}\NormalTok{ percPop_country_gender,}
+    \DataTypeTok{y =}\NormalTok{ age)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{fill =} \StringTok{"darkseagreen2"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_ggplot2_popPy_print_A4_1C}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_reverse}\NormalTok{(}
+    \DataTypeTok{name =} \StringTok{""}\NormalTok{, }
+    \CommentTok{# da Achse für weibliche Personen umgekehrt wird (_reverse)}
+    \CommentTok{# muss auch der min und max Wert umgekehrt angegben werden}
+    \DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(scale_max, }\DecValTok{0}\NormalTok{), }
+    \DataTypeTok{breaks=}\NormalTok{ scales}\OperatorTok{::}\KeywordTok{breaks_pretty}\NormalTok{(}\DecValTok{5}\NormalTok{), }
+    \DataTypeTok{expand =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \CommentTok{# durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots}
+    \CommentTok{# müssen die margins separat gesetzt werden}
+    \DataTypeTok{plot.margin =} \KeywordTok{unit}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DataTypeTok{t =} \DecValTok{0}\NormalTok{, }\DataTypeTok{r =} \DecValTok{0}\NormalTok{, }\DataTypeTok{b =} \DecValTok{0}\NormalTok{, }\DataTypeTok{l =} \FloatTok{-0.5}\NormalTok{), }\StringTok{"cm"}\NormalTok{),}
+        \DataTypeTok{axis.text.y =} \KeywordTok{element_blank}\NormalTok{()) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Angaben in %"}\NormalTok{) }
+
+
+
+\NormalTok{gridExtra}\OperatorTok{::}\KeywordTok{grid.arrange}\NormalTok{(}
+\NormalTok{  Female,}
+\NormalTok{  Male,}
+  \DataTypeTok{widths=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.5}\NormalTok{),}
+  \DataTypeTok{ncol=}\DecValTok{2}\NormalTok{,}
+  \CommentTok{# https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/grid.text}
+  \DataTypeTok{top =}\NormalTok{ grid}\OperatorTok{::}\KeywordTok{textGrob}\NormalTok{(}
+    \StringTok{"Alterspyramide"}\NormalTok{,}
+    \DataTypeTok{hjust =} \DecValTok{3}\NormalTok{,}
+    \DataTypeTok{gp=}\NormalTok{grid}\OperatorTok{::}\KeywordTok{gpar}\NormalTok{(}
+      \DataTypeTok{fontsize=}\DecValTok{10}\NormalTok{,}
+      \DataTypeTok{font=}\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 \hypertarget{bar-charts}{%
 \paragraph{Bar Charts}\label{bar-charts}}
@@ -346,7 +510,7 @@ Wrap}\label{scatter-plot-mit-facet-wrap}}
     \DataTypeTok{percPop_country_gender =} \KeywordTok{round}\NormalTok{(population}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(population)}\OperatorTok{*}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(year }\OperatorTok{==}\StringTok{ "2015"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{filter}\NormalTok{(country }\OperatorTok{%in%}\StringTok{ }\NormalTok{countryList)}
-\NormalTok{t <-}\StringTok{ }\NormalTok{data_popFM_long }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(country) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{distinct}\NormalTok{()}
+
 \NormalTok{plotBarGrouped <-}\StringTok{ }\NormalTok{BarData }\OperatorTok{%>%}\StringTok{ }
 \StringTok{    }\KeywordTok{ggplot}\NormalTok{( }
       \KeywordTok{aes}\NormalTok{(}
@@ -357,7 +521,7 @@ Wrap}\label{scatter-plot-mit-facet-wrap}}
 \StringTok{    }\KeywordTok{geom_bar}\NormalTok{(}
       \DataTypeTok{position =} \StringTok{"dodge"}\NormalTok{, }\DataTypeTok{width=}\FloatTok{0.7}\NormalTok{,}
       \DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{) }\OperatorTok{+}
-\StringTok{    }\KeywordTok{scale_fill_manual}\NormalTok{(}\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"weiblich"}\NormalTok{, }\StringTok{"männlich"}\NormalTok{), }\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{scale_fill_manual}\NormalTok{(}\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"männlich"}\NormalTok{, }\StringTok{"weiblich"}\NormalTok{), }\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"cornflowerblue"}\NormalTok{, }\StringTok{"darkseagreen2"}\NormalTok{)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{scale_x_discrete}\NormalTok{(}\DataTypeTok{guide =} \KeywordTok{guide_axis}\NormalTok{(}\DataTypeTok{angle =} \DecValTok{90}\NormalTok{)) }\OperatorTok{+}
 \StringTok{    }\KeywordTok{labs}\NormalTok{(}
       \DataTypeTok{title =} \StringTok{"Anteile der Bevölkerung nach Geschlecht und Altersgruppe"}\NormalTok{,}
@@ -375,6 +539,8 @@ Wrap}\label{scatter-plot-mit-facet-wrap}}
 \NormalTok{plotBarFill <-}\StringTok{ }\NormalTok{BarData }\OperatorTok{%>%}\StringTok{ }
 \StringTok{    }\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}
 \StringTok{    }\KeywordTok{geom_bar}\NormalTok{(}
+      \CommentTok{# filter des Datensatzes auf weibliche Personen}
+      \CommentTok{# Alternative: BarData[BarData$gender=="F",]}
       \DataTypeTok{data =} \KeywordTok{subset}\NormalTok{(BarData, gender }\OperatorTok{==}\StringTok{ "F"}\NormalTok{), }
       \KeywordTok{aes}\NormalTok{(}
         \DataTypeTok{x=}\NormalTok{age, }
@@ -450,7 +616,7 @@ Layout}\label{gemischtes-1-und-2-spalten-layout}}
 
 \begin {multicols}{2}
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-7-1.pdf}
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-9-1.pdf}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -458,7 +624,7 @@ voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
 \columnbreak
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-8-1.pdf}
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
 eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -466,24 +632,24 @@ voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
 
 \end {multicols}
 
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-9-1.pdf}
-
-\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-10-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plotBarOverlay}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{ggplot2_files/figure-latex/unnamed-chunk-11-1.pdf}
 
+\hypertarget{spaltiges-layout}{%
+\subsection{1 Spaltiges Layout}\label{spaltiges-layout}}
+
+\hypertarget{alternativen-zur-population-pyramid}{%
+\paragraph{Alternativen zur Population
+Pyramid}\label{alternativen-zur-population-pyramid}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{plotBarFill}
+\NormalTok{plotBarGrouped}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{ggplot2_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{ggplot2_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 \end{document}
