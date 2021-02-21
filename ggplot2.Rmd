@@ -21,6 +21,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(lang = "en_US")
 ```
 
 \newpage 
@@ -122,10 +123,15 @@ data_popFM_long <- data_popFM %>%
 ## package Infos, repositories, links
 
 
+### scales
+
+package zur Berechnung von Skalen, bspw. für Achseneinteilungen etc.
+
 # Vorlagen
 ## color palettes
 
 ```{r }
+# Beispiel für manuelle Festlegung diskreter Variablen
 PAL_Gliederung_Colour <- c(SR = "blue", UBZTP = "orange")
 PAL_Gebiet_fill <- c("yellow3", "black", "grey", "maroon3") 
 PAL_pal9GnPu <- c("#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837")
@@ -140,11 +146,13 @@ PAL_div_lowcontrast <- c("#fc8d62","#e78ac3","#66c2a5", "#8da0cb","#a6d854","#ff
 
 Hier werden themes für unterschiedliche Plot Typen und Größen festgelegt.
 
-Vorschlag für eine Syntax:\
-theme_package (ggplot, plotly etc.)_Plottyp(bspw. map oder barchart)_Format(print oder HTML)_Seitenformat (DINA4 oder A5 etc.)_SpaltenLayout (1, 2 oder 3-spaltig)
+Vorschlag für eine Syntax:  
+theme_package (ggplot, plotly etc.)_Plottyp (bspw. map oder barchart)_Format(print oder HTML)_Seitenformat (DINA4 oder A5 etc.)_SpaltenLayout (1, 2 oder 3-spaltig)
 
 Beispiel für ein Theme für ein ggplot2 plot, Typ Karte, für Printfassungen im A4 Format, 1-spaltig:\
 theme_ggplot2_map_print_A4_1c
+
+ggf. später zu vereinfachen, wenn sich heraustellt, dass keine individuellen Anpassungen zwischen 1- und 2 spaltig erfolgen müssen
 
 
 ```{r echo = FALSE}
@@ -160,11 +168,11 @@ theme_ggplot2_map_print_A4_1C <- function(...) {
       # family = default_font_family,
       color = default_font_color),
     # remove all axes
-    axis.line = element_blank(),
+    # axis.line = element_blank(),
     axis.text.x = element_blank(),
     axis.text.y = element_blank(),
     axis.ticks = element_blank(),
-    # add a subtle grid
+    # remove grid
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     # background colors
@@ -202,12 +210,16 @@ theme_ggplot2_map_print_A4_1C <- function(...) {
     ...
   )
 }
+
+
+
 ```
 /newpage
 
 ## Snippets
 ### Beschriftungen
 
+Copy/Paste Vorlage für labs()
 ```{r echo = FALSE}
 # Snippet für Beschriftungen
     # labs(
@@ -225,6 +237,7 @@ theme_ggplot2_map_print_A4_1C <- function(...) {
 \newpage
 ### Plots
 #### Karte
+
 ```{r plot map}
 mapData <- data_WorldGeom %>% 
   select(
@@ -346,11 +359,13 @@ ScatterPlot <-
     # Abstand der Achsentitel zum Achsentext
     axis.title.x = element_text(margin = margin(t = 15, r = 0, b = 0, l = 0)),
     axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0)))
+
 ```
 
-#### Population Pyramid
-```{r plot pop pyramid, echo = FALSE}
+#### population Pyramid Varianten
 
+##### data
+```{r}
 popPyData <- data_popFM_long %>% 
   # filtert Kontinente und Länder Gruppen heraus
   filter(!country_code >= 900) %>% 
@@ -365,72 +380,166 @@ popPyData <- data_popFM_long %>%
   filter(
     year == "2015"
     & country == "Germany")
+```
+
+##### Population Pyramid with Bar Charts
+
+```{r}
+theme_ggplot2_popPy_print_A4_1C <- function(...) {
+  theme_minimal()
+  theme(
+    text = element_text(
+      # family = default_font_family,
+      color = default_font_color),
+    # remove all axes
+    axis.line = element_blank(),
+    axis.text.x = element_text(size = 7, hjust = 0,
+                               color = default_font_color),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title.y=element_blank(),
+    # panel.grid.major = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # background colors
+    plot.background = element_rect(fill = default_background_color,
+                                   color = NA),
+    panel.background = element_rect(fill = default_background_color,
+                                    color = NA),
+    legend.background = element_rect(fill = default_background_color,
+                                     color = NA),
+    # borders and margins
+    # Syntax = top, right, bottom, left
+    plot.margin = unit(c(t = 0, r = 0, b = 0, l = 0), "cm"),
+    panel.border = element_blank(),
+    panel.spacing = unit(c(0, 0, 0, 0), "cm"),
+    # titles
+    legend.title = element_text(size = 7),
+    legend.text = element_text(size = 7, hjust = 0,
+                               color = default_font_color),
+    plot.title = element_text(size = 20, 
+                              color = default_font_color,
+                              face = "bold"),
+    plot.subtitle = element_text(size = 15, 
+                                 color = default_font_color,
+                                 margin = margin(b = -0.1,
+                                                 t = -0.1,
+                                                 l = 2,
+                                                 unit = "cm"),
+                                 debug = F),
+    # captions
+    plot.caption = element_text(size = 10,
+                                hjust = 0,
+                                margin = margin(t = 0.2,
+                                                b = 0,
+                                                unit = "cm"),
+                                color = "#939184"),
+    ...
+  ) 
+    
+}
+```
+
+```{r}
+
+data <- popPyData
+scale_variable <- c("percPop_country_gender")
+
+scale_max <-   
+  data %>% 
+  select(all_of(scale_variable)) %>% 
+  distinct() %>% 
+  max() %>% 
+  round(., 0)
 
 
-popPyplot <- popPyData %>%
-  ggplot(aes(x = age, color = gender))+
-  geom_linerange(
-    data = popPyData[popPyData$gender=="F",],
-    aes(
-      # damit der Abstand zu der sich in der Mitte befindenden label Spalte passt 
-      # wird ymin und ymax entsprechend angepasst
-      ymin = -0.5, 
-      ymax = -0.5+perc_MF), 
-    size = 3, 
-    alpha = 0.8) +
-  geom_linerange(
-    data = popPyData[popPyData$gender=="M",],
-    aes(
-      ymin = 0.5, 
-      ymax = 0.5+perc_MF), 
-    size = 3, 
-    alpha = 0.8) +
-  geom_label(
-    aes(
-      x = age, 
-      y = 0, 
-      label = age),
-    inherit.aes = F,
-    size = 3.5, 
-    label.padding = unit(0, "lines"), 
-    label.size = 0,
-    label.r = unit(0.0, "lines"), 
-    fill = "#EFF2F4", 
-    alpha = 0.9, 
-    color = "#5D646F") +
-   # scale_y_discrete(
-   #   breaks = c(
-   #     c(-2, -1.5, -1, -0.5, 0) + -0.3,
-   #     c(0, 0.5, 1, 1.5, 2) + 0.3),
-   #   labels = c("2", "1.5", "1", "0.5", "0", "0", "0.5", "1", "1.5", "2")) +
-    coord_flip() +
-   # labs(title = "Anteile der Bevölkerung",
-   #  subtitle = "nach Geschlecht und Altersgruppe",
-   #  caption = "Datenset wpp2015")+
-   #    scale_color_manual(
-   #      name = "",
-   #      values = c(male = "3E606F", female = "8C3F4D"),
-   #      labels = c("männlich", "weiblich")) +
-    theme_minimal()+
-    theme(
-      text = element_text(color = "#3A3F4A"),
-      panel.grid.major.y = element_blank(),
-      panel.grid.minor = element_blank(),
-      panel.grid.major.x = element_line(linetype = "dotted", size = 0.3, color = "#3A3F4A"),
-      axis.title = element_blank(),
-      plot.title = element_text(face = "bold", size = 36, margin = margin(b = 10), hjust = 0.030),
-      plot.subtitle = element_text(size = 16, margin = margin(b = 20), hjust = 0.030),
-      plot.caption = element_text(size = 14, margin = margin(b = 10, t = 50), color = "#5D646F"),
-      axis.text.x = element_text(size = 12, color = "#5D646F"),
-      axis.text.y = element_blank(),
-      strip.text = element_text(color = "#5D646F", size = 18, face = "bold", hjust = 0.030),
-      plot.background = element_rect(fill = "#EFF2F4"),
-      plot.margin = unit(c(2, 2, 2, 2), "cm"),
-      legend.position = "top",
-      legend.spacing  = unit(0.1, "lines"),
-      legend.text  = element_text(size = 14),
-      legend.text.align = 0)
 
+
+AgeBrackets <- ggplot(
+  data = popPyData[popPyData$gender=="M",],
+  aes(x = age)) +
+  geom_col(
+    data = popPyData[popPyData$gender=="M",], 
+    aes(
+      y = 0,
+      fill = alpha("white", 0))) +
+  geom_text(
+    aes(
+      y = 0,
+      label = as.character(age)),
+    size = 3) +
+  coord_flip() +
+  theme(
+     # title = element_text("Alter"),
+     legend.position = "none",
+     axis.text.y = element_blank(),
+     axis.title.y = element_blank(),
+     axis.text.x = element_blank(),
+     axis.ticks = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    # background colors
+    plot.background = element_rect(fill = default_background_color,
+                                   color = NA),
+    panel.background = element_rect(fill = default_background_color,
+                                    color = NA),
+    legend.background = element_rect(fill = default_background_color,
+                                     color = NA)) +
+  ylab("Alter")
+
+
+
+Male <- ggplot(
+  data = popPyData[popPyData$gender=="M",], 
+  aes(
+    x = percPop_country_gender,
+    y = age)) +
+  geom_col() +
+  theme_ggplot2_popPy_print_A4_1C() +
+  scale_x_continuous(
+    name = "", 
+    limits = c(0, scale_max), 
+    breaks= scales::breaks_pretty(5), 
+    expand = c(0, 1)) +   
+  theme(
+    # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
+    # müssen die margins separat gesetzt werden
+    plot.margin = unit(c(t = -0.2, r = 0.5, b = 0.5, l = -1.5), "cm")) 
+  
+
+
+
+Female <- ggplot(
+  data = popPyData[popPyData$gender=="F",], 
+  aes(
+    x = percPop_country_gender,
+    y = age)) +
+  geom_col() +
+  theme_ggplot2_popPy_print_A4_1C() +
+  scale_x_reverse(
+    name = "", 
+    # da Achse für weibliche Personen umgekehrt wird (_reverse)
+    # muss auch der min und max Wert umgekehrt angegben werden
+    limits = c(scale_max, 0), 
+    breaks= scales::breaks_pretty(5), 
+    expand = c(0, 1)) +
+  theme(
+    # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
+    # müssen die margins separat gesetzt werden
+    plot.margin = unit(c(t = -0.2, r = -1.5, b = 0.5, l = 0.5), "cm")) 
+
+
+
+grid.arrange(
+  Female,
+  AgeBrackets,
+  Male,
+  widths=c(0.4,0.2,0.4),
+    ncol=3)
+
+```
+
+```{r}
+install.packages("gridExtra")
 ```
 
 
@@ -449,7 +558,7 @@ BarData <- data_popFM_long %>%
     percPop_country_gender = round(population/sum(population)*100,1)) %>% 
   filter(year == "2015") %>% 
   filter(country %in% countryList)
-t <- data_popFM_long %>% select(country) %>% distinct()
+
 plotBarGrouped <- BarData %>% 
     ggplot( 
       aes(
@@ -460,7 +569,7 @@ plotBarGrouped <- BarData %>%
     geom_bar(
       position = "dodge", width=0.7,
       stat = "identity") +
-    scale_fill_manual(labels = c("weiblich", "männlich"), values = c("blue", "red")) +
+    scale_fill_manual(labels = c("männlich", "weiblich"), values = c("blue", "green")) +
     scale_x_discrete(guide = guide_axis(angle = 90)) +
     labs(
       title = "Anteile der Bevölkerung nach Geschlecht und Altersgruppe",
@@ -478,6 +587,8 @@ plotBarGrouped <- BarData %>%
 plotBarFill <- BarData %>% 
     ggplot() +
     geom_bar(
+      # filter des Datensatzes auf weibliche Personen
+      # Alternative: BarData[BarData$gender=="F",]
       data = subset(BarData, gender == "F"), 
       aes(
         x=age, 
@@ -584,6 +695,11 @@ ScatterPlot
 
 ```{r echo = FALSE}
 popPyplot
+```
+
+#### Alternativen zur Population Pyramid
+```{r}
+plotBarGrouped
 ```
 
 ```{r echo = FALSE}
