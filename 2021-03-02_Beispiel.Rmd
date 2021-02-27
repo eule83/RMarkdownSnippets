@@ -1,0 +1,334 @@
+---
+# Dokument Informationen
+title: "Latex, YAML, RMarkdown"
+subtitle: "Options, packages and examples for PDF print"
+email: "info.statistik@stadtdo.de"
+author: "Dortmunder Statistik"
+# abstract:
+# subject:
+# category: 
+# abstract:
+# lot: no # Tabellenverzeichnis
+# lof: no # Abbildungsverzeichnis
+
+  
+# Schrift
+mainfont: "Verdana"
+# sansfont:
+# monofont:
+# mathfont:
+linkcolor: "blue"
+urlcolor: "gray"
+
+  
+# Layout Optionen
+# margin_left: 
+# margin_right:
+papersize: "A4"
+classoption: "twoside" # für unterschiedliche gerade und ungerade Seitenformatierungen
+
+# Latex Optionen
+header-includes:
+  # Mehrspaltiges Layout
+  # Abstand zwischen Spalten
+  - \setlength{\columnsep}{18pt}
+  # multicol - package für mehrspaltige Layouts
+  - \usepackage{multicol}
+  # Work around für pandoc markdown
+  # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+  - \newcommand{\hideFromPandoc}[1]{#1} 
+  - \hideFromPandoc{
+      \let\Begin\begin
+      \let\End\end
+      }
+      
+  # Farbpalette    
+  - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
+  
+  # fancyhdr: Kopf- und Fußzeilen Einstellungen
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+  - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
+  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
+  # - \renewcommand{\headrulewidth}{0.4pt}
+  # - \renewcommand{\footrulewidth}{0.4pt}
+  - \usepackage{graphicx} # für includegraphics
+
+output: 
+  bookdown::pdf_document2:
+    # extra_dependencies: ["xcolor", "multicol"] # Verwendete Latex packages, Alternative zu \usepackage
+    # clean: # remove intermediate files
+    keep_tex: true # wirft zusätzlich eine .tex Datei aus
+    latex_engine: "xelatex" # erlaubt die Verwnedung lokal installierter Schrifttypen
+    # Inhaltsverzeichnis
+    toc: true
+    toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
+  toc-title: "Titel Inhaltsverzeichnis"
+
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r library, Import,echo = FALSE, message=FALSE}
+# library
+library(tidyverse) # import/wrangle
+library(ggplot2) # plot/maps
+library(kableExtra) # tables
+library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
+
+source("themes.R")
+
+
+# import und wrangle data
+Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")
+
+Gesamt <- readxl::read_excel("./data/Gesamt_Staat.xlsx")
+
+SB <- sf::st_read(dsn = "./shapes/Stadtbezirke_DO.shp") %>% 
+  mutate(
+    stbeznr = stringr::str_pad(stbeznr, 3, pad = "0"),
+    stbeznr = case_when(
+      bezeichnun == "INNENSTADT-WEST" ~"030",
+      bezeichnun == "INNENSTADT-NORD" ~"040",
+      bezeichnun == "INNENSTADT-OST" ~"070",
+      TRUE ~ as.character(stbeznr)))
+```
+
+
+```{r wrangle, echo = FALSE}
+
+Gesamt_long <- Gesamt %>% 
+  slice(-1) %>% 
+  select(-"Abb. 08") %>% 
+  rename(
+    "Variable" = "...2",
+    "deutsch_2013" = "2013...3",
+    "ndeutsch_2013" = "2013...4",
+    "deutsch_2018" = "2018...5",
+    "ndeutsch_2018" = "2018...6") %>% 
+  pivot_longer(
+    cols = -c("Variable"),
+    names_to = "Merkmal",
+    values_to = "Anzahl") %>% 
+  tidyr::separate(
+    Merkmal, 
+    c("Merkmal", "Jahr"),
+    sep = "_") %>% 
+  mutate(
+    Anzahl = as.numeric(Anzahl),
+    Variable = stringr::str_remove(Variable, "HWB_"),
+    Variable = forcats::fct_recode(Variable,
+                                   "Innenstadt-West" = "I-West",
+                                   "Innenstadt-Nord" = "I-Nord",
+                                   "Innenstadt-Ost" = "I-Ost"))
+
+
+GebKey <- tribble(
+      ~"Stadtbezirk", ~"Key",
+      "Innenstadt-West", "030",
+      "Innenstadt-Nord", "040",
+      "Innenstadt-Ost", "070",
+      "Eving", "001",
+      "Scharnhorst", "002",
+      "Brackel", "003",
+      "Aplerbeck", "004",
+      "Hörde", "005",
+      "Hombruch", "006",
+      "Lütgendortmund", "007",
+      "Huckarde", "008",
+      "Mengede", "009")
+
+
+Karte <- Gesamt_long %>% 
+    filter(
+    Variable == "Innenstadt-West"
+  | Variable ==  "Innenstadt-Nord"
+  | Variable ==  "Innenstadt-Ost"
+  | Variable ==  "Eving"
+  | Variable ==  "Scharnhorst"
+  | Variable ==  "Brackel"
+  | Variable ==  "Aplerbeck"
+  | Variable ==  "Hörde"
+  | Variable ==  "Hombruch"
+  | Variable ==  "Lütgendortmund"
+  | Variable ==  "Huckarde"
+  | Variable ==  "Mengede") %>% 
+  filter(Jahr == "2018") %>% 
+  select(
+    "Stadtbezirk" = Variable,
+    Merkmal,
+    Anzahl) %>% 
+  left_join(GebKey) %>% 
+  pivot_wider(
+    names_from = Merkmal,
+    values_from = Anzahl) %>% 
+  mutate(
+    Gesamt = deutsch + ndeutsch,
+    Anteil_ND = round(ndeutsch/Gesamt*100,1),
+    MW_ND = round(sum(ndeutsch)/sum(Gesamt)*100,1)) %>% 
+  select(
+    Stadtbezirk,
+    Key,
+    Anteil_ND,
+    MW_ND) 
+
+
+Karte_breaks <- Karte %>% 
+  mutate(
+    # Brüche
+    Intervall = as.factor(
+      cut(
+        Anteil_ND, 
+        breaks = round(
+          as.vector(cartography::getBreaks(
+                Karte$Anteil_ND, 
+                method = "jenks", 
+                nclass = 4)),1),
+        include.lowest = TRUE,
+        label = c(
+          "7,8 bis unter 10,7",
+          "10,7 bis unter 18,1",
+          "23,9",
+          "52,2"))))
+
+# join shape - Daten
+SB_AnteilND <- SB %>% 
+  left_join(Karte_breaks, by = c("stbeznr" = "Key"))
+
+```
+
+
+```{r Plots}
+# Farbpalette
+col_scale <- c(
+      "#d6ebff",
+      "#94c9ff",
+      "#42a1ff",
+      "#0080ff")
+
+# Durchschnittswert für Beschriftung
+mean <- SB_AnteilND$MW_ND[[1]]
+
+Plot_map_SB_ND_dis <- 
+  ggplot(data= SB_AnteilND) +
+  # Stadtbezirke
+  geom_sf(
+    aes(
+      # Füllung, sortiert nach Anteilen, absteigend
+      fill = forcats::fct_reorder(Intervall, -Anteil_ND)),
+    key_glyph = draw_key_polygon) +
+  # Beschriftung Karte Stadtbezirksnamen
+  # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
+  ggrepel::geom_text_repel(
+    # man kann die ausgewählte Variable in ggplot vorab mit "subset" filtern
+    # ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten
+    stat = "sf_coordinates",
+    aes(
+      geometry = geometry,
+      label = Stadtbezirk),
+    size = 3,
+    nudge_y = 0.01) +
+  # map theme
+  theme_ggplot2_map_print_A4_1C() +
+  # Beschriftung
+  labs(
+    # Titel
+    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit",
+    # Untertitel
+    subtitle = "Stichtag 31.12.2018",
+    # Fußnote
+    caption = paste0("Stadtweiter Durchschnitt: ",mean),
+    # Abbildungsnummer
+    tag = "Abb. 13",
+    # Legendentitel
+    fill = "Anteil in %") +
+  # Achsenbeschriftung
+  xlab("") +
+  ylab("") +
+  # https://ggplot2.tidyverse.org/reference/scale_steps.html
+  scale_fill_manual(
+    # Farben siehe oben, Anordnung umgekehrt
+    values = rev(col_scale)) 
+
+ggsave(
+  "test.pdf",
+  Plot_map_SB_ND_dis, 
+  dpi = 72)
+```
+
+
+```{r kable}
+t <- Bezirk %>% 
+  mutate(
+    across(
+      contains("perc_"),
+      ~ round(.,1))) %>% 
+  kableExtra::kbl(
+    booktabs = TRUE,
+    longtable = TRUE,
+    linesep = "",
+    caption = "Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
+    label = "Abb. 23",
+    col.names = c(
+      "Stadtbezirk Innenstadt-West",
+      "Anzahl",
+      "in % der HWB",
+      "Anzahl",
+      "in % der HWB",
+      "Anzahl",
+      "in % der HWB",
+      "Anzahl",
+      "Anzahl")) %>% 
+  kable_styling(
+    font_size = 9,
+    full_width = TRUE,
+    latex_options = c(
+      "scale_down",
+      "hold_position")) %>% 
+  add_header_above(
+    c(
+      " " = 1,
+      "2013" = 2,
+      "2017" = 2,
+      "2018" = 2,
+      "2018 / 2013" = 1,
+      "2018 / 2017" = 1)) %>% 
+  add_indent(
+    c(1:4, 7:35), 
+    level_of_indent = 1) %>% 
+  add_indent(
+    c(5:6), 
+    level_of_indent = 2) %>% 
+  pack_rows(
+    index = c(
+    "Hauptwohnbevölkerung (HWB)" = 1,
+    "Bevölkerung nach Geschlecht" = 2,
+    "Bevölkerung nach Migrationshintergrund" = 4,
+    "Bevölkerung nach Altersgruppen" = 9,
+    "Bevölkerung nach Familienstand" = 5, 
+    "Bevölkerung nach Konfession" = 3,
+    "Bevölkerung mit Nebenwohnsitz" = 1,
+    "Bevölkerung nach Haushalten" = 6,
+    "Bevölkerung nach Statistischen Bezirken" = 4)) %>% 
+  footnote(
+    general = "Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.",
+    number = c(
+    "Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder.",
+    "3) Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 % der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.", 
+    "Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet."),
+    general_title = " ",
+    threeparttable = TRUE)
+
+```
+

@@ -1,6 +1,6 @@
 ---
 title: "kableExtra"
-subtitle: "Options, packages and examples for PDF print"
+subtitle: "package Infos, themes und Vorlagen"
 mainfont: "Verdana"
 author: "Fabian Koch"
 header-includes:
@@ -46,7 +46,7 @@ WorldData <- World %>%
 
 
 
-### package Info
+# package Info
 https://cran.r-project.org/web/packages/kableExtra/index.html
 
 Guide für PDF
@@ -55,13 +55,13 @@ https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pd
 Spaltenformatierung
 https://rdrr.io/cran/kableExtra/man/column_spec.html
 
-### Text
-# Headline 1
-## Headline 2
-### Headline 3
-#### Headline 4
-##### Headline 5
+Farben
+https://stackoverflow.com/a/54076868/10275564
 
+newline in Kable
+https://rdrr.io/cran/kableExtra/f/inst/doc/best_practice_for_newline_in_latex_table.pdf
+
+# Text
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
 
@@ -112,7 +112,7 @@ tabData <- WorldData %>%
   mutate(
     Ungleichheit = as.factor(Ungleichheit))
 
-  tabData %>% 
+tabData %>% 
     select(-Ungleichheit) %>% 
     arrange(inequality) %>% 
   kableExtra::kbl(

@@ -92,7 +92,7 @@ library(ggplot2) # plot/maps
 library(tmap) # Dataset/Maps
 library(kableExtra) # tables
 library(viridis) # palettes
-library(bookdown)
+library(bookdown) 
 ```
 
 
@@ -138,8 +138,6 @@ Templates und Vorlagen wissenschaftlicher Journals
 #### ymlthis- YAML package
 
 package zur vereinfachten Verwendung von YAML in RMarkdown und bookdown
-
-[Einführung](https://cran.r-project.org/web/packages/ymlthis/vignettes/introduction-to-ymlthis.html)
 
 [Reference Manual](https://cran.r-project.org/web/packages/ymlthis/ymlthis.pdf)
 
