@@ -49,6 +49,8 @@ WorldData <- World %>%
 # package Info
 https://cran.r-project.org/web/packages/kableExtra/index.html
 
+https://cran.r-project.org/web/packages/kableExtra/kableExtra.pdf
+
 Guide für PDF
 https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_pdf.pdf
 

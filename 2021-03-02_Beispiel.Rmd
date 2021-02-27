@@ -56,9 +56,18 @@ header-includes:
   # - \renewcommand{\headrulewidth}{0.4pt}
   # - \renewcommand{\footrulewidth}{0.4pt}
   - \usepackage{graphicx} # für includegraphics
+  # für Tabellenüberschriften
+  # - \usepackage[justification=justified,labelfont={blue,it},font=small,singlelinecheck=false]
+  - \usepackage[justification=justified,font=small,singlelinecheck=false]{caption}
+  - \usepackage{color}
+  - \DeclareCaptionFont{blue}{\color{DoStat}}
+  - \captionsetup{labelfont={blue,bf}}
+
+  
 
 output: 
-  bookdown::pdf_document2:
+  pdf_document:
+  # bookdown::pdf_document2:
     # extra_dependencies: ["xcolor", "multicol"] # Verwendete Latex packages, Alternative zu \usepackage
     # clean: # remove intermediate files
     keep_tex: true # wirft zusätzlich eine .tex Datei aus
@@ -74,24 +83,32 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
+Sys.setenv(lang = "en_US")
 ```
 
 
 
 
-```{r library, Import,echo = FALSE, message=FALSE}
+```{r library, Import, echo = FALSE, message=FALSE, warning = FALSE}
 # library
-library(tidyverse) # import/wrangle
+
 library(ggplot2) # plot/maps
 library(kableExtra) # tables
+library(wpp2015) # data für pop pyramid
 library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
+library(tidyverse) # import/wrangle
+# library(huxtable) # tables
 
 source("themes.R")
 
 
 # import und wrangle data
-Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")
+Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")   %>% 
+  mutate(
+    across(
+      contains("perc_"),
+      ~ round(.,1))) 
 
 Gesamt <- readxl::read_excel("./data/Gesamt_Staat.xlsx")
 
@@ -103,15 +120,102 @@ SB <- sf::st_read(dsn = "./shapes/Stadtbezirke_DO.shp") %>%
       bezeichnun == "INNENSTADT-NORD" ~"040",
       bezeichnun == "INNENSTADT-OST" ~"070",
       TRUE ~ as.character(stbeznr)))
+
+
+
+# population data
+# https://cran.r-project.org/web/packages/wpp2015/wpp2015.pdf
+# Age- and sex-specific populationestimates and projections 
+
+data("popF") # Daten weiblich
+data("popM") # Daten männlich
+data("UNlocations") # Schlüsselliste
+
+
+
+
 ```
 
 
-```{r wrangle, echo = FALSE}
+```{r wrangle, echo = FALSE, warning = FALSE, message = FALSE}
+popFemal <- popF %>% mutate(gender = "F")
+
+
+# gemergte Daten für männlich und weiblich, dazu join von Kontinenten und Gruppierungen nach UN Definition
+data_popFM <- popM %>% 
+  mutate(gender = "M") %>% 
+  bind_rows(popFemal) %>% 
+  left_join(
+    select(
+      UNlocations,
+      country_code,
+      reg_code,
+      reg_name,
+      area_code,
+      area_name),
+    by = "country_code") 
+
+
+
+
+# im long format
+data_popFM_long <- data_popFM %>% 
+  pivot_longer(
+    # es werden die Spalten ent-pivotiert, die 4 Zahlen beinhalten (also bspw. 1950, 2015), also die yeares Spalten 
+    cols = matches("[0-9]{4}"),
+    values_to = "population",
+    names_to = "year") %>% 
+  mutate(
+    year = as.numeric(year),
+    age = factor(
+      age,
+      ordered = TRUE,
+      levels = c(
+        "0-4",
+        "5-9",
+        "10-14",
+        "15-19",
+        "20-24",
+        "25-29",
+        "30-34",
+        "35-39",
+        "40-44",
+        "45-49",
+        "50-54",
+        "55-59",
+        "60-64",
+        "65-69",
+        "70-74",
+        "75-79",
+        "80-84",
+        "85-89",
+        "90-94",
+        "95-99",
+        "100+")),
+    population = as.integer(population*1000))
+
+
+popPyData <- data_popFM_long %>% 
+  # filtert Kontinente und Länder Gruppen heraus
+  filter(!country_code >= 900) %>% 
+  dplyr::group_by(
+    year,
+    country,
+    gender) %>% 
+  dplyr::mutate(
+    percPop_country_gender = round(population/sum(population)*100,1)) %>% 
+  ungroup() %>% 
+  mutate(perc_MF = ifelse(gender == "F", percPop_country_gender*-1, percPop_country_gender)) %>% 
+  filter(
+    year == "2015"
+    & country == "Germany")
+
+
 
 Gesamt_long <- Gesamt %>% 
   slice(-1) %>% 
   select(-"Abb. 08") %>% 
-  rename(
+  dplyr::rename(
     "Variable" = "...2",
     "deutsch_2013" = "2013...3",
     "ndeutsch_2013" = "2013...4",
@@ -208,43 +312,93 @@ SB_AnteilND <- SB %>%
 
 ```
 
+```{r echo = FALSE}
+theme_ggplot2_popPy_print_A4_1C <- function(...) {
+  theme_minimal()
+  theme(
+    text = element_text(
+      # family = default_font_family,
+      color = default_font_color),
+    # remove all axes
+    axis.line = element_blank(),
+    axis.text.x = element_text(
+      size = 7, hjust = 0,
+      color = default_font_color),
+    axis.text.y = element_text(
+      margin = unit(c(t = 0, r = -0.7, b = 0, l = 0), "cm")),
+    axis.ticks = element_blank(),
+    axis.title.y=element_blank(),
+    # panel.grid.major = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # background colors
+    plot.background = element_rect(fill = default_background_color,
+                                   color = NA),
+    panel.background = element_rect(fill = default_background_color,
+                                    color = NA),
+    legend.background = element_rect(fill = default_background_color,
+                                     color = NA),
+    # borders and margins
+    panel.border = element_blank(),
+    panel.spacing = unit(c(0, 0, 0, 0), "cm"),
+    # titles
+    legend.title = element_text(size = 7),
+    legend.text = element_text(size = 7, hjust = 0,
+                               color = default_font_color),
+    plot.title = element_text(size = 20, 
+                              color = default_font_color,
+                              face = "bold"),
+    plot.subtitle = element_text(size = 15, 
+                                 color = default_font_color,
+                                 margin = margin(b = -0.1,
+                                                 t = -0.1,
+                                                 l = 2,
+                                                 unit = "cm"),
+                                 debug = F),
+    # captions
+    plot.caption = element_text(size = 10,
+                                hjust = 0,
+                                margin = margin(t = 0.2,
+                                                b = 0,
+                                                unit = "cm"),
+                                color = "#939184"),
+    ...
+  ) 
+  
+}
+```
 
-```{r Plots}
+```{r Plots, echo = FALSE, message=FALSE, warning=FALSE}
 # Farbpalette
 col_scale <- c(
       "#d6ebff",
       "#94c9ff",
       "#42a1ff",
-      "#0080ff")
+      "#044891")
 
 # Durchschnittswert für Beschriftung
 mean <- SB_AnteilND$MW_ND[[1]]
 
-Plot_map_SB_ND_dis <- 
+Plot_map_SB_ND <- 
   ggplot(data= SB_AnteilND) +
   # Stadtbezirke
   geom_sf(
     aes(
       # Füllung, sortiert nach Anteilen, absteigend
       fill = forcats::fct_reorder(Intervall, -Anteil_ND)),
-    key_glyph = draw_key_polygon) +
+    key_glyph = draw_key_polygon,
+    color = "White") +
   # Beschriftung Karte Stadtbezirksnamen
-  # ggrepel ist ein package, das Beschriftungen oder Labels so ausrichtet, dass es zu keinen Überlappungen kommmt
-  ggrepel::geom_text_repel(
-    # man kann die ausgewählte Variable in ggplot vorab mit "subset" filtern
-    # ohne stat = "sf_coordinates" kann ggrepel keine "geometry" Angaben verarbeiten
-    stat = "sf_coordinates",
+  geom_sf_text(
     aes(
       geometry = geometry,
       label = Stadtbezirk),
-    size = 3,
-    nudge_y = 0.01) +
+    size = 2.3) + 
   # map theme
   theme_ggplot2_map_print_A4_1C() +
   # Beschriftung
   labs(
     # Titel
-    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit",
+    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher \nStaatsangehörigkeit",
     # Untertitel
     subtitle = "Stichtag 31.12.2018",
     # Fußnote
@@ -260,39 +414,113 @@ Plot_map_SB_ND_dis <-
   scale_fill_manual(
     # Farben siehe oben, Anordnung umgekehrt
     values = rev(col_scale)) 
-
-ggsave(
-  "test.pdf",
-  Plot_map_SB_ND_dis, 
-  dpi = 72)
 ```
 
 
-```{r kable}
-t <- Bezirk %>% 
-  mutate(
-    across(
-      contains("perc_"),
-      ~ round(.,1))) %>% 
+```{r echo = FALSE}
+
+data <- popPyData
+scale_variable <- c("percPop_country_gender")
+
+scale_max <-   
+  data %>% 
+  select(all_of(scale_variable)) %>% 
+  distinct() %>% 
+  max() %>% 
+  round(., 0)
+
+
+
+Male <- ggplot(
+  data = popPyData[popPyData$gender=="M",], 
+  aes(
+    x = percPop_country_gender,
+    y = age)) +
+  geom_col(fill = "cornflowerblue") +
+  theme_ggplot2_popPy_print_A4_1C() +
+  scale_x_continuous(
+    name = "", 
+    limits = c(0, scale_max), 
+    breaks= scales::breaks_pretty(5), 
+    expand = c(0, 1)) +   
+  theme(
+    # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
+    # müssen die margins separat gesetzt werden
+    plot.margin = unit(c(t = 0, r = -0.5, b = 0, l = -0.5), "cm")) +
+  ylab("Anteil") 
+   
+
+
+
+Female <- ggplot(
+  data = popPyData[popPyData$gender=="F",], 
+  aes(
+    x = percPop_country_gender,
+    y = age)) +
+  geom_col(fill = "darkseagreen2") +
+  theme_ggplot2_popPy_print_A4_1C() +
+  scale_x_reverse(
+    name = "", 
+    # da Achse für weibliche Personen umgekehrt wird (_reverse)
+    # muss auch der min und max Wert umgekehrt angegben werden
+    limits = c(scale_max, 0), 
+    breaks= scales::breaks_pretty(5), 
+    expand = c(0, 1)) +
+  theme(
+    # durch die umgekehrte Ausrichtung der weiblichen/männlichen Plots
+    # müssen die margins separat gesetzt werden
+    plot.margin = unit(c(t = 0, r = 0, b = 0, l = -0.5), "cm"),
+        axis.text.y = element_blank()) +
+  ylab("Angaben in %") 
+
+
+
+popPyramid <- gridExtra::grid.arrange(
+  Female,
+  Male,
+  widths=c(0.5,0.5),
+  ncol=2,
+  # https://www.rdocumentation.org/packages/grid/versions/3.6.2/topics/grid.text
+  top = grid::textGrob(
+    "Alterspyramide",
+    hjust = 3,
+    gp=grid::gpar(
+      fontsize=10,
+      font=2)))
+
+```
+
+
+```{r kable, echo = FALSE}
+tableKable <- Bezirk %>% 
+  mutate(Dif_201813 = replace_na(Dif_201813, "-")) %>% 
   kableExtra::kbl(
     booktabs = TRUE,
-    longtable = TRUE,
+    longtable = FALSE,
+    format = "latex",
+    align = c("l", "r", "r", "r", "r", "r", "r", "r", "r" ),
+    # Without escape = F, characters with a special meaning to LaTeX (like \ & % { }) will be escaped with the result, 
+    # that you have the character itself in your output document. 
+    escape =F,
     linesep = "",
     caption = "Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
-    label = "Abb. 23",
-    col.names = c(
+    label = "Tab. 1",
+    col.names = linebreak(c(
       "Stadtbezirk Innenstadt-West",
       "Anzahl",
-      "in % der HWB",
+      "in \\% der \nHWB",
       "Anzahl",
-      "in % der HWB",
+      "in \\% der \nHWB",
       "Anzahl",
-      "in % der HWB",
-      "Anzahl",
-      "Anzahl")) %>% 
+      "in \\% der \nHWB",
+      # aus irgendeinem Grund muss man einen Zeilenumbruch einfügen,
+      # damit die Überschriften zentriert werden
+      "Anzahl\n",
+      "Anzahl\n"),
+      align ="c")) %>% 
   kable_styling(
-    font_size = 9,
-    full_width = TRUE,
+    # font_size = 7,
+    full_width = FALSE,
     latex_options = c(
       "scale_down",
       "hold_position")) %>% 
@@ -320,15 +548,45 @@ t <- Bezirk %>%
     "Bevölkerung nach Konfession" = 3,
     "Bevölkerung mit Nebenwohnsitz" = 1,
     "Bevölkerung nach Haushalten" = 6,
-    "Bevölkerung nach Statistischen Bezirken" = 4)) %>% 
+    "Bevölkerung nach Statistischen Bezirken" = 4),
+    bold = FALSE,
+    color = "#044891")  %>% 
   footnote(
-    general = "Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.",
     number = c(
+    "Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.",
     "Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder.",
-    "3) Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 % der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.", 
+    "Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 \\\\% der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.",
     "Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet."),
-    general_title = " ",
-    threeparttable = TRUE)
+    threeparttable = TRUE,
+    escape = FALSE,
+    fixed_small_size = TRUE)
 
+```
+
+
+\Begin{multicols}{2}
+
+```{r Plot map, echo = FALSE, message=FALSE, warning=FALSE, fig.fullwidth=TRUE}
+Plot_map_SB_ND
+```
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+\columnbreak
+
+```{r echo = FALSE}
+popPyramid
+```
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\End{multicols}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. 
+
+
+\newpage
+
+```{r Plot Kable, echo = FALSE}
+tableKable
 ```
 

@@ -1,5 +1,4 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
@@ -12,14 +11,14 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
   \setmainfont[]{Verdana}
 \fi
-% Use upquote if available, for straight quotes in verbatim environments
+% use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[]{microtype}
@@ -46,58 +45,9 @@
   filecolor=Maroon,
   citecolor=Blue,
   urlcolor=gray,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+  breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -107,14 +57,25 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-2}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+
 \setlength{\columnsep}{18pt}
 \usepackage{multicol}
 \newcommand{\hideFromPandoc}[1]{#1}
@@ -128,6 +89,10 @@
 \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
 \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
 \usepackage{graphicx}
+\usepackage[justification=justified,font=small,singlelinecheck=false]{caption}
+\usepackage{color}
+\DeclareCaptionFont{blue}{\color{DoStat}}
+\captionsetup{labelfont={blue,bf}}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -163,47 +128,7 @@
 \tableofcontents
 }
 \begin{verbatim}
-## Warning: package 'tidyverse' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'ggplot2' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tibble' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'tidyr' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'readr' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'purrr' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'dplyr' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'stringr' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'forcats' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'bookdown' was built under R version 4.0.3
-\end{verbatim}
-
-\begin{verbatim}
-## Reading layer `Stadtbezirke_DO' from data source `C:\myGitWorkspace\RMarkdownForPrintSnippets\shapes\Stadtbezirke_DO.shp' using driver `ESRI Shapefile'
+## Reading layer `Stadtbezirke_DO' from data source `D:\R\Projects\RMarkdownSnippets\shapes\Stadtbezirke_DO.shp' using driver `ESRI Shapefile'
 ## Simple feature collection with 12 features and 3 fields
 ## geometry type:  POLYGON
 ## dimension:      XY
@@ -211,133 +136,127 @@
 ## projected CRS:  ETRS89 / UTM zone 32N
 \end{verbatim}
 
-\begin{verbatim}
-## Joining, by = "Stadtbezirk"
-\end{verbatim}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Farbpalette}
-\NormalTok{col_scale <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
-      \StringTok{"#d6ebff"}\NormalTok{,}
-      \StringTok{"#94c9ff"}\NormalTok{,}
-      \StringTok{"#42a1ff"}\NormalTok{,}
-      \StringTok{"#0080ff"}\NormalTok{)}
+\begin {multicols}{2}
 
-\CommentTok{# Durchschnittswert für Beschriftung}
-\NormalTok{mean <-}\StringTok{ }\NormalTok{SB_AnteilND}\OperatorTok{$}\NormalTok{MW_ND[[}\DecValTok{1}\NormalTok{]]}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map-1}
 
-\NormalTok{Plot_map_SB_ND_dis <-}\StringTok{ }
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data=}\NormalTok{ SB_AnteilND) }\OperatorTok{+}
-\StringTok{  }\CommentTok{# Stadtbezirke}
-\StringTok{  }\KeywordTok{geom_sf}\NormalTok{(}
-    \KeywordTok{aes}\NormalTok{(}
-      \CommentTok{# Füllung, sortiert nach Anteilen, absteigend}
-      \DataTypeTok{fill =}\NormalTok{ forcats}\OperatorTok{::}\KeywordTok{fct_reorder}\NormalTok{(Intervall, }\OperatorTok{-}\NormalTok{Anteil_ND)),}
-    \DataTypeTok{key_glyph =}\NormalTok{ draw_key_polygon) }\OperatorTok{+}
-\StringTok{  }\CommentTok{# Beschriftung Karte Stadtbezirksnamen}
-\StringTok{  }\KeywordTok{geom_sf_text}\NormalTok{(}
-    \KeywordTok{aes}\NormalTok{(}\DataTypeTok{label =}\NormalTok{ Stadtbezirk),}
-    \DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\CommentTok{# map theme}
-\StringTok{  }\KeywordTok{theme_ggplot2_map_print_A4_1C}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\CommentTok{# Beschriftung}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}
-    \CommentTok{# Titel}
-    \DataTypeTok{title =} \StringTok{"Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit"}\NormalTok{,}
-    \CommentTok{# Untertitel}
-    \DataTypeTok{subtitle =} \StringTok{"Stichtag 31.12.2018"}\NormalTok{,}
-    \CommentTok{# Fußnote}
-    \DataTypeTok{caption =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"Stadtweiter Durchschnitt: "}\NormalTok{,mean),}
-    \CommentTok{# Abbildungsnummer}
-    \DataTypeTok{tag =} \StringTok{"Abb. 13"}\NormalTok{,}
-    \CommentTok{# Legendentitel}
-    \DataTypeTok{fill =} \StringTok{"Anteil in %"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\CommentTok{# Achsenbeschriftung}
-\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{""}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{""}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\CommentTok{# https://ggplot2.tidyverse.org/reference/scale_steps.html}
-\StringTok{  }\KeywordTok{scale_fill_manual}\NormalTok{(}
-    \CommentTok{# Farben siehe oben, Anordnung umgekehrt}
-    \DataTypeTok{values =} \KeywordTok{rev}\NormalTok{(col_scale)) }
-
-\KeywordTok{ggsave}\NormalTok{(}
-  \StringTok{"test.pdf"}\NormalTok{,}
-\NormalTok{  Plot_map_SB_ND_dis, }
-  \DataTypeTok{dpi =} \DecValTok{72}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet. \columnbreak
 
 \begin{verbatim}
-## Saving 6.5 x 4.5 in image
+## TableGrob (2 x 2) "arrange": 3 grobs
+##   z     cells    name               grob
+## 1 1 (2-2,1-1) arrange     gtable[layout]
+## 2 2 (2-2,2-2) arrange     gtable[layout]
+## 3 3 (1-1,1-2) arrange text[GRID.text.74]
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{t <-}\StringTok{ }\NormalTok{Bezirk }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}
-    \KeywordTok{across}\NormalTok{(}
-      \KeywordTok{contains}\NormalTok{(}\StringTok{"perc_"}\NormalTok{),}
-      \OperatorTok{~}\StringTok{ }\KeywordTok{round}\NormalTok{(.,}\DecValTok{1}\NormalTok{))) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\NormalTok{kableExtra}\OperatorTok{::}\KeywordTok{kbl}\NormalTok{(}
-    \DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{,}
-    \DataTypeTok{longtable =} \OtherTok{TRUE}\NormalTok{,}
-    \DataTypeTok{linesep =} \StringTok{""}\NormalTok{,}
-    \DataTypeTok{caption =} \StringTok{"Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018"}\NormalTok{,}
-    \DataTypeTok{label =} \StringTok{"Abb. 23"}\NormalTok{,}
-    \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}
-      \StringTok{"Stadtbezirk Innenstadt-West"}\NormalTok{,}
-      \StringTok{"Anzahl"}\NormalTok{,}
-      \StringTok{"in % der HWB"}\NormalTok{,}
-      \StringTok{"Anzahl"}\NormalTok{,}
-      \StringTok{"in % der HWB"}\NormalTok{,}
-      \StringTok{"Anzahl"}\NormalTok{,}
-      \StringTok{"in % der HWB"}\NormalTok{,}
-      \StringTok{"Anzahl"}\NormalTok{,}
-      \StringTok{"Anzahl"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}
-    \DataTypeTok{font_size =} \DecValTok{9}\NormalTok{,}
-    \DataTypeTok{full_width =} \OtherTok{TRUE}\NormalTok{,}
-    \DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}
-      \StringTok{"scale_down"}\NormalTok{,}
-      \StringTok{"hold_position"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{add_header_above}\NormalTok{(}
-    \KeywordTok{c}\NormalTok{(}
-      \StringTok{" "}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{,}
-      \StringTok{"2013"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
-      \StringTok{"2017"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
-      \StringTok{"2018"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
-      \StringTok{"2018 / 2013"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{,}
-      \StringTok{"2018 / 2017"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{add_indent}\NormalTok{(}
-    \KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DecValTok{7}\OperatorTok{:}\DecValTok{35}\NormalTok{), }\DataTypeTok{level_of_indent =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{add_indent}\NormalTok{(}
-    \KeywordTok{c}\NormalTok{(}\DecValTok{5}\OperatorTok{:}\DecValTok{6}\NormalTok{), }\DataTypeTok{level_of_indent =} \DecValTok{2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pack_rows}\NormalTok{(}
-    \DataTypeTok{index =} \KeywordTok{c}\NormalTok{(}
-    \StringTok{"Hauptwohnbevölkerung (HWB)"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Geschlecht"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Migrationshintergrund"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Altersgruppen"}\NormalTok{ =}\StringTok{ }\DecValTok{9}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Familienstand"}\NormalTok{ =}\StringTok{ }\DecValTok{5}\NormalTok{, }
-    \StringTok{"Bevölkerung nach Konfession"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{,}
-    \StringTok{"Bevölkerung mit Nebenwohnsitz"}\NormalTok{ =}\StringTok{ }\DecValTok{1}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Haushalten"}\NormalTok{ =}\StringTok{ }\DecValTok{6}\NormalTok{,}
-    \StringTok{"Bevölkerung nach Statistischen Bezirken"}\NormalTok{ =}\StringTok{ }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{footnote}\NormalTok{(}
-    \DataTypeTok{general =} \StringTok{"Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt."}\NormalTok{,}
-    \DataTypeTok{number =} \KeywordTok{c}\NormalTok{(}
-    \StringTok{"Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder."}\NormalTok{,}
-    \StringTok{"3) Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 % der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften."}\NormalTok{, }
-    \StringTok{"Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet."}\NormalTok{),}
-    \DataTypeTok{general_title =} \StringTok{" "}\NormalTok{,}
-    \DataTypeTok{threeparttable =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
-\begin{verbatim}
-## Warning in styling_latex_scale_down(out, table_info): Longtable cannot be
-## resized.
-\end{verbatim}
+\end {multicols}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua.
+
+\newpage
+
+\begin{table}[!h]
+
+\caption{\label{tab:Tab. 1}Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{2013} & \multicolumn{2}{c}{2017} & \multicolumn{2}{c}{2018} & \multicolumn{1}{c}{2018 / 2013} & \multicolumn{1}{c}{2018 / 2017} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5} \cmidrule(l{3pt}r{3pt}){6-7} \cmidrule(l{3pt}r{3pt}){8-8} \cmidrule(l{3pt}r{3pt}){9-9}
+Stadtbezirk Innenstadt-West & Anzahl & \makecell[c]{in \% der \\HWB} & Anzahl & \makecell[c]{in \% der \\HWB} & Anzahl & \makecell[c]{in \% der \\HWB} & \makecell[c]{Anzahl\\} & \makecell[c]{Anzahl\\}\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Hauptwohnbevölkerung (HWB)}}\\
+\hspace{1em}\hspace{1em}Insgesamt & 52031 & 100.0 & 53323 & 100.0 & 52970 & 100.0 & 939 & -353\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Geschlecht}}\\
+\hspace{1em}\hspace{1em}Männlich & 25739 & 49.5 & 26613 & 49.9 & 26441 & 49.9 & 702 & -172\\
+\hspace{1em}\hspace{1em}Weiblich & 26292 & 50.5 & 26710 & 50.1 & 26529 & 50.1 & 237 & -181\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Migrationshintergrund}}\\
+\hspace{1em}\hspace{1em}Deutsch & 44023 & 84.6 & 43702 & 82.0 & 43362 & 81.9 & -661 & -340\\
+\hspace{1em}\hspace{2em}dav. ohne Migrationshintergrund & 35589 & 68.4 & 35419 & 66.4 & 34802 & 65.7 & - & -617\\
+\hspace{1em}\hspace{2em}dav. mit Migrationshintergrund & 8434 & 16.2 & 8283 & 15.5 & 8560 & 16.2 & - & 277\\
+\hspace{1em}\hspace{1em}Nichtdeutsch (1. Staatsangehörigkeit) & 8008 & 15.4 & 9621 & 18.0 & 9608 & 18.1 & 1600 & -13\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Altersgruppen}}\\
+\hspace{1em}\hspace{1em}0 bis unter 3 Jahre & 1238 & 2.4 & 1356 & 2.5 & 1313 & 2.5 & 75 & -43\\
+\hspace{1em}\hspace{1em}3 bis unter 6 Jahre & 1102 & 2.1 & 1136 & 2.1 & 1122 & 2.1 & 20 & -14\\
+\hspace{1em}\hspace{1em}6 bis unter 18 Jahre & 4123 & 7.9 & 4172 & 7.8 & 4140 & 7.8 & 17 & -32\\
+\hspace{1em}\hspace{1em}18 bis unter 25 Jahre & 5729 & 11.0 & 5773 & 10.8 & 5692 & 10.7 & -37 & -81\\
+\hspace{1em}\hspace{1em}25 bis unter 35 Jahre & 10667 & 20.5 & 11713 & 22.0 & 11554 & 21.8 & 887 & -159\\
+\hspace{1em}\hspace{1em}35 bis unter 50 Jahre & 11095 & 21.3 & 10331 & 19.4 & 10203 & 19.3 & -892 & -128\\
+\hspace{1em}\hspace{1em}50 bis unter 65 Jahre & 9259 & 17.8 & 9927 & 18.6 & 9965 & 18.8 & 706 & 38\\
+\hspace{1em}\hspace{1em}65 bis unter 80 Jahre & 6294 & 12.1 & 6215 & 11.7 & 6180 & 11.7 & -114 & -35\\
+\hspace{1em}\hspace{1em}80 Jahre und älter & 2524 & 4.9 & 2700 & 5.1 & 2801 & 5.3 & 277 & 101\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Familienstand}}\\
+\hspace{1em}\hspace{1em}Ledig & 27380 & 52.6 & 28898 & 54.2 & 28697 & 54.2 & 1317 & -201\\
+\hspace{1em}\hspace{1em}Verheiratet & 16667 & 32.0 & 16426 & 30.8 & 16319 & 30.8 & -348 & -107\\
+\hspace{1em}\hspace{1em}Verwitwet & 3266 & 6.3 & 3107 & 5.8 & 3039 & 5.7 & -227 & -68\\
+\hspace{1em}\hspace{1em}Geschieden & 4458 & 8.6 & 4358 & 8.2 & 4290 & 8.1 & -168 & -68\\
+\hspace{1em}\hspace{1em}Sonstige & 260 & 0.5 & 534 & 1.0 & 625 & 1.2 & 365 & 91\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Konfession}}\\
+\hspace{1em}\hspace{1em}Evangelisch & 13735 & 26.4 & 12829 & 24.1 & 12549 & 23.7 & -1186 & -280\\
+\hspace{1em}\hspace{1em}Römisch-katholisch & 14848 & 28.5 & 14298 & 26.8 & 14017 & 26.5 & -831 & -281\\
+\hspace{1em}\hspace{1em}Sonstige, ohne Angabe, keine & 23448 & 45.1 & 26196 & 49.1 & 26404 & 49.8 & 2956 & 208\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung mit Nebenwohnsitz}}\\
+\hspace{1em}\hspace{1em}Insgesamt & 1060 & 2.0 & 1014 & 1.9 & 969 & 1.8 & -91 & -45\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Haushalten}}\\
+\hspace{1em}\hspace{1em}Einpersonenhaushalte & 19985 & 38.4 & 20393 & 38.2 & 20501 & 38.7 & - & 108\\
+\hspace{1em}\hspace{1em}(Ehe-)Paare ohne Kind(er) & 14881 & 28.6 & 15027 & 28.2 & 15027 & 28.4 & - & 0\\
+\hspace{1em}\hspace{1em}(Ehe-)Paare mit Kind(ern) & 11209 & 21.5 & 11410 & 21.4 & 11193 & 21.1 & - & -217\\
+\hspace{1em}\hspace{1em}Alleinerziehende Haushalte & 3147 & 6.0 & 2926 & 5.5 & 2979 & 5.6 & - & 53\\
+\hspace{1em}\hspace{1em}Sonstige Mehrpersonenhaushalte & 2809 & 5.4 & 2836 & 5.3 & 2770 & 5.2 & - & -66\\
+\hspace{1em}\hspace{1em}Bevölkerung in Haushalten insgesamt & 52031 & 100.0 & 52592 & 98.6 & 52470 & 99.1 & - & -122\\
+\addlinespace[0.3em]
+\multicolumn{9}{l}{\textcolor[HTML]{044891}{Bevölkerung nach Statistischen Bezirken}}\\
+\hspace{1em}\hspace{1em}000-City & 9337 & 17.9 & 9687 & 18.2 & 9707 & 18.3 & 370 & 20\\
+\hspace{1em}\hspace{1em}010-Westfalenhalle & 15517 & 29.8 & 15828 & 29.7 & 15863 & 29.9 & 346 & 35\\
+\hspace{1em}\hspace{1em}020-Dorstfelder Brücke & 11882 & 22.8 & 12458 & 23.4 & 12362 & 23.3 & 480 & -96\\
+\hspace{1em}\hspace{1em}030-Dorstfeld & 15295 & 29.4 & 15350 & 28.8 & 15038 & 28.4 & -257 & -312\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item[1] Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.
+\item[2] Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder.
+\item[3] Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 \% der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.
+\item[4] Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet.
+\end{tablenotes}
+\end{threeparttable}}
+\end{table}
 
 \end{document}

@@ -126,6 +126,10 @@ rmarkdown::default_output_format("./PDF_Latex.Rmd", output_yaml = TRUE)
 
 [Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex)
 
+### Bücher
+
+[RMarkdown for Scientists](https://rmd4sci.njtierney.com/)
+
 ## packages
 
 ### R
@@ -225,6 +229,11 @@ Beispiel https://www.kronto.org/thesis/tips/format-toc.html
 #### titlesec - Überschriften
 
 [Erweiterte Optionen für Überschriften](https://ctan.org/pkg/titlesec?lang=de)
+
+
+#### caption - Tabellenüberschriften
+
+[Formiertung für Tabellen oder Grafik Überschriften](https://ctan.org/pkg/caption?lang=de)
 
 ##### Beispiele
 
