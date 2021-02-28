@@ -434,7 +434,11 @@ Female <- ggplot(
 
 ```{r kable, echo = FALSE}
 tableKable <- Bezirk %>% 
-  mutate(Dif_201813 = replace_na(Dif_201813, "-")) %>% 
+  mutate(
+    Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
+    Variable = stringr::str_replace(Variable,"Sonstige", "Sonstige$^{1}$"),
+    Variable = stringr::str_replace(Variable,"Sonstige Mehrpersonenhaushalte", "Sonstige Mehrpersonenhaushalte^{2}$"),
+    Variable = stringr::str_replace(Variable,"Bevölkerung in Haushalten insgesamt", "Bevölkerung in Haushalten insgesamt$^{3}$")) %>% 
   kableExtra::kbl(
     booktabs = TRUE,
     longtable = FALSE,
@@ -659,7 +663,7 @@ tableKable
 
 To Dos:
 
-- Fußnoten innerhalb der Tabelle
+- Fußnoten innerhalb der Tabelle haben andere Schriftart
 - Ränder
 - Formatierung von Zahlen
 
