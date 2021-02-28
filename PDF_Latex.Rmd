@@ -261,6 +261,8 @@ Beispiel https://www.kronto.org/thesis/tips/format-toc.html
 
 [Schrift Katalog](https://tug.org/FontCatalogue/)
 
+[Schriften manuell wechslen](https://tex.stackexchange.com/questions/25249/how-do-i-use-a-particular-font-for-a-small-section-of-text-in-my-document)
+
 ### Seitenwechsel 
 
 Latex Page Breaks https://web.archive.org/web/20100622022829/http://help-csli.stanford.edu/tex/latex-pagebreaks.shtml

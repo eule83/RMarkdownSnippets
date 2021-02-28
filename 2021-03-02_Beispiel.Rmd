@@ -45,6 +45,7 @@ header-includes:
       
   # Farbpalette    
   - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
+  - \definecolor{DoGray}{RGB}{33, 36, 39}
   
   # fancyhdr: Kopf- und Fußzeilen Einstellungen
   - \usepackage{fancyhdr}
@@ -69,7 +70,6 @@ header-includes:
   # allerdings funktioniert die Installation des packages nicht
   # - \usepackage{includepdf}
   - \AtBeginDocument{\let\maketitle\relax} # keine Titelseite
-  
 
 output: 
   # pdf_document:
@@ -436,7 +436,7 @@ Female <- ggplot(
 tableKable <- Bezirk %>% 
   mutate(
     Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
-    Variable = stringr::str_replace(Variable,"Sonstige", "Sonstige$^{1}$"),
+    Variable = stringr::str_replace(Variable,"Sonstige\\b", "Sonstige$^{1}$"),
     Variable = stringr::str_replace(Variable,"Sonstige Mehrpersonenhaushalte", "Sonstige Mehrpersonenhaushalte^{2}$"),
     Variable = stringr::str_replace(Variable,"Bevölkerung in Haushalten insgesamt", "Bevölkerung in Haushalten insgesamt$^{3}$")) %>% 
   kableExtra::kbl(
@@ -446,11 +446,11 @@ tableKable <- Bezirk %>%
     align = c("l", "r", "r", "r", "r", "r", "r", "r", "r" ),
     # Without escape = F, characters with a special meaning to LaTeX (like \ & % { }) will be escaped with the result, 
     # that you have the character itself in your output document. 
-    escape =F,
     linesep = "",
     caption = "Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
     # label = "",
-    col.names = linebreak(c(
+    col.names = linebreak(
+      c(
       "Stadtbezirk Innenstadt-West",
       "Anzahl",
       "in \\% der \nHWB",
@@ -462,13 +462,17 @@ tableKable <- Bezirk %>%
       # damit die Überschriften zentriert werden
       "Anzahl\n",
       "Anzahl\n"),
-      align ="c")) %>% 
+      align ="c"),
+      escape =F) %>% 
   kable_styling(
     # font_size = 7,
     full_width = FALSE,
     latex_options = c(
       "scale_down",
       "hold_position")) %>% 
+  column_spec(
+    1:9,
+    color = "DoGray") %>% 
   add_header_above(
     c(
       " " = 1,
@@ -476,7 +480,8 @@ tableKable <- Bezirk %>%
       "2017" = 2,
       "2018" = 2,
       "2018 / 2013" = 1,
-      "2018 / 2017" = 1)) %>% 
+      "2018 / 2017" = 1),
+    color = "DoGray") %>% 
   add_indent(
     c(1:4, 7:35), 
     level_of_indent = 1) %>% 
@@ -496,15 +501,17 @@ tableKable <- Bezirk %>%
     "Bevölkerung nach Statistischen Bezirken" = 4),
     bold = FALSE,
     color = "#044891")  %>% 
+  # Formatierung Überschrift
+  row_spec(row = 0, color = "DoGray") %>% 
   footnote(
     number = c(
-    "Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.",
-    "Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder.",
-    "Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 \\\\% der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.",
-    "Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet."),
+    "\\\\textcolor{DoGray}{Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.}",
+    "\\\\textcolor{DoGray}{Sonstige Mehrpersonenhaushalte ohne Paare und ohne Kinder.}",
+    "\\\\textcolor{DoGray}{Seit 2016 werden durch methodische Verbesserungen in der Haushaltegenerierung Personen in Gemeinschaftsunterkünften ausgeschlossen, weshalb die Bevölkerung in Haushalten insgesamt ab 2016 unter 100 \\\\% der HWB liegt. Die Differenz sind die Personen in Gemeinschaftsunterkünften.}",
+    "\\\\textcolor{DoGray}{Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet.}"),
     threeparttable = TRUE,
     escape = FALSE,
-    fixed_small_size = TRUE)
+    fixed_small_size = TRUE,)
 
 ```
 \newpage
