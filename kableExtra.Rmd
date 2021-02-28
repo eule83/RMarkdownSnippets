@@ -60,6 +60,9 @@ https://rdrr.io/cran/kableExtra/man/column_spec.html
 Farben
 https://stackoverflow.com/a/54076868/10275564
 
+Ränder:
+https://stackoverflow.com/questions/53868409/is-there-a-way-to-make-a-kable-without-lines-borders-for-pdf
+
 newline in Kable
 https://rdrr.io/cran/kableExtra/f/inst/doc/best_practice_for_newline_in_latex_table.pdf
 

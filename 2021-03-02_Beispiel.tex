@@ -41,13 +41,17 @@
   pdftitle={Latex, YAML, RMarkdown},
   pdfauthor={Dortmunder Statistik},
   colorlinks=true,
-  linkcolor=blue,
+  linkcolor=MidnightBlue,
   filecolor=Maroon,
   citecolor=Blue,
-  urlcolor=gray,
+  urlcolor=MidnightBlue,
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs}
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -60,7 +64,7 @@
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-2}
+\setcounter{secnumdepth}{5}
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -86,13 +90,15 @@
 \fancyhf{}
 \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
 \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-\fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
-\fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
+\fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
+\fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
+\setlength{\headheight}{12.74066pt}
 \usepackage{graphicx}
 \usepackage[justification=justified,font=small,singlelinecheck=false]{caption}
 \usepackage{color}
 \DeclareCaptionFont{blue}{\color{DoStat}}
 \captionsetup{labelfont={blue,bf}}
+\AtBeginDocument{\let\maketitle\relax}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -122,69 +128,153 @@
 \begin{document}
 \maketitle
 
+\renewcommand*\contentsname{Inhaltsverzeichnis}
 {
 \hypersetup{linkcolor=}
 \setcounter{tocdepth}{4}
 \tableofcontents
 }
-\begin{verbatim}
-## Reading layer `Stadtbezirke_DO' from data source `D:\R\Projects\RMarkdownSnippets\shapes\Stadtbezirke_DO.shp' using driver `ESRI Shapefile'
-## Simple feature collection with 12 features and 3 fields
-## geometry type:  POLYGON
-## dimension:      XY
-## bbox:           xmin: 382191.9 ymin: 5697138 xmax: 405527.2 ymax: 5717740
-## projected CRS:  ETRS89 / UTM zone 32N
-\end{verbatim}
+\newpage
 
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1}
+\hypertarget{layout-beispiele}{%
+\section{Layout Beispiele}\label{layout-beispiele}}
+
+Heutiges Ziel:
+
+\begin{itemize}
+\tightlist
+\item
+  erste Eindrücke von gelösten Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
+\end{itemize}
+
+\hypertarget{spaltiges-textlayout}{%
+\subsection{1-spaltiges Textlayout}\label{spaltiges-textlayout}}
+
+Ziel des Prozesses:
+
+\begin{itemize}
+\tightlist
+\item
+  Veröffentlichungen für Homepage oder interne Kooppartner
+\item
+  downloadbar auf der Seite der Dortmunder Statistik und ausdruckbar vor Ort
+\item
+  KEIN hochwertiges Printprodukt (bspw. Statistikatlas)
+\end{itemize}
+
+Als Lückenfüller dient im Folgenden Lorem ipsum Text.
+
+\hypertarget{und-2--spaltiges-textlayout}{%
+\subsection{1- und 2- spaltiges Textlayout}\label{und-2--spaltiges-textlayout}}
+
+Gelöst wurde die freie Kombination von 1- und 2 spaltigen Textlayouts mit integrierten Plots. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
 
 \begin {multicols}{2}
 
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map-1}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet. \columnbreak
+\columnbreak
 
-\begin{verbatim}
-## TableGrob (2 x 2) "arrange": 3 grobs
-##   z     cells    name               grob
-## 1 1 (2-2,1-1) arrange     gtable[layout]
-## 2 2 (2-2,2-2) arrange     gtable[layout]
-## 3 3 (1-1,1-2) arrange text[GRID.text.74]
-\end{verbatim}
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \end {multicols}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-sed diam voluptua.
+Es existieren zahlreiche Beispiele, wie im Buch \href{https://rmd4sci.njtierney.com/}{"RMarkdown for Scientists} oder Sammlungen von \href{https://github.com/rstudio/rticles}{Template Vorlage wissenschaftlicher Journals}. Packages für Latex finden sich auf \href{https://www.ctan.org/}{CTAN}.
+
+\begin {multicols}{2}
+
+Bisher verwendet werden:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.ctan.org/pkg/multicol}{Multicol - mehrspaltige Layouts}
+\item
+  \href{https://ctan.org/pkg/fancyhdr?lang=de}{fancyhdr - Kopf- /Fußzeile}
+\item
+  \href{https://ctan.org/pkg/caption?lang=de}{caption - Tabellenüberschriften}
+\item
+  \href{https://ctan.org/pkg/xcolor?lang=de}{xcolor - Definition von Farben}
+\item
+  \href{https://www.ctan.org/pkg/tocloft}{tocloft - Erweiterte Optionen für Inhaltsverzeichnisse}
+  \newline
+  \newline
+\end{itemize}
+
+\columnbreak
+
+Geplant:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://ctan.org/pkg/geometry?lang=en}{geometry - flexible Dokumentformatierung}
+\item
+  \href{https://ctan.org/pkg/pdfpages}{pdfpages - Einbindung von PDF Dokumenten (Umschlag?)}
+\item
+  \href{https://ctan.org/pkg/pgf?lang=de}{tikz \& PGF - Skalierung von Grafiken in Latex}
+\item
+  \href{https://www.ctan.org/pkg/fontspec}{fontspec - Erweiterte Schrift Auswahl und Konfiguration}
+\end{itemize}
+
+\end {multicols}
 
 \newpage
 
+\hypertarget{mix-aus-plots-und-text}{%
+\subsection{Mix aus Plots und Text}\label{mix-aus-plots-und-text}}
+
+\begin {multicols}{2}
+
+\begin{flushright}\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map-1} \end{flushright}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\columnbreak
+
+\begin{flushright}\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 2-spaltig-1} \end{flushright}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\end {multicols}
+
+Ersichtlich sind auf den ersten Blick folgende To Dos:
+
+\begin{itemize}
+\tightlist
+\item
+  manche Grafiken sind für 2 Spalten ungeeignet -\textgreater{} Entscheidungen welche Grafik in welcher Form wie verwendet wird?
+\item
+  Maxmierung der Grafikgröße entlang der Spaltenbreite. (Lösung über fig.width, fig.height)
+\item
+  Skalierung der Grafik Beschriftung anhand der festgelegten Schriftgröße im Gesamtdokument. Hier kann man entweder händisch in ggplot Einstellungen vornehmen oder über das package tikz eine Lösung finden.
+\item
+  Entscheidung, ob mit Tabellenüberschriften innerhalb der Grafik gearbeitet wird, oder diese über RMarkdown Captions gelöst werden.
+\item
+  letztendlich macht es aber erst Sinn, wenn die Einbindung der cd Schrift Frutiger gelungen ist.
+\end{itemize}
+
+\newpage
+
+\hypertarget{plots-1-spaltig}{%
+\subsection{Plots 1 spaltig}\label{plots-1-spaltig}}
+
+Hier eine Ansicht in maximaler Größe
+
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map 1 spaltig-1}
+
+\vspace{5mm}
+
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 1 spaltig-1}
+
+\newpage
+
+\hypertarget{tabelle-ganzseitig}{%
+\subsection{Tabelle Ganzseitig}\label{tabelle-ganzseitig}}
+
 \begin{table}[!h]
 
-\caption{\label{tab:Tab. 1}Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018}
+\caption{\label{tab:kable}Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{threeparttable}
@@ -258,5 +348,96 @@ Stadtbezirk Innenstadt-West & Anzahl & \makecell[c]{in \% der \\HWB} & Anzahl & 
 \end{tablenotes}
 \end{threeparttable}}
 \end{table}
+
+To Dos:
+
+\begin{itemize}
+\tightlist
+\item
+  Fußnoten innerhalb der Tabelle
+\item
+  Ränder
+\item
+  Formatierung von Zahlen
+\end{itemize}
+
+\newpage
+
+\hypertarget{nuxe4chste-schritte}{%
+\section{Nächste Schritte}\label{nuxe4chste-schritte}}
+
+\hypertarget{to-dos-nach-priorituxe4t}{%
+\subsection{To Dos nach Priorität}\label{to-dos-nach-priorituxe4t}}
+
+\begin {multicols}{2}
+
+\hypertarget{hoch}{%
+\subsubsection{Hoch}\label{hoch}}
+
+Unabdingbar zu lösen:
+
+\begin{itemize}
+\tightlist
+\item
+  Latex Installation auf Verwaltungsrechnern
+\item
+  Integration von ``frutiger'' Schriftsatz
+\end{itemize}
+
+Klärung der Fragen:
+
+\begin{itemize}
+\tightlist
+\item
+  Festlegung gewünschter Produkte und entsprechenden grundlegenden Design Ansprüchen
+\item
+  Darauf basierend:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reicht RMarkdown? Was geht nicht und kann ggf. darauf verzichtet werden?
+  \item
+    Kann das package ``bookdown'' helfen? siehe auch: Beispiel Tufte
+  \item
+    Oder ``muss'' Latex umgestiegen werden?
+  \end{itemize}
+\end{itemize}
+
+Ergebnis: Minimalbeispiel mit Designelementen
+
+\columnbreak
+
+\hypertarget{mittel}{%
+\subsubsection{Mittel}\label{mittel}}
+
+\begin{itemize}
+\tightlist
+\item
+  Festlegung von Standardelementen (Tabellen, Grafiken)
+\item
+  Entwicklung von themes für Standardelemente im Corporate Design
+\item
+  Lösung für Umschlag und fortgeschrittene Designelemente
+\item
+  Lösung von Schriftsatz und Grafikskalierung
+\end{itemize}
+
+Ergebnis: Minimalbeispiele für Plots/Tabellen als Basis zur Abstimmung zukünftiger Templates
+
+\hypertarget{niedrig}{%
+\subsubsection{Niedrig}\label{niedrig}}
+
+\begin{itemize}
+\tightlist
+\item
+  Erstellung der Plots und Tabellen
+\item
+  Einbindung von Automatisierungsprozessen
+\end{itemize}
+
+Ergebnis: Fertige, automatisierte Berichte
+
+\end {multicols}
 
 \end{document}

@@ -76,16 +76,6 @@ knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
 ```
 
 
-
-<!-- 
-OPTIONAL
-\newpage 
-\tableofcontents man kann auch in YAML das Inhaltsverzeichnis aktivieren, allerdings wird es dann auf einer Seite mit dem Titel ausgeworfen 
-\listoffigures
-\listoftables
-\newpage 
---> 
-
 ```{r echo = FALSE, message=FALSE}
 library(tidyverse) # import/wrangle
 library(ggplot2) # plot/maps
@@ -126,9 +116,11 @@ rmarkdown::default_output_format("./PDF_Latex.Rmd", output_yaml = TRUE)
 
 [Latex engines](https://tex.stackexchange.com/questions/36/differences-between-luatex-context-and-xetex)
 
-### Bücher
+### Bücher/Präsentationen
 
 [RMarkdown for Scientists](https://rmd4sci.njtierney.com/)
+
+[Publication Quality Reports with knitr](https://warwick.ac.uk/fac/sci/wdsi/events/vacationschool2016/for-participants/materials/knitr.pdf)
 
 ## packages
 
@@ -138,6 +130,13 @@ rmarkdown::default_output_format("./PDF_Latex.Rmd", output_yaml = TRUE)
 Templates und Vorlagen wissenschaftlicher Journals
 
 [rtcles](https://github.com/rstudio/rticles)
+
+
+#### captionier - individuelle Tabellen und Grafik Tags
+
+[Dokumenation](https://www.rdocumentation.org/packages/captioner/versions/2.2.3)
+
+[stackoverflow Thread mit Beispielen](https://stackoverflow.com/questions/51945079/how-to-change-the-figure-caption-format-in-bookdow)
 
 #### ymlthis- YAML package
 
@@ -172,6 +171,9 @@ https://www.ctan.org/pkg/multicol
 https://tex.stackexchange.com/questions/8683/how-do-i-force-a-column-break-in-a-multi-column-page
 
 https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+
+column length 
+https://tex.stackexchange.com/questions/61624/adjusting-column-width-in-latex-with-the-multicol-package
 
 Mögliche Lösungen für 2 Spalten:
 https://github.com/yihui/rmarkdown-cookbook/issues/19

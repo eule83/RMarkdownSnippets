@@ -1,106 +1,83 @@
 ---
-# Dokument Informationen
-title: "Latex, YAML, RMarkdown"
-subtitle: "Options, packages and examples for PDF print"
-email: "info.statistik@stadtdo.de"
-author: "Dortmunder Statistik"
-# documentclass: "article"
-# abstract:
-# subject:
-# category: 
-# abstract:
-# lot: no # Tabellenverzeichnis
-# lof: no # Abbildungsverzeichnis
-
-  
-# Schrift
+title: "Das Tufte Layout"
+runningheader: "Tufte Handout with R Markdown" # only for pdf output
+subtitle: "An implementation in R Markdown" # only for html output
+author: ""
+# date: "`r Sys.Date()`"
 mainfont: "Verdana"
 # sansfont:
 # monofont:
 # mathfont:
-linkcolor: "MidnightBlue"
-urlcolor: "MidnightBlue"
-
-  
-# Layout Optionen
-# margin_left: 
-# margin_right:
-papersize: "A4"
-classoption: "twoside" # für unterschiedliche gerade und ungerade Seitenformatierungen
-
-# Latex Optionen
+linkcolor: "blue"
+urlcolor: "gray"
 header-includes:
   # Mehrspaltiges Layout
   # Abstand zwischen Spalten
   - \setlength{\columnsep}{18pt}
-  # multicol - package für mehrspaltige Layouts
   - \usepackage{multicol}
-  # Work around für pandoc markdown
   # https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
   - \newcommand{\hideFromPandoc}[1]{#1} 
   - \hideFromPandoc{
       \let\Begin\begin
       \let\End\end
       }
-      
-  # Farbpalette    
   - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
-  
+      
   # fancyhdr: Kopf- und Fußzeilen Einstellungen
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
   - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
   - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
-  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • Tufte • eine Alternative zum 2-spaltigen Layout • ein Kurzbeispiel}
+  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • Tufte • eine Alternative zum 2-spaltigen Layout • ein Kurzbeispiel \hspace{0.5cm} \thepage}
   - \setlength{\headheight}{12.74066pt}
-  # - \renewcommand{\headrulewidth}{0.4pt}
-  # - \renewcommand{\footrulewidth}{0.4pt}
   - \usepackage{graphicx} # für includegraphics
-  
-  # für Tabellenüberschriften
   - \usepackage[justification=justified,font=small,singlelinecheck=false]{caption}
   - \usepackage{color}
   - \DeclareCaptionFont{blue}{\color{DoStat}}
   - \captionsetup{labelfont={blue,bf}}
-  
-  # Ggf. Lösung zur Einbindung von Umschlägen
-  # allerdings funktioniert die Installation des packages nicht
-  # - \usepackage{includepdf}
-  - \AtBeginDocument{\let\maketitle\relax} # keine Titelseite
-  
-
-output: 
-  # pdf_document:
-  # bookdown package, hilft momentan beim ToC
-  bookdown::pdf_document2: 
-    clean: TRUE
-    keep_tex: true # wirft zusätzlich eine .tex Datei aus
-    latex_engine: "xelatex" # erlaubt die Verwnedung lokal installierter Schrifttypen
-    # Inhaltsverzeichnis
-    toc: true
-    toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
-toc-title: "Inhaltsverzeichnis"
-
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+    toc: TRUE
+bibliography: skeleton.bib
+link-citations: yes
 ---
 
-
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
-Sys.setenv(lang = "en_US")
-```
-
-
-```{r library, Import, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
-# library
+knitr::opts_chunk$set(cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+library(tufte)
 library(ggplot2) # plot/maps
 library(kableExtra) # tables
 library(wpp2015) # data für pop pyramid
 library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
 library(tidyverse) # import/wrangle
+```
 
+# Einführung in das tufte package
+
+Vorteile:
+
+- Flexible Verwendung von Seitennotizen
+- "modernes" Layout, in Abgrenzung zu bestehendem 1 bzw 2-spaltigem Layout
+- support über "bookdown" package, dadurch 
+  + Produktion von HTML und PDF Versionen aus einem Dokument!
+  + kontinuierlicher Support über Community
+  + trotzdem Einbindung von fortgeschrittenem Latex möglich
+  
+Das Format wird auch in Langfassungen verwendet.^[Zefir [Wege zur Metropole Ruhr](http://www.zefir.rub.de/mam/content/zefir_mat_bd_6_wege_zur_metropole_ruhr.pdf)]
+
+Eine weitere Alternative ist das package [tint](https://www.rdocumentation.org/packages/tint/versions/0.1.3) 
+
+
+```{r  Import, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
 
 source("source.R")
 
@@ -503,210 +480,47 @@ tableKable <- Bezirk %>%
     fixed_small_size = TRUE)
 
 ```
-\newpage
-
-# Layout Beispiele
-
-Heutiges Ziel:
-
-- erste Eindrücke von gelösten Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
-
-## 1-spaltiges Textlayout
-
-Ziel des Prozesses: 
-
-- Veröffentlichungen für Homepage oder interne Kooppartner
-- downloadbar auf der Seite der Dortmunder Statistik und ausdruckbar vor Ort
-- KEIN hochwertiges Printprodukt (bspw. Statistikatlas)
-
-Als Lückenfüller dient im Folgenden Lorem ipsum Text.
-
-## 1- und 2- spaltiges Textlayout
-
-Gelöst wurde die freie Kombination von 1- und 2 spaltigen Textlayouts mit integrierten Plots. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
-
-\Begin{multicols}{2}
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\columnbreak
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\End{multicols}
 
 
-Es existieren zahlreiche Beispiele, wie im Buch ["RMarkdown for Scientists](https://rmd4sci.njtierney.com/) oder Sammlungen von [Template Vorlage wissenschaftlicher Journals](https://github.com/rstudio/rticles). Packages für Latex finden sich auf [CTAN](https://www.ctan.org/). 
+# Beispiele
 
-\Begin{multicols}{2}
+DISCLAIMER: natürlich müssen sämtliche Grafiken an das neue Layout Format angepasst werden. Hier werden Grafiken aus dem Standard Latex Template verwendet.
 
-Bisher verwendet werden:
-
-- [Multicol - mehrspaltige Layouts](https://www.ctan.org/pkg/multicol)
-- [fancyhdr - Kopf- /Fußzeile](https://ctan.org/pkg/fancyhdr?lang=de)
-- [caption - Tabellenüberschriften](https://ctan.org/pkg/caption?lang=de)
-- [xcolor - Definition von Farben](https://ctan.org/pkg/xcolor?lang=de)
-- [tocloft - Erweiterte Optionen für Inhaltsverzeichnisse](https://www.ctan.org/pkg/tocloft)
-\newline
-\newline
-
-\columnbreak
-
-Geplant:
-
-- [geometry - flexible Dokumentformatierung](https://ctan.org/pkg/geometry?lang=en)
-- [pdfpages - Einbindung von PDF Dokumenten (Umschlag?)](https://ctan.org/pkg/pdfpages)
-- [tikz & PGF - Skalierung von Grafiken in Latex](https://ctan.org/pkg/pgf?lang=de)
-- [fontspec - Erweiterte Schrift Auswahl und Konfiguration](https://www.ctan.org/pkg/fontspec)
-
-\End{multicols}
-
-\newpage
-
-## Mix aus Plots und Text
-
-\Begin{multicols}{2}
-```{r Plot map, echo = FALSE, message=FALSE, warning=FALSE, fig.fullwidth=TRUE, fig.align = 'right'}
+Ein Plot mit seitlich ausgerichteter Karte. Deutlich zu sehen: hier muss einiges an Arbeit investiert werden, um die Plots und Schriften auszurichten und zu gestalten.
+```{r Plot map 1 spaltig, echo = FALSE, message=FALSE, warning=FALSE, fig.margin = TRUE}
 Plot_map_SB_ND
 ```
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-\columnbreak
+\vspace{30mm}
 
-```{r plot Pyramide 2-spaltig, echo = FALSE, fig.align = 'right'}
 
-title <- cowplot::ggdraw()  + 
-  cowplot::draw_label(
-    "Altersgruppen der Bevölkerung Deutschlands\nStand: 31.12.2018, Angaben in %",
-    x = 0,
-    hjust = 0
-  ) +
-  ggplot2::theme(
-    # add margin on the left of the drawing canvas,
-    # so title is aligned with left edge of first plot
-    plot.margin = margin(0, 0, 0, 7)
-  )
-
-plot <- cowplot::plot_grid(
-  Female,
-  Male,
-  labels = c("weiblich", "männlich"))
-
-cowplot::plot_grid(
-  title, 
-  plot,
-  ncol = 1,
-  # rel_heights values control vertical title margins
-  rel_heights = c(0.1, 1)
-)
+Deshalb werden im Anschluss Beispiele aus integrierten Datensets in R verwendet, um die Anwendung zu verdeutlichen.
+```{r fig.margin = TRUE, cache=TRUE, echo = FALSE}
+ggplot(diamonds, aes(cut, price)) + geom_boxplot()
 ```
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\End{multicols}
-
-Ersichtlich sind auf den ersten Blick folgende To Dos:
-
-- manche Grafiken sind für 2 Spalten ungeeignet -> Entscheidungen welche Grafik in welcher Form wie verwendet wird?
-- Maxmierung der Grafikgröße entlang der Spaltenbreite. (Lösung über fig.width, fig.height)
-- Skalierung der Grafik Beschriftung anhand der festgelegten Schriftgröße im Gesamtdokument. Hier kann man entweder händisch in ggplot Einstellungen vornehmen oder über das package tikz eine Lösung finden. 
-- Entscheidung, ob mit Tabellenüberschriften innerhalb der Grafik gearbeitet wird, oder diese über RMarkdown Captions gelöst werden.
-- letztendlich macht es aber erst Sinn, wenn die Einbindung der cd Schrift Frutiger gelungen ist.
 
 \newpage
 
-## Plots 1 spaltig
-Hier eine Ansicht in maximaler Größe
-```{r Plot map 1 spaltig, echo = FALSE, message=FALSE, warning=FALSE}
+
+Es geht auch andersherum: Plots, die viel Fläche verbrauchen, können entsprechend seitlich kommentiert werden:
+
+
+```{r r fig-main, fig.cap = "Auch hier muss deutlich umformatiert werden", cache=TRUE, echo = FALSE}
+# ein seitlicher Kommentar der Karte
 Plot_map_SB_ND
 ```
 
-\vspace{5mm}
-```{r plot Pyramide 1 spaltig, echo = FALSE}
 
-title <- cowplot::ggdraw()  + 
-  cowplot::draw_label(
-    "Altersgruppen der Bevölkerung Deutschlands\nStand: 31.12.2018, Angaben in %",
-    x = 0,
-    hjust = 0
-  ) +
-  ggplot2::theme(
-    # add margin on the left of the drawing canvas,
-    # so title is aligned with left edge of first plot
-    plot.margin = margin(0, 0, 0, 7)
-  )
+Hier ein passendes Beispiel:
 
-plot <- cowplot::plot_grid(
-  Female,
-  Male,
-  labels = c("weiblich", "männlich"))
-
-cowplot::plot_grid(
-  title, 
-  plot,
-  ncol = 1,
-  # rel_heights values control vertical title margins
-  rel_heights = c(0.1, 1)
-)
+```{r fig-main, fig.cap = "Das sieht schon besser aus", cache=TRUE,echo = FALSE}
+ggplot(mtcars, aes(hp, mpg, color = am)) +
+  geom_point()
 ```
+
 
 \newpage
 
-## Tabelle Ganzseitig
 
-```{r Plot Kable, echo = FALSE}
-tableKable
-```
-
-To Dos:
-
-- Fußnoten innerhalb der Tabelle
-- Ränder
-- Formatierung von Zahlen
-
-\newpage
-
-# Nächste Schritte
-
-## To Dos nach Priorität
-
-\Begin{multicols}{2}
-
-### Hoch
-
-Unabdingbar zu lösen:
-
-- Latex Installation  auf Verwaltungsrechnern
-- Integration von "frutiger" Schriftsatz
-
-Klärung der Fragen: 
-
-- Festlegung gewünschter Produkte und entsprechenden grundlegenden Design Ansprüchen
-- Darauf basierend:
-  + Reicht RMarkdown? Was geht nicht und kann ggf. darauf verzichtet werden?
-  + Kann das package "bookdown" helfen? siehe auch: Beispiel Tufte
-  + Oder "muss" Latex umgestiegen werden?
-  
-Ergebnis: Minimalbeispiel mit Designelementen
-
-\columnbreak
-
-### Mittel
-
-- Festlegung von Standardelementen (Tabellen, Grafiken)
-- Entwicklung von themes für Standardelemente im Corporate Design
-- Lösung für Umschlag und fortgeschrittene Designelemente
-- Lösung von Schriftsatz und Grafikskalierung
-
-Ergebnis: Minimalbeispiele für Plots/Tabellen als Basis zur Abstimmung zukünftiger Templates
-
-### Niedrig
-
-- Erstellung der Plots und Tabellen
-- Einbindung von Automatisierungsprozessen
-
-
-Ergebnis: Fertige, automatisierte Berichte
-
-
-\End{multicols}
 
