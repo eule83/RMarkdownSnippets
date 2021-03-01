@@ -38,8 +38,9 @@ theme_ggplot2_map_print_A4_1C <- function(...) {
     legend.key.size = unit(1.5, 'lines'),
     legend.position = c(0.1, 0.2),
     plot.title = element_text(size = 9, 
-                              color = default_font_color,
-                              face = "bold"),
+                              color = default_font_color
+                              # face = "bold"
+                              ),
     plot.subtitle = element_text(size = 7, 
                                  color = default_font_color,
                                  margin = margin(b = -0.1,
@@ -103,13 +104,14 @@ theme_ggplot2_popPy_print_A4_1C <- function(...) {
     panel.border = element_blank(),
     panel.spacing = unit(c(0, 0, 0, 0), "cm"),
     # titles
-    legend.title = element_text(size = 7),
+    legend.title = element_text(size = 9),
     legend.text = element_text(size = 7, hjust = 0,
                                color = default_font_color),
-    plot.title = element_text(size = 20,
-                              color = default_font_color,
-                              face = "bold"),
-    plot.subtitle = element_text(size = 15,
+    plot.title = element_text(size = 7,
+                              color = default_font_color
+                              # face = "bold"
+                              ),
+    plot.subtitle = element_text(size = 7,
                                  color = default_font_color,
                                  margin = margin(b = -0.1,
                                                  t = -0.1,

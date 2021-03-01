@@ -100,6 +100,7 @@
 \DeclareCaptionFont{blue}{\color{DoStat}}
 \captionsetup{labelfont={blue,bf}}
 \AtBeginDocument{\let\maketitle\relax}
+\newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -137,38 +138,82 @@
 }
 \newpage
 
-\hypertarget{layout-beispiele}{%
-\section{Layout Beispiele}\label{layout-beispiele}}
+\hypertarget{ziel}{%
+\section{Ziel}\label{ziel}}
 
-Heutiges Ziel:
+\textcolor{DoStat}{Heutiges Ziel:}
 
 \begin{itemize}
 \tightlist
 \item
-  erste Eindrücke von gelösten Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
+  erste Eindrücke von gelösten Layout-Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
+\item
+  Plot Beispiele in 1- und 2 spaltigem Layout
 \end{itemize}
 
-\hypertarget{spaltiges-textlayout}{%
-\subsection{1-spaltiges Textlayout}\label{spaltiges-textlayout}}
-
-Ziel des Prozesses:
+\textcolor{DoStat}{Ziel des Prozesses:}
 
 \begin{itemize}
 \tightlist
 \item
-  Veröffentlichungen für Homepage oder interne Kooppartner
-\item
-  downloadbar auf der Seite der Dortmunder Statistik und ausdruckbar vor Ort
+  Veröffentlichungen für Homepage oder interne Kooppartner, downloadbar auf der Seite der Dortmunder Statistik und ausdruckbar vor Ort
 \item
   KEIN hochwertiges Printprodukt (bspw. Statistikatlas)
+\item
+  Plots basieren teilweise auf Daten aus dem Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
+\item
+  sie dienen lediglich als \textcolor{DoStat}{erste Beispiele} und bedürfen noch umfangreicher Formatierung für einen einheitliches Layout
+\item
+  Als Lückenfüller dient im Folgenden Lorem ipsum Text
 \end{itemize}
 
-Als Lückenfüller dient im Folgenden Lorem ipsum Text.
+\newpage
+
+\begin {multicols}{2}
+
+\vspace*{\textheight}
+
+\columnbreak
+
+\vspace*{12cm}
+
+Die 2 spaltige Ausrichtung des Impressums kann über ``minipage'' gelöst werden, hat zeitlich nicht geklappt
+
+\textcolor{DoStat}{\textbf{Impressum}}
+
+\textbf{Herausgeber} \hspace{0.5cm} Stadt Dortmund, 3/Dez - Stabsstelle Dortmunder Statistik, 44122 Dortmund, 07/2019
+
+\textbf{Redaktion} \hspace{0.5cm} Berthold Haermeyer (verantwortlich), Manfred Gabriel, Roland Scheebaum, Georg Schulte, Iwona Szargut
+
+\textbf{Satz} \hspace{0.5cm} Rebecca Schluck
+
+\textbf{Layout} \hspace{0.5cm} Gerd Schmedes, Gabak Solutions, Grafische Konstruktionen, Dortmund
+
+\textbf{Kontakt} \hspace{0.5cm} InfoLine (0231) 50-22124, Telefax: (0231) 50-24777
+
+\textbf{eMail} \hspace{0.5cm} \href{mailto:info.statistik@stadtdo.de}{\nolinkurl{info.statistik@stadtdo.de}}
+
+\textbf{Internet} \hspace{0.5cm} www.statistik.dortmund.de
+
+\hspace{2cm}\textcolor{DoStat}{\textbf{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}}
+
+\end {multicols}
+
+\newpage
+
+\hypertarget{inhaltsverzeichnis}{%
+\subsection{Inhaltsverzeichnis}\label{inhaltsverzeichnis}}
+
+Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich formatiert werden (package: tocloft), beinhaltet aber viel Aufwand. Machbar, aber gut abzustimmen, im Hinblick auf die angefragten Produkten.
+
+\includegraphics{B8obV.jpg}
+
+\newpage
 
 \hypertarget{und-2--spaltiges-textlayout}{%
 \subsection{1- und 2- spaltiges Textlayout}\label{und-2--spaltiges-textlayout}}
 
-Gelöst wurde die freie Kombination von 1- und 2 spaltigen Textlayouts mit integrierten Plots. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
+Texte sind im 1- und 2 spaltigen Layout frei mit integrierten Plots kombinierbar. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
 
 \begin {multicols}{2}
 
@@ -177,46 +222,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 \columnbreak
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-\end {multicols}
-
-Es existieren zahlreiche Beispiele, wie im Buch \href{https://rmd4sci.njtierney.com/}{"RMarkdown for Scientists} oder Sammlungen von \href{https://github.com/rstudio/rticles}{Template Vorlage wissenschaftlicher Journals}. Packages für Latex finden sich auf \href{https://www.ctan.org/}{CTAN}.
-
-\begin {multicols}{2}
-
-Bisher verwendet werden:
-
-\begin{itemize}
-\tightlist
-\item
-  \href{https://www.ctan.org/pkg/multicol}{Multicol - mehrspaltige Layouts}
-\item
-  \href{https://ctan.org/pkg/fancyhdr?lang=de}{fancyhdr - Kopf- /Fußzeile}
-\item
-  \href{https://ctan.org/pkg/caption?lang=de}{caption - Tabellenüberschriften}
-\item
-  \href{https://ctan.org/pkg/xcolor?lang=de}{xcolor - Definition von Farben}
-\item
-  \href{https://www.ctan.org/pkg/tocloft}{tocloft - Erweiterte Optionen für Inhaltsverzeichnisse}
-  \newline
-  \newline
-\end{itemize}
-
-\columnbreak
-
-Geplant:
-
-\begin{itemize}
-\tightlist
-\item
-  \href{https://ctan.org/pkg/geometry?lang=en}{geometry - flexible Dokumentformatierung}
-\item
-  \href{https://ctan.org/pkg/pdfpages}{pdfpages - Einbindung von PDF Dokumenten (Umschlag?)}
-\item
-  \href{https://ctan.org/pkg/pgf?lang=de}{tikz \& PGF - Skalierung von Grafiken in Latex}
-\item
-  \href{https://www.ctan.org/pkg/fontspec}{fontspec - Erweiterte Schrift Auswahl und Konfiguration}
-\end{itemize}
 
 \end {multicols}
 
@@ -231,29 +236,17 @@ Geplant:
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-1-1}
+
 \columnbreak
 
-\begin{flushright}\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 2-spaltig-1} \end{flushright}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 2-spaltig-1}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1}
+
 \end {multicols}
-
-Ersichtlich sind auf den ersten Blick folgende To Dos:
-
-\begin{itemize}
-\tightlist
-\item
-  manche Grafiken sind für 2 Spalten ungeeignet -\textgreater{} Entscheidungen welche Grafik in welcher Form wie verwendet wird?
-\item
-  Maxmierung der Grafikgröße entlang der Spaltenbreite. (Lösung über fig.width, fig.height)
-\item
-  Skalierung der Grafik Beschriftung anhand der festgelegten Schriftgröße im Gesamtdokument. Hier kann man entweder händisch in ggplot Einstellungen vornehmen oder über das package tikz eine Lösung finden.
-\item
-  Entscheidung, ob mit Tabellenüberschriften innerhalb der Grafik gearbeitet wird, oder diese über RMarkdown Captions gelöst werden.
-\item
-  letztendlich macht es aber erst Sinn, wenn die Einbindung der cd Schrift Frutiger gelungen ist.
-\end{itemize}
 
 \newpage
 
@@ -267,6 +260,12 @@ Hier eine Ansicht in maximaler Größe
 \vspace{5mm}
 
 \includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 1 spaltig-1}
+
+\newpage
+
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1}
+
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1}
 
 \newpage
 
@@ -350,95 +349,6 @@ Hier eine Ansicht in maximaler Größe
 \end{threeparttable}}
 \end{table}
 
-To Dos:
-
-\begin{itemize}
-\tightlist
-\item
-  Fußnoten innerhalb der Tabelle haben andere Schriftart
-\item
-  Ränder
-\item
-  Formatierung von Zahlen
-\end{itemize}
-
 \newpage
-
-\hypertarget{nuxe4chste-schritte}{%
-\section{Nächste Schritte}\label{nuxe4chste-schritte}}
-
-\hypertarget{to-dos-nach-priorituxe4t}{%
-\subsection{To Dos nach Priorität}\label{to-dos-nach-priorituxe4t}}
-
-\begin {multicols}{2}
-
-\hypertarget{hoch}{%
-\subsubsection{Hoch}\label{hoch}}
-
-Unabdingbar zu lösen:
-
-\begin{itemize}
-\tightlist
-\item
-  Latex Installation auf Verwaltungsrechnern
-\item
-  Integration von ``frutiger'' Schriftsatz
-\end{itemize}
-
-Klärung der Fragen:
-
-\begin{itemize}
-\tightlist
-\item
-  Festlegung gewünschter Produkte und entsprechenden grundlegenden Design Ansprüchen
-\item
-  Darauf basierend:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Reicht RMarkdown? Was geht nicht und kann ggf. darauf verzichtet werden?
-  \item
-    Kann das package ``bookdown'' helfen? siehe auch: Beispiel Tufte
-  \item
-    Oder ``muss'' Latex umgestiegen werden?
-  \end{itemize}
-\end{itemize}
-
-Ergebnis: Minimalbeispiel mit Designelementen
-
-\columnbreak
-
-\hypertarget{mittel}{%
-\subsubsection{Mittel}\label{mittel}}
-
-\begin{itemize}
-\tightlist
-\item
-  Festlegung von Standardelementen (Tabellen, Grafiken)
-\item
-  Entwicklung von themes für Standardelemente im Corporate Design
-\item
-  Lösung für Umschlag und fortgeschrittene Designelemente
-\item
-  Lösung von Schriftsatz und Grafikskalierung
-\end{itemize}
-
-Ergebnis: Minimalbeispiele für Plots/Tabellen als Basis zur Abstimmung zukünftiger Templates
-
-\hypertarget{niedrig}{%
-\subsubsection{Niedrig}\label{niedrig}}
-
-\begin{itemize}
-\tightlist
-\item
-  Erstellung der Plots und Tabellen
-\item
-  Einbindung von Automatisierungsprozessen
-\end{itemize}
-
-Ergebnis: Fertige, automatisierte Berichte
-
-\end {multicols}
 
 \end{document}
