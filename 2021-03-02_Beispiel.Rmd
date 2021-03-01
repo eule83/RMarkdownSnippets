@@ -699,7 +699,7 @@ Die 2 spaltige Ausrichtung des Impressums kann über "minipage" gelöst werden, 
 
 \textbf{Internet} \hspace{0.5cm} www.statistik.dortmund.de
 
-\hspace{2cm}\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}
+\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}
 
 \End{multicols}
 
