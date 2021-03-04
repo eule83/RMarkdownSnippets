@@ -72,6 +72,10 @@ header-includes:
   - \AtBeginDocument{\let\maketitle\relax} # keine Titelseite
   - \newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}}
 
+  # Tabellen Rahmen Farbe
+  - \usepackage{colortbl}
+  - \arrayrulecolor{DoGray}
+
 output: 
   # pdf_document:
   # bookdown package, hilft momentan beim ToC
@@ -455,10 +459,6 @@ Female <- ggplot(
         axis.text.y = element_blank()) +
   ylab("Angaben in %") 
 
-
-
-
-
 ```
 
 
@@ -505,7 +505,6 @@ HWBVBarPlot <-   ggplot(HWBVBar) +
       fill = "") +
     xlab("") +
     ylab("") 
-
 
 ```
 
@@ -573,14 +572,22 @@ popLineGraph <- ggplot(
 
 
 ```{r kable, echo = FALSE, message=FALSE, warning=FALSE}
-tableKable <- Bezirk %>% 
+tableKableData <- Bezirk %>% 
   mutate(
     Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
     Variable = stringr::str_replace(Variable,"Sonstige\\b", "Sonstige$^{1}$"),
     Variable = stringr::str_replace(Variable,"Sonstige Mehrpersonenhaushalte", "Sonstige Mehrpersonenhaushalte^{2}$"),
-    Variable = stringr::str_replace(Variable,"Bevölkerung in Haushalten insgesamt", "Bevölkerung in Haushalten insgesamt$^{3}$")) %>% 
-  kableExtra::kbl(
+    Variable = stringr::str_replace(Variable,"Bevölkerung in Haushalten insgesamt", "Bevölkerung in Haushalten insgesamt$^{3}$"))
+
+
+  tableKable <- kableExtra::kbl(
+    tableKableData,
     booktabs = TRUE,
+    format.args = list(
+      # 1000er Trennzeichen
+      big.mark = ".",
+      # Dezimal Trennzeichen
+      decimal.mark = ','),
     longtable = FALSE,
     format = "latex",
     align = c("l", "r", "r", "r", "r", "r", "r", "r", "r" ),
@@ -641,8 +648,12 @@ tableKable <- Bezirk %>%
     "Bevölkerung nach Statistischen Bezirken" = 4),
     bold = FALSE,
     color = "#044891")  %>% 
-  # Formatierung Überschrift
+  # Formatierung Zeile Überschrift
   row_spec(row = 0, color = "DoGray") %>% 
+  # kein Strich über Kopfzeile der Tabelle
+  sub("\\\\toprule", "", .) %>%
+  row_spec((tableKableData %>% 
+             nrow()), extra_latex_after = "\\arrayrulecolor{DoGray}") %>% 
   footnote(
     number = c(
     "\\\\textcolor{DoGray}{Hierzu zählen Lebenspartnerschaft, Lebenspartnerschaft aufgehoben, Lebenspartner verstorben und unbekannt.}",
@@ -654,6 +665,8 @@ tableKable <- Bezirk %>%
     fixed_small_size = TRUE,)
 
 ```
+
+
 \newpage
 
 # Ziel
