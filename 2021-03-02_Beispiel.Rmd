@@ -53,8 +53,8 @@ header-includes:
   - \fancyhf{}
   - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
   - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
-  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
+  - \fancyfoot[RO]{\color{DoStat} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
   - \setlength{\headheight}{12.74066pt}
   # - \renewcommand{\headrulewidth}{0.4pt}
   # - \renewcommand{\footrulewidth}{0.4pt}
@@ -678,9 +678,7 @@ tableKableData <- Bezirk %>%
 
 \textcolor{DoStat}{Ziel des Prozesses:}
 
-- Veröffentlichungen für Homepage oder interne Kooppartner, downloadbar auf der Seite der Dortmunder Statistik und ausdruckbar vor Ort
-- KEIN hochwertiges Printprodukt (bspw. Statistikatlas)
-- Plots basieren teilweise auf Daten aus dem Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
+- Plots basieren teilweise auf öffentlich abrufbaren Daten aus dem Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
 - sie dienen lediglich als \textcolor{DoStat}{erste Beispiele} und bedürfen noch umfangreicher Formatierung für einen einheitliches Layout
 - Als Lückenfüller dient im Folgenden Lorem ipsum Text
 
@@ -698,19 +696,19 @@ Die 2 spaltige Ausrichtung des Impressums kann über "minipage" gelöst werden, 
 
 \boldDoStat{Impressum}
 
-\textbf{Herausgeber} \hspace{0.5cm} Stadt Dortmund, 3/Dez - Stabsstelle Dortmunder Statistik, 44122 Dortmund, 07/2019
+\textbf{Herausgeber} \hspace{0.5cm} NN
 
-\textbf{Redaktion} \hspace{0.5cm}  Berthold Haermeyer (verantwortlich), Manfred Gabriel, Roland Scheebaum, Georg Schulte, Iwona Szargut
+\textbf{Redaktion} \hspace{0.5cm}  NN
 
-\textbf{Satz} \hspace{0.5cm} Rebecca Schluck
+\textbf{Satz} \hspace{0.5cm} NN
 
-\textbf{Layout} \hspace{0.5cm} Gerd Schmedes, Gabak Solutions, Grafische Konstruktionen, Dortmund
+\textbf{Layout} \hspace{0.5cm} wer auch immer
 
-\textbf{Kontakt} \hspace{0.5cm} InfoLine (0231) 50-22124, Telefax: (0231) 50-24777
+\textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax: (0000) 12-34567
 
-\textbf{eMail} \hspace{0.5cm} info.statistik@stadtdo.de
+\textbf{eMail} \hspace{0.5cm} E-Mail Adresse
 
-\textbf{Internet} \hspace{0.5cm} www.statistik.dortmund.de
+\textbf{Internet} \hspace{0.5cm} Internetadresse
 
 \boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}
 

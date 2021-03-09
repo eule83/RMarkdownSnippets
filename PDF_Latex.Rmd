@@ -51,8 +51,8 @@ header-includes:
   - \fancyhf{}
   - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
   - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung}
-  - \fancyfoot[RO]{\color{DoStat} dortmunder\textbf{statistik}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} random\textbf{Organisation}  • nr. 211 • jahresbericht 2018 • bevölkerung}
+  - \fancyfoot[RO]{\color{DoStat} random\textbf{Organisation}  • nr. 211 • jahresbericht 2018 • bevölkerung \hspace{0.5cm} \thepage}
   # - \renewcommand{\headrulewidth}{0.4pt}
   # - \renewcommand{\footrulewidth}{0.4pt}
   - \usepackage{graphicx} # für includegraphics
