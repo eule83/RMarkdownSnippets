@@ -1,0 +1,48 @@
+---
+title: "geofacet"
+author: "Fabian Koch"
+date: "12 3 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(geofacet)
+```
+
+```{r}
+SB <- sf::st_read(dsn = "./shapes/Stadtbezirke_DO.shp") %>% 
+  mutate(
+    stbeznr = stringr::str_pad(stbeznr, 3, pad = "0"),
+    stbeznr = case_when(
+      bezeichnun == "INNENSTADT-WEST" ~"030",
+      bezeichnun == "INNENSTADT-NORD" ~"040",
+      bezeichnun == "INNENSTADT-OST" ~"070",
+      TRUE ~ as.character(stbeznr)))
+
+altersgruppen <- readxl::read_excel("./data/Altersgruppen.xlsx") 
+Dortmund <- altersgruppen %>% 
+  group_by()
+
+```
+
+
+
+
+```{r}
+
+#https://hafen.github.io/grid-designer/
+mygrid <- data.frame(
+  row = c(1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 6),
+  col = c(2, 3, 4, 2, 3, 4, 1, 2, 3, 4, 2, 3, 1),
+  code = c("Mengede", "Eving", "Scharnhorst", "Huckarde", "Innenstadt-Nord", "Brackel", "Lütgendortmund", "Innenstadt-West", "Innenstadt-Ost", "Aplerbeck", "Hombruch", "Hörde", " Dortmund"),
+  name = c("", "", "", "", "", "", "", "", "", "", "", "", ""),
+  stringsAsFactors = FALSE
+)
+
+```
+
