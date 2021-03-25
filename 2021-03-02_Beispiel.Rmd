@@ -75,7 +75,15 @@ header-includes:
   # Tabellen Rahmen Farbe
   - \usepackage{colortbl}
   - \arrayrulecolor{DoGray}
+  
+  # fig.caps above table
+  - \usepackage{floatrow}
+  - \floatsetup[figure]{capposition=top}
+  
 
+
+
+  
 output: 
   # pdf_document:
   # bookdown package, hilft momentan beim ToC
@@ -84,16 +92,23 @@ output:
     keep_tex: true # wirft zusätzlich eine .tex Datei aus
     latex_engine: "xelatex" # erlaubt die Verwnedung lokal installierter Schrifttypen
     # Inhaltsverzeichnis
+    fig_caption: yes
     toc: true
     toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
 toc-title: "Inhaltsverzeichnis"
 
 ---
-
-
+<!--  renaming table and fig labels -->
+<!--  full list https://stackoverflow.com/a/47237025 -->
+  
+\renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
+knitr::opts_chunk$set(dev = 'pdf')
 Sys.setenv(lang = "en_US")
 ```
 
@@ -106,10 +121,11 @@ library(wpp2015) # data für pop pyramid
 library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
 library(tidyverse) # import/wrangle
 
-
 source("source.R")
+```
 
 
+```{r data, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
 # import und wrangle data
 Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")   %>% 
   mutate(
@@ -616,7 +632,7 @@ tableKableData <- Bezirk %>%
     full_width = FALSE,
     latex_options = c(
       "scale_down",
-      "hold_position")) %>% 
+      "HOLD_position")) %>% 
   column_spec(
     1:9,
     color = "DoGray") %>% 
@@ -833,13 +849,13 @@ cowplot::plot_grid(
 
 \newpage
 
-```{r echo = FALSE } 
+```{r echo = FALSE, fig.cap="blubb" } 
 HWBVBarPlot
 ```
 
 
 
-```{r echo = FALSE } 
+```{r echo = FALSE, fig.cap="test"} 
 popLineGraph
 ```
 
@@ -856,4 +872,14 @@ tableKable
 
 
 
+```{r Plot Kable2, echo = FALSE}
+tableKable
+```
 
+\newpage
+
+\listoffigures  
+
+\newpage
+
+\listoftables
