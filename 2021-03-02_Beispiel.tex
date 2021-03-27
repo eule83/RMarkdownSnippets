@@ -48,10 +48,6 @@
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
-\usepackage{longtable,booktabs}
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -105,6 +101,8 @@
 \arrayrulecolor{DoGray}
 \usepackage{floatrow}
 \floatsetup[figure]{capposition=top}
+\floatsetup[table]{capposition=top}
+\usepackage{tikz}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -150,12 +148,16 @@
 \hypertarget{ziel}{%
 \section{Ziel}\label{ziel}}
 
+\hypertarget{text}{%
+\subsection{Text}\label{text}}
+
 \textcolor{DoStat}{Heutiges Ziel:}
 
 \begin{itemize}
 \tightlist
 \item
-  erste Eindrücke von gelösten Layout-Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
+  erste Eindrücke von gelösten Layout-Problemstellungen in der
+  Erstellung von RMarkdown/Latex basierten PDF Dokumenten
 \item
   Plot Beispiele in 1- und 2 spaltigem Layout
 \end{itemize}
@@ -165,9 +167,12 @@
 \begin{itemize}
 \tightlist
 \item
-  Plots basieren teilweise auf öffentlich abrufbaren Daten aus dem Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
+  Plots basieren teilweise auf öffentlich abrufbaren Daten aus dem
+  Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
 \item
-  sie dienen lediglich als \textcolor{DoStat}{erste Beispiele} und bedürfen noch umfangreicher Formatierung für einen einheitliches Layout
+  sie dienen lediglich als \textcolor{DoStat}{erste Beispiele} und
+  bedürfen noch umfangreicher Formatierung für einen einheitliches
+  Layout
 \item
   Als Lückenfüller dient im Folgenden Lorem ipsum Text
 \end{itemize}
@@ -182,7 +187,8 @@
 
 \vspace*{12cm}
 
-Die 2 spaltige Ausrichtung des Impressums kann über ``minipage'' gelöst werden, hat zeitlich nicht geklappt
+Die 2 spaltige Ausrichtung des Impressums kann über ``minipage'' gelöst
+werden, hat zeitlich nicht geklappt
 
 \textcolor{DoStat}{\textbf{Impressum}}
 
@@ -194,7 +200,8 @@ Die 2 spaltige Ausrichtung des Impressums kann über ``minipage'' gelöst werden
 
 \textbf{Layout} \hspace{0.5cm} wer auch immer
 
-\textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax: (0000) 12-34567
+\textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax:
+(0000) 12-34567
 
 \textbf{eMail} \hspace{0.5cm} E-Mail Adresse
 
@@ -206,27 +213,55 @@ Die 2 spaltige Ausrichtung des Impressums kann über ``minipage'' gelöst werden
 
 \newpage
 
-\hypertarget{inhaltsverzeichnis}{%
-\subsection{Inhaltsverzeichnis}\label{inhaltsverzeichnis}}
+\hypertarget{themen}{%
+\section{Themen}\label{themen}}
 
-Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich formatiert werden (package: tocloft), beinhaltet aber viel Aufwand. Machbar, aber gut abzustimmen im Hinblick auf die angefragten Produkten.
+\hypertarget{inhaltsverzeichnis}{%
+\subsection*{Inhaltsverzeichnis}\label{inhaltsverzeichnis}}
+\addcontentsline{toc}{subsection}{Inhaltsverzeichnis}
+
+Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich
+formatiert werden (package: tocloft), beinhaltet aber viel Aufwand.
+Machbar, aber gut abzustimmen im Hinblick auf die angefragten Produkten.
+
+Nicht nummerierte Sektionen können im Titel über \{-\} bestimmt werden,
+also hier bspw. \#Inhaltsverzeichnis \{-\}
 
 \includegraphics{B8obV.jpg}
 
 \newpage
 
 \hypertarget{und-2--spaltiges-textlayout}{%
-\subsection{1- und 2- spaltiges Textlayout}\label{und-2--spaltiges-textlayout}}
+\subsection{1- und 2- spaltiges
+Textlayout}\label{und-2--spaltiges-textlayout}}
 
-Texte sind im 1- und 2 spaltigen Layout frei mit integrierten Plots kombinierbar. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
+Texte sind im 1- und 2 spaltigen Layout frei mit integrierten Plots
+kombinierbar. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von
+gerade auf ungerade Seite.
 
 \begin {multicols}{2}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
 \columnbreak
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
 \end {multicols}
 
@@ -239,7 +274,15 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 \begin{flushright}\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map-1} \end{flushright}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
 \includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-1-1}
 
@@ -247,7 +290,15 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 \includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/plot Pyramide 2-spaltig-1}
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+ipsum dolor sit amet.
 
 \includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1}
 

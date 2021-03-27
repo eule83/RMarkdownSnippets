@@ -79,20 +79,22 @@ header-includes:
   # fig.caps above table
   - \usepackage{floatrow}
   - \floatsetup[figure]{capposition=top}
+  - \floatsetup[table]{capposition=top}
   
-
+  - \usepackage{tikz}
 
 
   
 output: 
-  # pdf_document:
-  # bookdown package, hilft momentan beim ToC
-  bookdown::pdf_document2: 
-    clean: TRUE
+  pdf_document:
+  # # bookdown 
+  # bookdown::pdf_document2: 
+    # clean: TRUE
     keep_tex: true # wirft zusätzlich eine .tex Datei aus
-    latex_engine: "xelatex" # erlaubt die Verwnedung lokal installierter Schrifttypen
+    latex_engine: "xelatex" # erlaubt die Verwendung lokal installierter Schrifttypen
     # Inhaltsverzeichnis
     fig_caption: yes
+    number_sections: true
     toc: true
     toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
 toc-title: "Inhaltsverzeichnis"
@@ -120,6 +122,7 @@ library(kableExtra) # tables
 library(wpp2015) # data für pop pyramid
 library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
 library(tidyverse) # import/wrangle
+library(tikzDevice)
 
 source("source.R")
 ```
@@ -158,8 +161,6 @@ data("UNlocations") # Schlüsselliste
 
 HWBV <- readxl::read_excel("./data/HWBV.xlsx") %>% 
   mutate(Wert = round(Wert,1))
-
-
 
 
 ```
@@ -369,7 +370,7 @@ popLine <- popFL %>%
 ```
 
 
-```{r Map, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Map, echo = FALSE, message=FALSE, warning=FALSE, sanitize=FALSE}
 # Farbpalette
 col_scale <- c(
       "#d6ebff",
@@ -400,7 +401,7 @@ Plot_map_SB_ND <-
   # Beschriftung
   labs(
     # Titel
-    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher \nStaatsangehörigkeit",
+    title = "$\\Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit$",
     # Untertitel
     subtitle = "Stichtag 31.12.2018",
     # Fußnote
@@ -408,10 +409,10 @@ Plot_map_SB_ND <-
     # Abbildungsnummer
     tag = "Abb. 13",
     # Legendentitel
-    fill = "Anteil in %") +
+    fill = "$\\Anteil in %$") +
   # Achsenbeschriftung
-  xlab("") +
-  ylab("") +
+  xlab("\\$") +
+  ylab("\\$") +
   # https://ggplot2.tidyverse.org/reference/scale_steps.html
   scale_fill_manual(
     # Farben siehe oben, Anordnung umgekehrt
@@ -687,6 +688,8 @@ tableKableData <- Bezirk %>%
 
 # Ziel
 
+## Text
+
 \textcolor{DoStat}{Heutiges Ziel:}
 
 - erste Eindrücke von gelösten Layout-Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
@@ -732,9 +735,13 @@ Die 2 spaltige Ausrichtung des Impressums kann über "minipage" gelöst werden, 
 
 \newpage
 
-## Inhaltsverzeichnis
+# Themen
+
+## Inhaltsverzeichnis {-}
 
 Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich formatiert werden (package: tocloft), beinhaltet aber viel Aufwand. Machbar, aber gut abzustimmen im Hinblick auf die angefragten Produkten.
+
+Nicht nummerierte Sektionen können im Titel über \{-} bestimmt werden, also hier bspw. \#Inhaltsverzeichnis {-}
 
 \includegraphics{B8obV.jpg}
 
@@ -755,7 +762,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 \newpage
 
-## Mix aus Plots und Text
+## Mix aus Plots und Text 
 
 \Begin{multicols}{2}
 
@@ -813,7 +820,7 @@ popLineGraph
 
 ## Plots 1 spaltig
 Hier eine Ansicht in maximaler Größe
-```{r Plot map 1 spaltig, echo = FALSE, message=FALSE, warning=FALSE}
+```{r, echo = FALSE, message=FALSE, warning=FALSE, sanitize=FALSE}
 Plot_map_SB_ND
 ```
 
