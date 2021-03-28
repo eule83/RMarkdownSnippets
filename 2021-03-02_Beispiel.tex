@@ -75,6 +75,7 @@
 \usepackage{multicol}
 \newcommand{\hideFromPandoc}[1]{#1}
 \hideFromPandoc{ \let\Begin\begin \let\End\end }
+\usepackage{vwcol}
 \definecolor{DoStat}{RGB}{4, 72, 145}
 \definecolor{DoGray}{RGB}{33, 36, 39}
 \usepackage{fancyhdr}
@@ -101,7 +102,6 @@
 \usepackage{floatrow}
 \floatsetup[figure]{capposition=top}
 \floatsetup[table]{capposition=top}
-\usepackage{tikz}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -227,10 +227,10 @@ Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich
 formatiert werden (package: tocloft), beinhaltet aber viel Aufwand.
 Machbar, aber gut abzustimmen im Hinblick auf die angefragten Produkten.
 
-Nicht nummerierte Sektionen können im Titel über \{-\} bestimmt werden,
-also hier bspw. \#Inhaltsverzeichnis \{-\}
-
 \includegraphics{B8obV.jpg}
+
+Nicht nummerierte Sektionen (siehe Inhaltsverzeichnis) können im Titel
+über \{-\} bestimmt werden, also hier bspw. \#Inhaltsverzeichnis \{-\}
 
 \newpage
 
@@ -327,7 +327,7 @@ Hier eine Ansicht in maximaler Größe
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1} \caption{test}\label{fig:unnamed-chunk-5}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1} \caption{Bevölkerungsentwicklung in Deutschland und Frankreich}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 \newpage

@@ -43,6 +43,9 @@ header-includes:
       \let\End\end
       }
       
+  # einseitiges multicol Format mit unterschiedlicher Spaltenbreite     
+  - \usepackage{vwcol}      
+  
   # Farbpalette    
   - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
   - \definecolor{DoGray}{RGB}{33, 36, 39}
@@ -71,9 +74,7 @@ header-includes:
   - \captionsetup[table]{aboveskip=4pt}
   - \captionsetup[figure]{aboveskip=4pt}
   
-  # Ggf. Lösung zur Einbindung von Umschlägen
-  # allerdings funktioniert die Installation des packages nicht
-  # - \usepackage{includepdf}
+
   - \AtBeginDocument{\let\maketitle\relax} # keine Titelseite
   - \newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}}
 
@@ -86,7 +87,8 @@ header-includes:
   - \floatsetup[figure]{capposition=top}
   - \floatsetup[table]{capposition=top}
   
-  - \usepackage{tikz}
+  # TODO unskalierte Grafik Beschriftung
+  # - \usepackage{tikz}
 
 
   
@@ -129,7 +131,7 @@ Sys.setenv(lang = "en_US")
 \listoffigures
 <!-- \addcontentsline{toc}{chapter}{List of Figures} -->
 
-<!-- \cleardoublepage% Wichtig, weil sonst der Eintrag ggf. die falsche Seite zeigt. -->
+
 
 \listoftables
 <!-- \addcontentsline{toc}{chapter}{List of Tables} -->
@@ -422,7 +424,7 @@ Plot_map_SB_ND <-
   # Beschriftung
   labs(
     # Titel
-    title = "$\\Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit$",
+    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit",
     # Untertitel
     subtitle = "Stichtag 31.12.2018",
     # Fußnote
@@ -430,10 +432,10 @@ Plot_map_SB_ND <-
     # Abbildungsnummer
     tag = "Abb. 13",
     # Legendentitel
-    fill = "$\\Anteil in %$") +
+    fill = "Anteil in ") +
   # Achsenbeschriftung
-  xlab("\\$") +
-  ylab("\\$") +
+  xlab("") +
+  ylab("") +
   # https://ggplot2.tidyverse.org/reference/scale_steps.html
   scale_fill_manual(
     # Farben siehe oben, Anordnung umgekehrt
@@ -597,12 +599,12 @@ popLineGraph <- ggplot(
     fontface =2,
     alpha = 0.7) +
   theme_minimal() + 
-  labs(
-      title = "Bevölkerungsentwicklung in Deutschland und Frankreich",
-      subtitle = "1950 bis 2015",
-      caption = "",
-      tag = "",
-      fill = "") +
+  # labs(
+  #     title = "Bevölkerungsentwicklung in Deutschland und Frankreich",
+  #     subtitle = "1950 bis 2015",
+  #     caption = "",
+  #     tag = "",
+  #     fill = "") +
     xlab("") +
     ylab("Anzahl in Millionen") +
   theme(legend.position = "none")
@@ -726,13 +728,17 @@ tableKableData <- Bezirk %>%
 
 \Begin{multicols}{2}
 
-\vspace*{\textheight}
+\vspace*{12cm}
+
+\boldDoStat{Impressum}
+
+<!-- \vspace*{\textheight} -->
 
 \columnbreak 
 
 \vspace*{12cm}
 
-Die 2 spaltige Ausrichtung des Impressums kann über "minipage" gelöst werden, hat zeitlich nicht geklappt
+\boldDoStat{Impressum}
 
 \boldDoStat{Impressum}
 
@@ -762,9 +768,9 @@ Die 2 spaltige Ausrichtung des Impressums kann über "minipage" gelöst werden, 
 
 Das trockene Inhaltsverzeichis aus Seite 1 kann in Latex umfangreich formatiert werden (package: tocloft), beinhaltet aber viel Aufwand. Machbar, aber gut abzustimmen im Hinblick auf die angefragten Produkten.
 
-Nicht nummerierte Sektionen können im Titel über \{-} bestimmt werden, also hier bspw. \#Inhaltsverzeichnis {-}
-
 \includegraphics{B8obV.jpg}
+
+Nicht nummerierte Sektionen (siehe Inhaltsverzeichnis) können im Titel über \{-} bestimmt werden, also hier bspw. \#Inhaltsverzeichnis {-}
 
 \newpage
 
@@ -884,7 +890,7 @@ HWBVBarPlot
 
 
 
-```{r echo = FALSE, fig.cap="test"} 
+```{r echo = FALSE, fig.cap="Bevölkerungsentwicklung in Deutschland und Frankreich"} 
 popLineGraph
 ```
 
