@@ -1,0 +1,9 @@
+\nobreakspace {}\hfill \textbf {Seite}\par 
+\contentsline {section}{\numberline {1}Ziel}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Text}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Themen}{4}{section.2}%
+\contentsline {subsection}{Inhaltsverzeichnis}{4}{section*.4}%
+\contentsline {subsection}{\numberline {2.1}1- und 2- spaltiges Textlayout}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Mix aus Plots und Text}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Plots 1 spaltig}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Tabelle Ganzseitig}{10}{subsection.2.4}%

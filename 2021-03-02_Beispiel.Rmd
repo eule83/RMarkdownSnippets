@@ -611,7 +611,7 @@ popLineGraph <- ggplot(
 ```
 
 
-```{r kable, echo = FALSE, message=FALSE, warning=FALSE}
+```{r kabledata, echo = FALSE, message=FALSE, warning=FALSE}
 tableKableData <- Bezirk %>% 
   mutate(
     Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
@@ -726,39 +726,59 @@ tableKableData <- Bezirk %>%
 
 \newpage
 
-\Begin{multicols}{2}
+<!-- \Begin{multicols}{2} -->
 
-\vspace*{12cm}
+<!-- \vspace*{8cm} -->
 
-\boldDoStat{Impressum}
 
-<!-- \vspace*{\textheight} -->
+<!-- \textbf{Herausgeber} -->
+<!-- <!-- \vspace*{\textheight} --> 
 
-\columnbreak 
+<!-- \columnbreak  -->
 
-\vspace*{12cm}
+<!-- \vspace*{8cm} -->
+<!-- \newline -->
 
-\boldDoStat{Impressum}
+<!-- \textbf{Redaktion} \hspace{0.5cm}  NN -->
 
-\boldDoStat{Impressum}
+<!-- \textbf{Satz} \hspace{0.5cm} NN -->
 
-\textbf{Herausgeber} \hspace{0.5cm} NN
+<!-- \textbf{Layout} \hspace{0.5cm} wer auch immer -->
 
-\textbf{Redaktion} \hspace{0.5cm}  NN
+<!-- \textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax: (0000) 12-34567 -->
 
-\textbf{Satz} \hspace{0.5cm} NN
+<!-- \textbf{eMail} \hspace{0.5cm} E-Mail Adresse -->
 
-\textbf{Layout} \hspace{0.5cm} wer auch immer
+<!-- \textbf{Internet} \hspace{0.5cm} Internetadresse -->
 
-\textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax: (0000) 12-34567
+<!-- \boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.} -->
 
-\textbf{eMail} \hspace{0.5cm} E-Mail Adresse
+<!-- \End{multicols} -->
 
-\textbf{Internet} \hspace{0.5cm} Internetadresse
 
-\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}
 
-\End{multicols}
+\noindent\begin{tabular}[b]{@{}r}
+\boldDoStat{Impressum} \\
+\hspace{4cm}\textbf{Redaktion} \\
+\hspace{4cm}\textbf{Satz} \\
+\hspace{4cm}\textbf{Layout} \\
+\hspace{4cm}\textbf{Kontakt} \\
+\hspace{4cm}\textbf{eMail} \\
+\hspace{4cm}\textbf{Internet} \\
+\end{tabular}
+\hfill
+\begin{tabular}[b]{l@{}}
+blank \\
+Dortmunder Statistik \\
+Dortmunder Statistik \\
+Dortmunder Statistik \\
+InfoLine (0000) 12-34567,Telefax: (0000) 12-34567 \\
+E-Mail Adresse \\
+Internetadresse \\
+\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.} \\
+\end{tabular}
+
+
 
 \newpage
 
