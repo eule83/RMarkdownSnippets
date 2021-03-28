@@ -1,6 +1,5 @@
 \PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
   a4paper,
@@ -40,11 +39,7 @@
 \hypersetup{
   pdftitle={Latex, YAML, RMarkdown},
   pdfauthor={Dortmunder Statistik},
-  colorlinks=true,
-  linkcolor=MidnightBlue,
-  filecolor=Maroon,
-  citecolor=Blue,
-  urlcolor=MidnightBlue,
+  pdfborder={0 0 0},
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
@@ -95,6 +90,10 @@
 \usepackage{color}
 \DeclareCaptionFont{blue}{\color{DoStat}}
 \captionsetup{labelfont={blue,bf}}
+\captionsetup[table]{belowskip=4pt}
+\captionsetup[figure]{belowskip=4pt}
+\captionsetup[table]{aboveskip=4pt}
+\captionsetup[figure]{aboveskip=4pt}
 \AtBeginDocument{\let\maketitle\relax}
 \newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}}
 \usepackage{colortbl}
@@ -132,16 +131,20 @@
 \begin{document}
 \maketitle
 
-\renewcommand*\contentsname{Inhaltsverzeichnis}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{4}
-\tableofcontents
-}
 \renewcommand{\figurename}{Abb.}
 \renewcommand{\tablename}{Tab.}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
 \renewcommand{\listfigurename}{Abbildungsverzeichnis}
 \renewcommand{\listtablename}{Tabellenverzeichnis}
+
+\tableofcontents 
+\addtocontents{toc}{~\hfill\textbf{Seite}\par}
+
+\listoffigures
+
+\listoftables
+
+\newpage
 
 \newpage
 
@@ -311,7 +314,7 @@ ipsum dolor sit amet.
 
 Hier eine Ansicht in maximaler Größe
 
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/Plot map 1 spaltig-1}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1}
 
 \vspace{5mm}
 
@@ -320,11 +323,11 @@ Hier eine Ansicht in maximaler Größe
 \newpage
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1} \caption{blubb}\label{fig:unnamed-chunk-3}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1} \caption{blubb}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1} \caption{test}\label{fig:unnamed-chunk-4}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1} \caption{test}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 \newpage
@@ -489,13 +492,5 @@ Hier eine Ansicht in maximaler Größe
 \end{tablenotes}
 \end{threeparttable}}
 \end{table}
-
-\newpage
-
-\listoffigures
-
-\newpage
-
-\listoftables
 
 \end{document}

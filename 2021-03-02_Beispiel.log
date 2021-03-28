@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.3.25)  27 MAR 2021 08:48
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.3.25)  28 MAR 2021 10:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -253,7 +253,7 @@ tex-text;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 20.
+(Font)              scaled to size 10.0pt on input line 19.
 
 Package fontspec Info: Verdana scale = 0.9999972023354904.
 
@@ -294,11 +294,11 @@ uage=dflt;"
 (fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.: 
 
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/Verdana(1)/m/n on input line 20.
+(Font)                  OT1/lmr/m/n --> TU/Verdana(1)/m/n on input line 19.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/Verdana(1)/m/it on input line 20.
+(Font)                  OT1/lmr/m/it --> TU/Verdana(1)/m/it on input line 19.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/Verdana(1)/b/n on input line 20.
+(Font)                  OT1/lmr/bx/n --> TU/Verdana(1)/b/n on input line 19.
 
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype
 .sty
@@ -347,15 +347,7 @@ Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
 Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
-
-(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/dvipsnam.d
-ef
-File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
-) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/svgnam.def
-File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
-) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/x11nam.def
-File: x11nam.def 2016/05/11 v2.12 Predefined colors according to Unix/X11 (UK)
-))
+)
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.s
 ty
 Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
@@ -509,8 +501,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 48.
-Package hyperref Info: Option `breaklinks' set `true' on input line 48.
+Package hyperref Info: Option `breaklinks' set `true' on input line 43.
 
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.s
 ty
@@ -1175,34 +1166,34 @@ LaTeX Warning: Label `tab:kable' multiply defined.
 )
 \openout1 = `2021-03-02_Beispiel.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 132.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 131.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 132.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 131.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 132.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 131.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 132.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 131.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1231,7 +1222,7 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 12.65442pt on input line 132.
+(Font)              scaled to size 12.65442pt on input line 131.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1270,18 +1261,18 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.65442pt on input line 132.
+(Font)              scaled to size 12.65442pt on input line 131.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 132.
+(Font)              `operators' in the math version `normal' on input line 131.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 132.
+ line 131.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 132.
+(Font)              `operators' in the math version `bold' on input line 131.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 132.
+t line 131.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1368,15 +1359,15 @@ t=math;language=dflt;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 132.
+(Font)              `symbols' in the math version `normal' on input line 131.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 132.
+t line 131.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 132.
+(Font)              `symbols' in the math version `bold' on input line 131.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 132.
+t line 131.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1446,17 +1437,17 @@ t=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-32.
+31.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 132.
+t line 131.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 132
+(Font)              `largesymbols' in the math version `bold' on input line 131
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 132.
-LaTeX Info: Redefining \microtypecontext on input line 132.
+t line 131.
+LaTeX Info: Redefining \microtypecontext on input line 131.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1466,7 +1457,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `Verdana' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package hyperref Info: Link coloring ON on input line 132.
+Package hyperref Info: Link coloring OFF on input line 131.
 
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.st
 y
@@ -1482,9 +1473,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count361
 )
-LaTeX Info: Redefining \ref on input line 132.
-LaTeX Info: Redefining \pageref on input line 132.
-LaTeX Info: Redefining \nameref on input line 132.
+LaTeX Info: Redefining \ref on input line 131.
+LaTeX Info: Redefining \pageref on input line 131.
+LaTeX Info: Redefining \nameref on input line 131.
 (./2021-03-02_Beispiel.out) (./2021-03-02_Beispiel.out)
 \@outlinefile=\write4
 \openout4 = `2021-03-02_Beispiel.out'.
@@ -1546,34 +1537,34 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 \c@FBLTpage=\count362
 )
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 139.
+(Font)              scaled to size 14.4pt on input line 140.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 139.
+(Font)              scaled to size 14.4pt on input line 140.
 (./2021-03-02_Beispiel.toc
 LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
 (Font)              scaled to size 10.0pt on input line 1.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.8581pt on input line 2.
+(Font)              scaled to size 8.8581pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.32721pt on input line 2.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+(Font)              scaled to size 6.32721pt on input line 3.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
 .
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.65579pt on input line 2.
+(Font)              scaled to size 12.65579pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.85905pt on input line 2.
+(Font)              scaled to size 8.85905pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.3279pt on input line 2.
+(Font)              scaled to size 6.3279pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.6532pt on input line 2.
+(Font)              scaled to size 12.6532pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.85724pt on input line 2.
+(Font)              scaled to size 8.85724pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.3266pt on input line 2.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+(Font)              scaled to size 6.3266pt on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1581,7 +1572,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 g
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -1592,15 +1583,23 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 \tf@toc=\write5
 \openout5 = `2021-03-02_Beispiel.toc'.
 
+(./2021-03-02_Beispiel.lof)
+\tf@lof=\write6
+\openout6 = `2021-03-02_Beispiel.lof'.
+
+(./2021-03-02_Beispiel.lot)
+\tf@lot=\write7
+\openout7 = `2021-03-02_Beispiel.lot'.
+
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 146.
+(Font)              scaled to size 10.0pt on input line 147.
 [1
 
 ]
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 152.
+(Font)              scaled to size 12.0pt on input line 155.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 152.
+(Font)              scaled to size 12.0pt on input line 155.
 [2]
 Overfull \vbox (10.0pt too high) has occurred while \output is active []
 
@@ -1621,63 +1620,55 @@ File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file
  (type pdf)
 <use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-2-1.pdf>
 [6]
-File: 2021-03-02_Beispiel_files/figure-latex/Plot map 1 spaltig-1.pdf Graphic f
-ile (type pdf)
-<use 2021-03-02_Beispiel_files/figure-latex/Plot map 1 spaltig-1.pdf>
+File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file
+ (type pdf)
+<use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1.pdf>
 File: 2021-03-02_Beispiel_files/figure-latex/plot Pyramide 1 spaltig-1.pdf Grap
 hic file (type pdf)
 <use 2021-03-02_Beispiel_files/figure-latex/plot Pyramide 1 spaltig-1.pdf>
 [7]
-File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file
- (type pdf)
-<use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-3-1.pdf>
-LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 323.
-LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 323.
 File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file
  (type pdf)
 <use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1.pdf>
+LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
+(Font)              scaled to size 9.0pt on input line 326.
+LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
+(Font)              scaled to size 9.0pt on input line 326.
+File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file
+ (type pdf)
+<use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1.pdf>
 [8]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 11.38898pt on input line 410.
+(Font)              scaled to size 11.38898pt on input line 413.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.59265pt on input line 410.
+(Font)              scaled to size 7.59265pt on input line 413.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 11.39021pt on input line 410.
+(Font)              scaled to size 11.39021pt on input line 413.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.59348pt on input line 410.
+(Font)              scaled to size 7.59348pt on input line 413.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.38788pt on input line 410.
+(Font)              scaled to size 11.38788pt on input line 413.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.59192pt on input line 410.
+(Font)              scaled to size 7.59192pt on input line 413.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 410.
+(Font)              scaled to size 6.0pt on input line 413.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9] [10] [11] (./2021-03-02_Beispiel.lof)
-\tf@lof=\write6
-\openout6 = `2021-03-02_Beispiel.lof'.
-
-[12] (./2021-03-02_Beispiel.lot)
-\tf@lot=\write7
-\openout7 = `2021-03-02_Beispiel.lot'.
-
-[13] (./2021-03-02_Beispiel.aux)
+[9] [10] [11] (./2021-03-02_Beispiel.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `2021-03-02_Beispiel.out' has not changed.
-(rerunfilecheck)             Checksum: BAB24B07487E137C3EBF113F3F8A13B5;1042.
+(rerunfilecheck)             Checksum: E0F9AD13441C18B49D8D53B8610BBF93;1042.
  ) 
 Here is how much of TeX's memory you used:
- 30872 strings out of 478922
- 593873 string characters out of 5865228
- 1120739 words of memory out of 5000000
- 50173 multiletter control sequences out of 15000+600000
+ 30791 strings out of 478922
+ 592311 string characters out of 5865228
+ 1113087 words of memory out of 5000000
+ 50101 multiletter control sequences out of 15000+600000
  409099 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,20n,125p,430b,501s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,20n,125p,430b,510s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 2021-03-02_Beispiel.pdf (13 pages).
+Output written on 2021-03-02_Beispiel.pdf (11 pages).

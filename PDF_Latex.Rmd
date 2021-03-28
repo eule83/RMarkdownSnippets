@@ -252,6 +252,10 @@ Beispiel https://www.kronto.org/thesis/tips/format-toc.html
 
 ## Formatierung
 
+### Abstände 
+
+[Abstände](https://tex.stackexchange.com/questions/36361/how-can-i-inject-the-proper-amount-of-vertical-space-between-captions-and-figure/36362#comment72508_36362)
+
 ### Pandoc Variablen
 
 [Anleitung](https://pandoc.org/MANUAL.html#variables-for-latex)

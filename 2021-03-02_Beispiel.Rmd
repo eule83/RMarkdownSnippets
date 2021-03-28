@@ -18,8 +18,8 @@ mainfont: "Verdana"
 # sansfont:
 # monofont:
 # mathfont:
-linkcolor: "MidnightBlue"
-urlcolor: "MidnightBlue"
+# linkcolor: "MidnightBlue" # Vorsicht: Links sind auch in Verzeichnissen
+# urlcolor: "MidnightBlue" # Vorsicht: Links sind auch in Verzeichnissen
 
   
 # Layout Optionen
@@ -56,15 +56,20 @@ header-includes:
   - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
   - \fancyfoot[RO]{\color{DoStat} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
   - \setlength{\headheight}{12.74066pt}
-  # - \renewcommand{\headrulewidth}{0.4pt}
-  # - \renewcommand{\footrulewidth}{0.4pt}
+
+  
   - \usepackage{graphicx} # für includegraphics
   
   # für Tabellenüberschriften
+  # https://www.namsu.de/Extra/pakete/Caption.html
   - \usepackage[justification=justified,font=small,singlelinecheck=false]{caption}
   - \usepackage{color}
   - \DeclareCaptionFont{blue}{\color{DoStat}}
   - \captionsetup{labelfont={blue,bf}}
+  - \captionsetup[table]{belowskip=4pt}
+  - \captionsetup[figure]{belowskip=4pt}
+  - \captionsetup[table]{aboveskip=4pt}
+  - \captionsetup[figure]{aboveskip=4pt}
   
   # Ggf. Lösung zur Einbindung von Umschlägen
   # allerdings funktioniert die Installation des packages nicht
@@ -95,9 +100,9 @@ output:
     # Inhaltsverzeichnis
     fig_caption: yes
     number_sections: true
-    toc: true
+    # toc: true
     toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
-toc-title: "Inhaltsverzeichnis"
+
 
 ---
 <!--  renaming table and fig labels -->
@@ -105,6 +110,7 @@ toc-title: "Inhaltsverzeichnis"
   
 \renewcommand{\figurename}{Abb.}
 \renewcommand{\tablename}{Tab.}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
 \renewcommand{\listfigurename}{Abbildungsverzeichnis}
 \renewcommand{\listtablename}{Tabellenverzeichnis}
 
@@ -114,6 +120,21 @@ knitr::opts_chunk$set(dev = 'pdf')
 Sys.setenv(lang = "en_US")
 ```
 
+\tableofcontents 
+\addtocontents{toc}{~\hfill\textbf{Seite}\par}
+
+
+
+<!-- \cleardoublepage% Wichtig, weil sonst der Eintrag ggf. die falsche Seite zeigt. -->
+\listoffigures
+<!-- \addcontentsline{toc}{chapter}{List of Figures} -->
+
+<!-- \cleardoublepage% Wichtig, weil sonst der Eintrag ggf. die falsche Seite zeigt. -->
+
+\listoftables
+<!-- \addcontentsline{toc}{chapter}{List of Tables} -->
+
+\newpage
 
 ```{r library, Import, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
 # library
@@ -884,10 +905,3 @@ tableKable
 tableKable
 ```
 
-\newpage
-
-\listoffigures  
-
-\newpage
-
-\listoftables
