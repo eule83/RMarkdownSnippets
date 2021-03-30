@@ -145,7 +145,7 @@ library(kableExtra) # tables
 library(wpp2015) # data für pop pyramid
 library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
 library(tidyverse) # import/wrangle
-library(tikzDevice)
+library(huxtable)
 
 source("source.R")
 ```
@@ -726,37 +726,6 @@ tableKableData <- Bezirk %>%
 
 \newpage
 
-<!-- \Begin{multicols}{2} -->
-
-<!-- \vspace*{8cm} -->
-
-
-<!-- \textbf{Herausgeber} -->
-<!-- <!-- \vspace*{\textheight} --> 
-
-<!-- \columnbreak  -->
-
-<!-- \vspace*{8cm} -->
-<!-- \newline -->
-
-<!-- \textbf{Redaktion} \hspace{0.5cm}  NN -->
-
-<!-- \textbf{Satz} \hspace{0.5cm} NN -->
-
-<!-- \textbf{Layout} \hspace{0.5cm} wer auch immer -->
-
-<!-- \textbf{Kontakt} \hspace{0.5cm} InfoLine (0000) 12-34567, Telefax: (0000) 12-34567 -->
-
-<!-- \textbf{eMail} \hspace{0.5cm} E-Mail Adresse -->
-
-<!-- \textbf{Internet} \hspace{0.5cm} Internetadresse -->
-
-<!-- \boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.} -->
-
-<!-- \End{multicols} -->
-
-
-
 \noindent\begin{tabular}[b]{@{}r}
 \boldDoStat{Impressum} \\
 \hspace{4cm}\textbf{Redaktion} \\
@@ -875,7 +844,6 @@ Plot_map_SB_ND
 \vspace{5mm}
 
 ```{r plot Pyramide 1 spaltig, echo = FALSE}
-
 title <- cowplot::ggdraw()  + 
   cowplot::draw_label(
     "Altersgruppen der Bevölkerung Deutschlands\nStand: 31.12.2018, Angaben in %",
@@ -904,7 +872,7 @@ cowplot::plot_grid(
 
 \newpage
 
-```{r echo = FALSE, fig.cap="blubb" } 
+```{r echo = FALSE, fig.cap="Beschriftung 1" } 
 HWBVBarPlot
 ```
 
@@ -929,5 +897,39 @@ tableKable
 
 ```{r Plot Kable2, echo = FALSE}
 tableKable
+```
+
+```{r hux test}
+tableHux <- as_hux(Bezirk)
+```
+
+```{r}
+tableHux %>% 
+  # cell properties
+        set_all_padding(4) %>% # sets padding, for single direction `left_padding`, `right_padding`, `top_padding` and `bottom_padding`
+      set_outer_padding(0) %>%  # sets the padding around the outside of the huxtable, single = left_padding etc.
+      set_number_format(2:36, contains("perc"),1) %>%  # all number formats (including headers) %>% 
+      set_number_format(2:36, contains("Anzahl"),0) %>%  # all number formats (including headers) %>% 
+        set_number_format(2:36, contains("Dif"),0) %>%  # all number formats (including headers) %>% 
+      set_bold(1, everywhere) %>% # bold setting in row 1 (headers, everywhere = every column)
+      set_bottom_border(1, everywhere) %>%  # bottom border for row 1, every column
+      set_width(0.4) %>% # width of bottom border
+    #  table properties
+      set_caption("Pots of jam for sale") %>% # caption of table
+      set_font_size(10)   %>% 
+      # set_font(-1, everywhere, mono_font)  %>% 
+      set_header_rows(1, TRUE)                             %>% 
+      set_width(0.9)                                       %>% 
+      set_tb_padding(2)                                    %>% 
+      set_label("tab:props")                               %>% 
+      set_col_width(c(.2, .2,.2,.2,.2,.2,.2,.2,.2))     %>% 
+      # set_tb_borders()` to set top and bottom borders;
+      # set_lr_borders() `to set left and right borders;
+      # set_outer_borders()` to set borders around a group of cells.
+      # set_right_border(everywhere, 1, 3) %>% 
+      # set_right_border_style(everywhere, 1, "double") %>% 
+      # set_right_border_color(everywhere, 1, "grey")
+      set_all_borders(brdr(0.4, "solid", "white"))  
+ 
 ```
 

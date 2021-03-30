@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.3.25)  28 MAR 2021 20:59
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2021.3.25)  30 MAR 2021 14:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -522,6 +522,23 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutvoffset=\dimen163
 \Gm@dimlist=\toks23
 )
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.s
+ty
+Package: fancyvrb 2021/01/20 v3.7 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count299
+\FV@InFile=\read2
+\FV@TabBox=\box51
+\c@FancyVerbLine=\count300
+\FV@StepNumber=\count301
+\FV@OutFile=\write3
+) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen164
+\fb@frh=\dimen165
+\FrameRule=\dimen166
+\FrameSep=\dimen167
+)
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.s
 ty
 Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
@@ -538,8 +555,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 105.
 )
-\Gin@req@height=\dimen164
-\Gin@req@width=\dimen165
+\Gin@req@height=\dimen168
+\Gin@req@width=\dimen169
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
@@ -549,28 +566,27 @@ line 40.
 ) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/multicol.st
 y
 Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
-\c@tracingmulticols=\count299
-\mult@box=\box51
-\multicol@leftmargin=\dimen166
-\c@unbalance=\count300
-\c@collectmore=\count301
-\doublecol@number=\count302
-\multicoltolerance=\count303
-\multicolpretolerance=\count304
-\full@width=\dimen167
-\page@free=\dimen168
-\premulticols=\dimen169
-\postmulticols=\dimen170
-\multicolsep=\skip53
-\multicolbaselineskip=\skip54
-\partial@page=\box52
-\last@line=\box53
-\maxbalancingoverflow=\dimen171
-\mult@rightbox=\box54
-\mult@grightbox=\box55
-\mult@gfirstbox=\box56
-\mult@firstbox=\box57
-\@tempa=\box58
+\c@tracingmulticols=\count302
+\mult@box=\box52
+\multicol@leftmargin=\dimen170
+\c@unbalance=\count303
+\c@collectmore=\count304
+\doublecol@number=\count305
+\multicoltolerance=\count306
+\multicolpretolerance=\count307
+\full@width=\dimen171
+\page@free=\dimen172
+\premulticols=\dimen173
+\postmulticols=\dimen174
+\multicolsep=\skip54
+\multicolbaselineskip=\skip55
+\partial@page=\box53
+\last@line=\box54
+\maxbalancingoverflow=\dimen175
+\mult@rightbox=\box55
+\mult@grightbox=\box56
+\mult@gfirstbox=\box57
+\mult@firstbox=\box58
 \@tempa=\box59
 \@tempa=\box60
 \@tempa=\box61
@@ -607,29 +623,30 @@ Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
 \@tempa=\box92
 \@tempa=\box93
 \@tempa=\box94
-\c@minrows=\count305
-\c@columnbadness=\count306
-\c@finalcolumnbadness=\count307
-\last@try=\dimen172
-\multicolovershoot=\dimen173
-\multicolundershoot=\dimen174
-\mult@nat@firstbox=\box95
-\colbreak@box=\box96
-\mc@col@check@num=\count308
+\@tempa=\box95
+\c@minrows=\count308
+\c@columnbadness=\count309
+\c@finalcolumnbadness=\count310
+\last@try=\dimen176
+\multicolovershoot=\dimen177
+\multicolundershoot=\dimen178
+\mult@nat@firstbox=\box96
+\colbreak@box=\box97
+\mc@col@check@num=\count311
 ) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/vwcol/vwcol.sty
 Package: vwcol 2015/02/10 v0.2 Variable-width multicolumn text
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count309
-\calc@Bcount=\count310
-\calc@Adimen=\dimen175
-\calc@Bdimen=\dimen176
-\calc@Askip=\skip55
-\calc@Bskip=\skip56
+\calc@Acount=\count312
+\calc@Bcount=\count313
+\calc@Adimen=\dimen179
+\calc@Bdimen=\dimen180
+\calc@Askip=\skip56
+\calc@Bskip=\skip57
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count311
-\calc@Cskip=\skip57
+\calc@Ccount=\count314
+\calc@Cskip=\skip58
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
@@ -648,47 +665,47 @@ Package: everysel 2021/01/20 v2.1 EverySelectfont Package (MS)
 
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/everysel/everysel-2
 011-10-28.sty))
-\CenteringLeftskip=\skip58
-\RaggedLeftLeftskip=\skip59
-\RaggedRightLeftskip=\skip60
-\CenteringRightskip=\skip61
-\RaggedLeftRightskip=\skip62
-\RaggedRightRightskip=\skip63
-\CenteringParfillskip=\skip64
-\RaggedLeftParfillskip=\skip65
-\RaggedRightParfillskip=\skip66
-\JustifyingParfillskip=\skip67
-\CenteringParindent=\skip68
-\RaggedLeftParindent=\skip69
-\RaggedRightParindent=\skip70
-\JustifyingParindent=\skip71
+\CenteringLeftskip=\skip59
+\RaggedLeftLeftskip=\skip60
+\RaggedRightLeftskip=\skip61
+\CenteringRightskip=\skip62
+\RaggedLeftRightskip=\skip63
+\RaggedRightRightskip=\skip64
+\CenteringParfillskip=\skip65
+\RaggedLeftParfillskip=\skip66
+\RaggedRightParfillskip=\skip67
+\JustifyingParfillskip=\skip68
+\CenteringParindent=\skip69
+\RaggedLeftParindent=\skip70
+\RaggedRightParindent=\skip71
+\JustifyingParindent=\skip72
 )
-\vwcol@sep=\skip72
-\vwcol@rule=\skip73
-\vwcol@totalwidth=\skip74
-\vwcol@averagewidth=\skip75
-\vwcol@parindent=\skip76
-\vwcol@last=\count312
-\vwcol@Ncols=\count313
-\vwcol@Nlines=\count314
-\vwcol@maxrecursion=\count315
-\vwcol@box=\box97
-\vwcol@plainbox=\box98
-\vwcol@outputbox=\box99
+\vwcol@sep=\skip73
+\vwcol@rule=\skip74
+\vwcol@totalwidth=\skip75
+\vwcol@averagewidth=\skip76
+\vwcol@parindent=\skip77
+\vwcol@last=\count315
+\vwcol@Ncols=\count316
+\vwcol@Nlines=\count317
+\vwcol@maxrecursion=\count318
+\vwcol@box=\box98
+\vwcol@plainbox=\box99
+\vwcol@outputbox=\box100
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.s
 ty
 Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
 rs
-\f@nch@headwidth=\skip77
-\f@nch@O@elh=\skip78
-\f@nch@O@erh=\skip79
-\f@nch@O@olh=\skip80
-\f@nch@O@orh=\skip81
-\f@nch@O@elf=\skip82
-\f@nch@O@erf=\skip83
-\f@nch@O@olf=\skip84
-\f@nch@O@orf=\skip85
+\f@nch@headwidth=\skip78
+\f@nch@O@elh=\skip79
+\f@nch@O@erh=\skip80
+\f@nch@O@olh=\skip81
+\f@nch@O@orh=\skip82
+\f@nch@O@elf=\skip83
+\f@nch@O@erf=\skip84
+\f@nch@O@olf=\skip85
+\f@nch@O@orf=\skip86
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
@@ -696,17 +713,17 @@ Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.st
 y
 Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
-\captionmargin=\dimen177
-\captionmargin@=\dimen178
-\captionwidth=\dimen179
-\caption@tempdima=\dimen180
-\caption@indent=\dimen181
-\caption@parindent=\dimen182
-\caption@hangindent=\dimen183
+\captionmargin=\dimen181
+\captionmargin@=\dimen182
+\captionwidth=\dimen183
+\caption@tempdima=\dimen184
+\caption@indent=\dimen185
+\caption@parindent=\dimen186
+\caption@hangindent=\dimen187
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count316
-\c@continuedfloat=\count317
+\c@caption@flags=\count319
+\c@continuedfloat=\count320
 Package caption Info: hyperref package is loaded.
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.s
@@ -714,108 +731,108 @@ ty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
-\col@sep=\dimen184
-\ar@mcellbox=\box100
-\extrarowheight=\dimen185
+\col@sep=\dimen188
+\ar@mcellbox=\box101
+\extrarowheight=\dimen189
 \NC@list=\toks24
-\extratabsurround=\skip86
-\backup@length=\skip87
-\ar@cellbox=\box101
+\extratabsurround=\skip87
+\backup@length=\skip88
+\ar@cellbox=\box102
 )
 \everycr=\toks25
-\minrowclearance=\skip88
+\minrowclearance=\skip89
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/floatrow/floatrow.s
 ty
 Package: floatrow 2008/08/02 v0.3b floatrow: float package extension
-\c@float@type=\count318
+\c@float@type=\count321
 \float@exts=\toks26
-\float@box=\box102
-\@floatcapt=\box103
+\float@box=\box103
+\@floatcapt=\box104
 Package floatrow Info: Modified float package code loaded on input line 455.
 Package floatrow Info: Modified rotfloat package code loaded on input line 473.
 
 \FR@everyfloat=\toks27
 \flrow@foot=\insert252
-\FB@wd=\dimen186
-\FBo@wd=\dimen187
-\FBc@wd=\dimen188
-\FBo@ht=\skip89
-\FBc@ht=\skip90
-\FBf@ht=\skip91
-\FBo@max=\skip92
-\FBc@max=\skip93
-\FBf@max=\skip94
-\c@FBl@b=\count319
-\floatbox@depth=\count320
-\c@FRobj=\count321
-\c@FRsobj=\count322
-\Xhsize=\skip95
-\sXhsize=\skip96
-\Zhsize=\skip97
-\sZhsize=\skip98
-\flrow@rowbox=\box104
-\FR@Zunitlength=\dimen189
-\c@FBcnt=\count323
-\FPOScnt=\count324
-\LTleft=\skip99
-\LTright=\skip100
-\LTleft=\skip101
-\LTright=\skip102
+\FB@wd=\dimen190
+\FBo@wd=\dimen191
+\FBc@wd=\dimen192
+\FBo@ht=\skip90
+\FBc@ht=\skip91
+\FBf@ht=\skip92
+\FBo@max=\skip93
+\FBc@max=\skip94
+\FBf@max=\skip95
+\c@FBl@b=\count322
+\floatbox@depth=\count323
+\c@FRobj=\count324
+\c@FRsobj=\count325
+\Xhsize=\skip96
+\sXhsize=\skip97
+\Zhsize=\skip98
+\sZhsize=\skip99
+\flrow@rowbox=\box105
+\FR@Zunitlength=\dimen193
+\c@FBcnt=\count326
+\FPOScnt=\count327
+\LTleft=\skip100
+\LTright=\skip101
+\LTleft=\skip102
+\LTright=\skip103
 \flrow@types=\toks28
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.s
 ty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen190
-\lightrulewidth=\dimen191
-\cmidrulewidth=\dimen192
-\belowrulesep=\dimen193
-\belowbottomsep=\dimen194
-\aboverulesep=\dimen195
-\abovetopsep=\dimen196
-\cmidrulesep=\dimen197
-\cmidrulekern=\dimen198
-\defaultaddspace=\dimen199
-\@cmidla=\count325
-\@cmidlb=\count326
-\@aboverulesep=\dimen256
-\@belowrulesep=\dimen257
-\@thisruleclass=\count327
-\@lastruleclass=\count328
-\@thisrulewidth=\dimen258
+\heavyrulewidth=\dimen194
+\lightrulewidth=\dimen195
+\cmidrulewidth=\dimen196
+\belowrulesep=\dimen197
+\belowbottomsep=\dimen198
+\aboverulesep=\dimen199
+\abovetopsep=\dimen256
+\cmidrulesep=\dimen257
+\cmidrulekern=\dimen258
+\defaultaddspace=\dimen259
+\@cmidla=\count328
+\@cmidlb=\count329
+\@aboverulesep=\dimen260
+\@belowrulesep=\dimen261
+\@thisruleclass=\count330
+\@lastruleclass=\count331
+\@thisrulewidth=\dimen262
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip103
-\LTright=\skip104
-\LTpre=\skip105
-\LTpost=\skip106
-\LTchunksize=\count329
-\LTcapwidth=\dimen259
-\LT@head=\box105
-\LT@firsthead=\box106
-\LT@foot=\box107
-\LT@lastfoot=\box108
-\LT@cols=\count330
-\LT@rows=\count331
-\c@LT@tables=\count332
-\c@LT@chunks=\count333
+\LTleft=\skip104
+\LTright=\skip105
+\LTpre=\skip106
+\LTpost=\skip107
+\LTchunksize=\count332
+\LTcapwidth=\dimen263
+\LT@head=\box106
+\LT@firsthead=\box107
+\LT@foot=\box108
+\LT@lastfoot=\box109
+\LT@cols=\count333
+\LT@rows=\count334
+\c@LT@tables=\count335
+\c@LT@chunks=\count336
 \LT@p@ftn=\toks29
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.s
 ty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
-\multirow@colwidth=\skip107
-\multirow@cntb=\count334
-\multirow@dima=\skip108
-\bigstrutjot=\dimen260
+\multirow@colwidth=\skip108
+\multirow@cntb=\count337
+\multirow@dima=\skip109
+\bigstrutjot=\dimen264
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
-\wrapoverhang=\dimen261
-\WF@size=\dimen262
-\c@WF@wrappedlines=\count335
-\WF@box=\box109
+\wrapoverhang=\dimen265
+\WF@size=\dimen266
+\c@WF@wrappedlines=\count338
+\WF@box=\box110
 \WF@everypar=\toks30
 Package: wrapfig 2003/01/31  v 3.6
 )
@@ -834,66 +851,171 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.s
 ty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box110
-\sift@deathcycles=\count336
-\@vwid@loff=\dimen263
-\@vwid@roff=\dimen264
+\@vwid@box=\box111
+\sift@deathcycles=\count339
+\@vwid@loff=\dimen267
+\@vwid@roff=\dimen268
 )
-\c@taburow=\count337
-\tabu@nbcols=\count338
-\tabu@cnt=\count339
-\tabu@Xcol=\count340
-\tabu@alloc=\count341
-\tabu@nested=\count342
-\tabu@target=\dimen265
-\tabu@spreadtarget=\dimen266
-\tabu@naturalX=\dimen267
-\tabucolX=\dimen268
-\tabu@Xsum=\dimen269
-\extrarowdepth=\dimen270
-\abovetabulinesep=\dimen271
-\belowtabulinesep=\dimen272
-\tabustrutrule=\dimen273
+\c@taburow=\count340
+\tabu@nbcols=\count341
+\tabu@cnt=\count342
+\tabu@Xcol=\count343
+\tabu@alloc=\count344
+\tabu@nested=\count345
+\tabu@target=\dimen269
+\tabu@spreadtarget=\dimen270
+\tabu@naturalX=\dimen271
+\tabucolX=\dimen272
+\tabu@Xsum=\dimen273
+\extrarowdepth=\dimen274
+\abovetabulinesep=\dimen275
+\belowtabulinesep=\dimen276
+\tabustrutrule=\dimen277
 \tabu@thebody=\toks31
 \tabu@footnotes=\toks32
-\tabu@box=\box111
-\tabu@arstrutbox=\box112
-\tabu@hleads=\box113
-\tabu@vleads=\box114
-\tabu@cellskip=\skip109
+\tabu@box=\box112
+\tabu@arstrutbox=\box113
+\tabu@hleads=\box114
+\tabu@vleads=\box115
+\tabu@cellskip=\skip110
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttable/thre
 eparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box115
+\@tempboxb=\box116
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/thr
 eeparttablex.sty
 Package: threeparttablex 2013/07/23 v0.3 by daleif
-\TPTL@width=\skip110
+\TPTL@width=\skip111
 ) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box116
-\UL@hyphenbox=\box117
-\UL@skip=\skip111
+\UL@box=\box117
+\UL@hyphenbox=\box118
+\UL@skip=\skip112
 \UL@hook=\toks33
-\UL@height=\dimen274
-\UL@pe=\count343
-\UL@pixel=\dimen275
-\ULC@box=\box118
+\UL@height=\dimen278
+\UL@pe=\count346
+\UL@pixel=\dimen279
+\ULC@box=\box119
 Package: ulem 2019/11/18
-\ULdepth=\dimen276
+\ULdepth=\dimen280
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.s
 ty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen277
-\c@nlinenum=\count344
+\rotheadsize=\dimen281
+\c@nlinenum=\count347
 \TeXr@lab=\toks34
+)
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2020/02/25 v2.8b A comprehensive (SI) units package
+\l__siunitx_tmp_box=\box120
+\l__siunitx_tmp_dim=\dimen282
+\l__siunitx_tmp_int=\count348
+\l__siunitx_number_mantissa_length_int=\count349
+\l__siunitx_number_uncert_length_int=\count350
+\l__siunitx_round_int=\count351
+\l__siunitx_process_decimal_int=\count352
+\l__siunitx_process_uncertainty_int=\count353
+\l__siunitx_process_fixed_int=\count354
+\l__siunitx_process_integer_min_int=\count355
+\l__siunitx_process_precision_int=\count356
+\l__siunitx_group_min_int=\count357
+\l__siunitx_angle_marker_box=\box121
+\l__siunitx_angle_unit_box=\box122
+\l__siunitx_angle_marker_dim=\dimen283
+\l__siunitx_angle_unit_dim=\dimen284
+\l__siunitx_unit_int=\count358
+\l__siunitx_unit_denominator_int=\count359
+\l__siunitx_unit_numerator_int=\count360
+\l__siunitx_unit_prefix_int=\count361
+\l__siunitx_unit_prefix_base_int=\count362
+\l__siunitx_unit_prefix_gram_int=\count363
+\l__siunitx_number_product_int=\count364
+\c__siunitx_one_fill_skip=\skip113
+\l__siunitx_table_unit_align_skip=\skip114
+\l__siunitx_table_exponent_dim=\dimen285
+\l__siunitx_table_integer_dim=\dimen286
+\l__siunitx_table_mantissa_dim=\dimen287
+\l__siunitx_table_marker_dim=\dimen288
+\l__siunitx_table_result_dim=\dimen289
+\l__siunitx_table_uncert_dim=\dimen290
+\l__siunitx_table_fill_pre_dim=\dimen291
+\l__siunitx_table_fill_post_dim=\dimen292
+\l__siunitx_table_fill_mid_dim=\dimen293
+\l__siunitx_table_pre_box=\box123
+\l__siunitx_table_post_box=\box124
+\l__siunitx_table_mantissa_box=\box125
+\l__siunitx_table_result_box=\box126
+\l__siunitx_table_number_align_skip=\skip115
+\l__siunitx_table_text_align_skip=\skip116
+) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/hhline.sty
+Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
+) (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/tabularx.st
+y
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen294
+\TX@old@table=\dimen295
+\TX@old@col=\dimen296
+\TX@target=\dimen297
+\TX@delta=\dimen298
+\TX@cols=\count365
+\TX@ftn=\toks35
+)
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/adjustbox/adjustbox
+.sty
+Package: adjustbox 2020/08/19 v1.3 Adjusting TeX boxes (trim, clip, ...)
+
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.t
+ex
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.
+tex
+\XKV@toks=\toks36
+\XKV@tempa@toks=\toks37
+)
+\XKV@depth=\count366
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/adjustbox/adjcalc.s
+ty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/adjustbox/trimclip.
+sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/collectbox/collectb
+ox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box127
+)
+\tc@llx=\dimen299
+\tc@lly=\dimen300
+\tc@urx=\dimen301
+\tc@ury=\dimen302
+Package trimclip Info: Using driver 'tc-xetex.def'.
+
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/adjustbox/tc-xetex.
+def
+File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
+))
+\adjbox@Width=\dimen303
+\adjbox@Height=\dimen304
+\adjbox@Depth=\dimen305
+\adjbox@Totalheight=\dimen306
+\adjbox@pwidth=\dimen307
+\adjbox@pheight=\dimen308
+\adjbox@pdepth=\dimen309
+\adjbox@ptotalheight=\dimen310
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.s
 ty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count345
+\etb@tempcnta=\count367
 ) (./2021-03-02_Beispiel.aux
 
 LaTeX Warning: Label `tab:kabledata' multiply defined.
@@ -901,34 +1023,34 @@ LaTeX Warning: Label `tab:kabledata' multiply defined.
 )
 \openout1 = `2021-03-02_Beispiel.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 131.
-LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 131.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 179.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 131.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 179.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 131.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 179.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 131.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 179.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -957,7 +1079,7 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 12.65442pt on input line 131.
+(Font)              scaled to size 12.65442pt on input line 179.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -996,18 +1118,18 @@ t=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.65442pt on input line 131.
+(Font)              scaled to size 12.65442pt on input line 179.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 131.
+(Font)              `operators' in the math version `normal' on input line 179.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 131.
+ line 179.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 131.
+(Font)              `operators' in the math version `bold' on input line 179.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 131.
+t line 179.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1094,15 +1216,15 @@ t=math;language=dflt;"
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 131.
+(Font)              `symbols' in the math version `normal' on input line 179.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 131.
+t line 179.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 131.
+(Font)              `symbols' in the math version `bold' on input line 179.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 131.
+t line 179.
 
 Package fontspec Info: latinmodern-math scale = 1.265449035442061.
 
@@ -1172,17 +1294,17 @@ t=math;language=dflt;"
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
 (Font)              `largesymbols' in the math version `normal' on input line 1
-31.
+79.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 131.
+t line 179.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 131
+(Font)              `largesymbols' in the math version `bold' on input line 179
 .
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 131.
-LaTeX Info: Redefining \microtypecontext on input line 131.
+t line 179.
+LaTeX Info: Redefining \microtypecontext on input line 179.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1192,7 +1314,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `Verdana' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-Package hyperref Info: Link coloring OFF on input line 131.
+Package hyperref Info: Link coloring OFF on input line 179.
 
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.st
 y
@@ -1206,14 +1328,14 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ttitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count346
+\c@section@level=\count368
 )
-LaTeX Info: Redefining \ref on input line 131.
-LaTeX Info: Redefining \pageref on input line 131.
-LaTeX Info: Redefining \nameref on input line 131.
+LaTeX Info: Redefining \ref on input line 179.
+LaTeX Info: Redefining \pageref on input line 179.
+LaTeX Info: Redefining \nameref on input line 179.
 (./2021-03-02_Beispiel.out) (./2021-03-02_Beispiel.out)
-\@outlinefile=\write3
-\openout3 = `2021-03-02_Beispiel.out'.
+\@outlinefile=\write4
+\openout4 = `2021-03-02_Beispiel.out'.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -1250,7 +1372,7 @@ LaTeX Info: Redefining \nameref on input line 131.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 131.
+LaTeX Info: Redefining \selectfont on input line 179.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
@@ -1269,39 +1391,37 @@ Package caption Info: End \AtBeginDocument code.
 le.sty
 Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 
-\flrow@LT@lasthead=\box119
-\flrow@LT@prelastfoot=\box120
-\c@FBLTpage=\count347
+\flrow@LT@lasthead=\box128
+\flrow@LT@prelastfoot=\box129
+\c@FBLTpage=\count369
 )
-LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 140.
-LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 140.
-(./2021-03-02_Beispiel.toc
-LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 10.0pt on input line 1.
+(c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx-abb
+reviations.cfg
+File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
+)
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.8581pt on input line 3.
+(Font)              scaled to size 8.8581pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.32721pt on input line 3.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-.
+(Font)              scaled to size 6.32721pt on input line 179.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+79.
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.65579pt on input line 3.
+(Font)              scaled to size 12.65579pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.85905pt on input line 3.
+(Font)              scaled to size 8.85905pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.3279pt on input line 3.
+(Font)              scaled to size 6.3279pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 12.6532pt on input line 3.
+(Font)              scaled to size 12.6532pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.85724pt on input line 3.
+(Font)              scaled to size 8.85724pt on input line 179.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.3266pt on input line 3.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+(Font)              scaled to size 6.3266pt on input line 179.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 179
+.
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -1309,36 +1429,49 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 g
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 179
+.
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 (c:/Users/eule/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cf
 g
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-))
-\tf@toc=\write4
-\openout4 = `2021-03-02_Beispiel.toc'.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 188.
+LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 188.
+(./2021-03-02_Beispiel.toc
+LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 1.
+)
+\tf@toc=\write5
+\openout5 = `2021-03-02_Beispiel.toc'.
 
 (./2021-03-02_Beispiel.lof)
-\tf@lof=\write5
-\openout5 = `2021-03-02_Beispiel.lof'.
+\tf@lof=\write6
+\openout6 = `2021-03-02_Beispiel.lof'.
 
 (./2021-03-02_Beispiel.lot)
-\tf@lot=\write6
-\openout6 = `2021-03-02_Beispiel.lot'.
+\tf@lot=\write7
+\openout7 = `2021-03-02_Beispiel.lot'.
 
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 147.
+(Font)              scaled to size 10.0pt on input line 195.
 [1
 
 ]
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 155.
+(Font)              scaled to size 12.0pt on input line 203.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 155.
+(Font)              scaled to size 12.0pt on input line 203.
 [2]
-Overfull \hbox (78.38512pt too wide) in paragraph at lines 187--207
+Overfull \hbox (78.38512pt too wide) in paragraph at lines 235--255
 [][]  [] 
  []
 
@@ -1370,31 +1503,76 @@ File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file
  (type pdf)
 <use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1.pdf>
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 317.
+(Font)              scaled to size 9.0pt on input line 365.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/b/n' will be
-(Font)              scaled to size 9.0pt on input line 317.
+(Font)              scaled to size 9.0pt on input line 365.
 File: 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file
  (type pdf)
 <use 2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-5-1.pdf>
 [8]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 11.38898pt on input line 404.
+(Font)              scaled to size 11.38898pt on input line 452.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.59265pt on input line 404.
+(Font)              scaled to size 7.59265pt on input line 452.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 11.39021pt on input line 404.
+(Font)              scaled to size 11.39021pt on input line 452.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.59348pt on input line 404.
+(Font)              scaled to size 7.59348pt on input line 452.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.38788pt on input line 404.
+(Font)              scaled to size 11.38788pt on input line 452.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.59192pt on input line 404.
+(Font)              scaled to size 7.59192pt on input line 452.
 LaTeX Font Info:    Font shape `TU/Verdana(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 404.
+(Font)              scaled to size 6.0pt on input line 452.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9] [10] [11] (./2021-03-02_Beispiel.aux)
+[9] [10]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 537.
+
+Overfull \vbox (0.31543pt too high) detected at line 570
+ []
+
+[11]
+Overfull \hbox (33.38707pt too wide) in paragraph at lines 1094--1094
+\TU/Verdana(0)/m/n/10 Migrationshintergrund[]  
+ []
+
+
+Overfull \hbox (33.38707pt too wide) in paragraph at lines 1094--1094
+\TU/Verdana(0)/m/n/10 Migrationshintergrund[]  
+ []
+
+
+Overfull \hbox (27.6693pt too wide) in paragraph at lines 1094--1094
+\TU/Verdana(0)/m/n/10 Staatsangehörigkeit)[]  
+ []
+
+
+Overfull \hbox (33.05992pt too wide) in paragraph at lines 1094--1094
+[][]\TU/Verdana(0)/m/n/10 Einpersonenhaushalte[]  
+ []
+
+
+Overfull \hbox (4.80309pt too wide) in paragraph at lines 1094--1094
+[][]\TU/Verdana(0)/m/n/10 Alleinerziehende 
+ []
+
+
+Overfull \hbox (42.64488pt too wide) in paragraph at lines 1094--1094
+\TU/Verdana(0)/m/n/10 Mehrpersonenhaushalte[]  
+ []
+
+
+Overfull \hbox (330.1097pt too wide) in alignment at lines 1094--1094
+[][][][][][][][][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 166.89423pt on input line 1097.
+
+[12] [13] (./2021-03-02_Beispiel.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1402,12 +1580,12 @@ Package rerunfilecheck Info: File `2021-03-02_Beispiel.out' has not changed.
 (rerunfilecheck)             Checksum: E0F9AD13441C18B49D8D53B8610BBF93;1042.
  ) 
 Here is how much of TeX's memory you used:
- 21191 strings out of 478922
- 378874 string characters out of 5865228
- 930706 words of memory out of 5000000
- 40694 multiletter control sequences out of 15000+600000
- 409099 words of font info for 84 fonts, out of 8000000 for 9000
+ 24818 strings out of 478922
+ 467339 string characters out of 5865228
+ 1221150 words of memory out of 5000000
+ 44252 multiletter control sequences out of 15000+600000
+ 409195 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,20n,125p,408b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,20n,125p,417b,919s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on 2021-03-02_Beispiel.pdf (11 pages).
+Output written on 2021-03-02_Beispiel.pdf (13 pages).

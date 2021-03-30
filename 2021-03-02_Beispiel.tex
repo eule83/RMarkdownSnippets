@@ -43,6 +43,46 @@
   breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -116,6 +156,14 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{hyperref}
 
 \title{Latex, YAML, RMarkdown}
 \usepackage{etoolbox}
@@ -314,7 +362,7 @@ Hier eine Ansicht in maximaler Größe
 \newpage
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1} \caption{blubb}\label{fig:unnamed-chunk-4}
+\includegraphics[width=1\linewidth]{2021-03-02_Beispiel_files/figure-latex/unnamed-chunk-4-1} \caption{Beschriftung 1}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 \begin{figure}
@@ -482,6 +530,570 @@ Hier eine Ansicht in maximaler Größe
 \item[4] \textcolor{DoGray}{Durch methodische Verbesserungen (seit 2016) in der Generierung der Daten zum Migrationshintergrund und zu den Haushalten, sind die Daten für einen Zeitvergleich nicht geeignet.}
 \end{tablenotes}
 \end{threeparttable}}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tableHux <-}\StringTok{ }\KeywordTok{as_hux}\NormalTok{(Bezirk)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tableHux }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\CommentTok{# cell properties}
+\StringTok{        }\KeywordTok{set_all_padding}\NormalTok{(}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# sets padding, for single direction `left_padding`, `right_padding`, `top_padding` and `bottom_padding`}
+\StringTok{      }\KeywordTok{set_outer_padding}\NormalTok{(}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# sets the padding around the outside of the huxtable, single = left_padding etc.}
+\StringTok{      }\KeywordTok{set_number_format}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{36}\NormalTok{, }\KeywordTok{contains}\NormalTok{(}\StringTok{"perc"}\NormalTok{),}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# all number formats (including headers) %>% }
+\StringTok{      }\KeywordTok{set_number_format}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{36}\NormalTok{, }\KeywordTok{contains}\NormalTok{(}\StringTok{"Anzahl"}\NormalTok{),}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# all number formats (including headers) %>% }
+\StringTok{        }\KeywordTok{set_number_format}\NormalTok{(}\DecValTok{2}\OperatorTok{:}\DecValTok{36}\NormalTok{, }\KeywordTok{contains}\NormalTok{(}\StringTok{"Dif"}\NormalTok{),}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# all number formats (including headers) %>% }
+\StringTok{      }\KeywordTok{set_bold}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# bold setting in row 1 (headers, everywhere = every column)}
+\StringTok{      }\KeywordTok{set_bottom_border}\NormalTok{(}\DecValTok{1}\NormalTok{, everywhere) }\OperatorTok{%>%}\StringTok{  }\CommentTok{# bottom border for row 1, every column}
+\StringTok{      }\KeywordTok{set_width}\NormalTok{(}\FloatTok{0.4}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# width of bottom border}
+\StringTok{    }\CommentTok{#  table properties}
+\StringTok{      }\KeywordTok{set_caption}\NormalTok{(}\StringTok{"Pots of jam for sale"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# caption of table}
+\StringTok{      }\KeywordTok{set_font_size}\NormalTok{(}\DecValTok{10}\NormalTok{)   }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\CommentTok{# set_font(-1, everywhere, mono_font)  %>% }
+\StringTok{      }\KeywordTok{set_header_rows}\NormalTok{(}\DecValTok{1}\NormalTok{, }\OtherTok{TRUE}\NormalTok{)                             }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{set_width}\NormalTok{(}\FloatTok{0.9}\NormalTok{)                                       }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{set_tb_padding}\NormalTok{(}\DecValTok{2}\NormalTok{)                                    }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{set_label}\NormalTok{(}\StringTok{"tab:props"}\NormalTok{)                               }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\KeywordTok{set_col_width}\NormalTok{(}\KeywordTok{c}\NormalTok{(.}\DecValTok{2}\NormalTok{, }\FloatTok{.2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{,.}\DecValTok{2}\NormalTok{))     }\OperatorTok{%>%}\StringTok{ }
+\StringTok{      }\CommentTok{# set_tb_borders()` to set top and bottom borders;}
+\StringTok{      }\CommentTok{# set_lr_borders()` to set left and right borders;}
+\StringTok{      }\CommentTok{# set_outer_borders()` to set borders around a group of cells.}
+\StringTok{      }\CommentTok{# set_right_border(everywhere, 1, 3) %>% }
+\StringTok{      }\CommentTok{# set_right_border_style(everywhere, 1, "double") %>% }
+\StringTok{      }\CommentTok{# set_right_border_color(everywhere, 1, "grey")}
+\StringTok{      }\KeywordTok{set_all_borders}\NormalTok{(}\KeywordTok{brdr}\NormalTok{(}\FloatTok{0.4}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"white"}\NormalTok{))  }
+\end{Highlighting}
+\end{Shaded}
+
+ 
+  \providecommand{\huxb}[2]{\arrayrulecolor[RGB]{#1}\global\arrayrulewidth=#2pt}
+  \providecommand{\huxvb}[2]{\color[RGB]{#1}\vrule width #2pt}
+  \providecommand{\huxtpad}[1]{\rule{0pt}{#1}}
+  \providecommand{\huxbpad}[1]{\rule[-#1]{0pt}{#1}}
+
+\begin{table}[ht]
+\begin{centerbox}
+\begin{threeparttable}
+\captionsetup{justification=centering,singlelinecheck=off}
+\caption{Pots of jam for sale}
+ \label{tab:props}
+\setlength{\tabcolsep}{0pt}
+\begin{tabularx}{0.9\textwidth}{p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth} p{0.18\textwidth}}
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright \textbf{{\fontsize{10pt}{12pt}\selectfont Variable}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont Anzahl\_2013}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont perc\_2013}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont Anzahl\_2017}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont perc\_2017}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont Anzahl\_2018}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont perc\_2018}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont Dif\_201813}}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft \textbf{{\fontsize{10pt}{12pt}\selectfont Dif\_201817}}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Insgesamt}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52031}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 100.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 53323}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 100.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52970}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 100.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 939}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -353}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Männlich}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 25739}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 49.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26613}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 49.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26441}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 49.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 702}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -172}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Weiblich}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26292}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 50.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26710}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 50.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26529}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 50.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 237}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -181}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Deutsch}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 44023}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 84.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 43702}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 82.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 43362}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 81.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -661}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -340}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont dav. ohne Migrationshintergrund}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 35589}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 68.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 35419}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 66.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 34802}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 65.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -617}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont dav. mit Migrationshintergrund}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8434}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 16.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8283}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8560}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 16.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 277}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Nichtdeutsch (1. Staatsangehörigkeit)}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8008}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9621}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9608}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1600}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -13}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 0 bis unter 3 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1238}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1356}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1313}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 75}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -43}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 3 bis unter 6 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1102}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1136}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1122}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 20}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -14}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 6 bis unter 18 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4123}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 7.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4172}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 7.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4140}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 7.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 17}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -32}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 18 bis unter 25 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5729}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5773}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 10.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5692}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 10.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -37}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -81}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 25 bis unter 35 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 10667}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 20.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11713}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 22.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11554}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 21.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 887}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -159}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 35 bis unter 50 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11095}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 21.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 10331}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 19.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 10203}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 19.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -892}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -128}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 50 bis unter 65 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9259}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 17.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9927}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9965}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 706}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 38}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 65 bis unter 80 Jahre}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 6294}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 12.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 6215}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 6180}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -114}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -35}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 80 Jahre und älter}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2524}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2700}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2801}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 277}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 101}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Ledig}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 27380}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28898}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 54.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28697}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 54.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1317}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -201}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Verheiratet}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 16667}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 32.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 16426}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 30.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 16319}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 30.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -348}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -107}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Verwitwet}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 3266}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 6.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 3107}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 3039}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -227}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -68}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Geschieden}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4458}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4358}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 4290}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 8.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -168}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -68}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Sonstige}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 260}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 0.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 534}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 625}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 365}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 91}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Evangelisch}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 13735}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 12829}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 24.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 12549}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 23.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -1186}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -280}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Römisch-katholisch}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 14848}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 14298}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 14017}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -831}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -281}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Sonstige, ohne Angabe, keine}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 23448}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 45.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26196}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 49.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 26404}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 49.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2956}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 208}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Insgesamt}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1060}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1014}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 969}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 1.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -91}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -45}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Einpersonenhaushalte}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 19985}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 38.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 20393}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 38.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 20501}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 38.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 108}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont (Ehe-)Paare ohne Kind(er)}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 14881}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15027}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15027}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 0}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont (Ehe-)Paare mit Kind(ern)}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11209}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 21.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11410}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 21.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11193}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 21.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -217}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Alleinerziehende Haushalte}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 3147}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 6.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2926}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.5}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2979}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 53}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Sonstige Mehrpersonenhaushalte}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2809}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2836}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 2770}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 5.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -66}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont Bevölkerung in Haushalten insgesamt}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52031}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 100.0}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52592}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 98.6}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 52470}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 99.1}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont }\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -122}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 000-City}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9337}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 17.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9687}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.2}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 9707}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 18.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 370}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 20}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 010-Westfalenhalle}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15517}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 29.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15828}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 29.7}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15863}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 29.9}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 346}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 35}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 020-Dorstfelder Brücke}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 11882}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 22.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 12458}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 23.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 12362}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 23.3}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 480}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -96}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{255, 255, 255}{0.4}}p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{0pt}\parbox[b]{0.18\textwidth-0pt-4pt}{\huxtpad{2pt + 1em}\raggedright {\fontsize{10pt}{12pt}\selectfont 030-Dorstfeld}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15295}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 29.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15350}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.8}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 15038}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont 28.4}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-4pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -257}\huxbpad{2pt}}} &
+\multicolumn{1}{p{0.18\textwidth}!{\huxvb{255, 255, 255}{0.4}}}{\hspace{4pt}\parbox[b]{0.18\textwidth-4pt-0pt}{\huxtpad{2pt + 1em}\raggedleft {\fontsize{10pt}{12pt}\selectfont -312}\huxbpad{2pt}}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}->{\huxb{255, 255, 255}{0.4}}-}
+\arrayrulecolor{black}
+\end{tabularx}
+\end{threeparttable}\par\end{centerbox}
+
 \end{table}
 
 \end{document}
