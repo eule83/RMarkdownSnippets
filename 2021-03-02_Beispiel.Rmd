@@ -89,7 +89,14 @@ header-includes:
   
   # TODO unskalierte Grafik Beschriftung
   # - \usepackage{tikz}
-
+  # https://stackoverflow.com/questions/47774886/controlling-space-between-lines-or-rows-in-tables-using-papaja-with-r-markdown-f
+  # ## Möglichkeit zur Reduzierung von Zeilenabständen
+  # - \usepackage{setspace}
+  # - \AtBeginEnvironment{tabular}{\singlespacing}
+  # - \AtBeginEnvironment{lltable}{\singlespacing}
+  # - \AtBeginEnvironment{tablenotes}{\singlespacing}
+  # - \captionsetup[table]{font={stretch=1}}
+  # - \captionsetup[figure]{font={stretch=1}}
 
   
 output: 
@@ -634,7 +641,7 @@ tableKableData <- Bezirk %>%
     # Without escape = F, characters with a special meaning to LaTeX (like \ & % { }) will be escaped with the result, 
     # that you have the character itself in your output document. 
     linesep = "",
-    caption = "Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
+    caption = "Kable: Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
     # label = "",
     col.names = linebreak(
       c(
@@ -893,43 +900,70 @@ tableKable
 
 \newpage
 
-
-
-```{r Plot Kable2, echo = FALSE}
-tableKable
-```
-
-```{r hux test}
+```{r hux test, echo = FALSE}
 tableHux <- as_hux(Bezirk)
 ```
 
-```{r}
+\begingroup
+\renewcommand{\arraystretch}{0}
+
+```{r echo = FALSE}
 tableHux %>% 
-  # cell properties
-        set_all_padding(4) %>% # sets padding, for single direction `left_padding`, `right_padding`, `top_padding` and `bottom_padding`
+    # cell properties
+      set_all_padding(0) %>% # sets padding, for single direction `left_padding`, `right_padding`, `top_padding` and `bottom_padding`
       set_outer_padding(0) %>%  # sets the padding around the outside of the huxtable, single = left_padding etc.
       set_number_format(2:36, contains("perc"),1) %>%  # all number formats (including headers) %>% 
       set_number_format(2:36, contains("Anzahl"),0) %>%  # all number formats (including headers) %>% 
-        set_number_format(2:36, contains("Dif"),0) %>%  # all number formats (including headers) %>% 
+      set_number_format(2:36, contains("Dif"),0) %>%  # all number formats (including headers) %>% 
       set_bold(1, everywhere) %>% # bold setting in row 1 (headers, everywhere = every column)
-      set_bottom_border(1, everywhere) %>%  # bottom border for row 1, every column
-      set_width(0.4) %>% # width of bottom border
+      set_number_format(everywhere, everywhere, fmt_pretty(big.mark = '.', decimal.mark = ',')) %>% 
     #  table properties
-      set_caption("Pots of jam for sale") %>% # caption of table
-      set_font_size(10)   %>% 
-      # set_font(-1, everywhere, mono_font)  %>% 
-      set_header_rows(1, TRUE)                             %>% 
-      set_width(0.9)                                       %>% 
-      set_tb_padding(2)                                    %>% 
-      set_label("tab:props")                               %>% 
-      set_col_width(c(.2, .2,.2,.2,.2,.2,.2,.2,.2))     %>% 
+      set_position("left") %>% # left alIgned on page
+      set_caption("Huxtable: Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018") %>% # caption of table
+      set_font_size(6)   %>% 
+      set_width(1)                                       %>% 
+      set_tb_padding(0)                                    %>% 
+      set_col_width(c(1.2, .2,.2,.2,.2,.2,.2,.3,.3))     %>% 
+      # renaming and column groups
+      set_contents(1, 1:9, c("Stadtbezirk Innenstadt-West","Anzahl", "% HWB", "Anzahl", "% HWB", "Anzahl", "% HWB", "Anzahl", "Anzahl")) %>% 
+      insert_row("", "2013", "", "2017", "", "2018", "", "2013/2018", "2017/2018", after = 0) %>% 
+      merge_cells(1, 2:3) %>% 
+      merge_cells(1, 4:5) %>% 
+      merge_cells(1, 6:7) %>%
+      set_align(1, everywhere, "center") %>% 
+      set_tb_padding(1, everywhere, 0) %>% 
+      set_bold(1, everywhere) %>% 
+      set_font_size(1, 1:9, 6)   %>% 
+      set_number_format(1,1:9,0)  %>%  # all number formats (including headers) 
+      # define header rows and column (get repeated on page break)
+      set_header_rows(1:2, TRUE) %>% 
+      set_header_cols(1, TRUE) %>% 
+      style_headers(bold = TRUE, text_color = "grey40") %>% 
+      # set_valign(2, everywhere, "middle") %>% 
+      # set_align(2, 3, "center") %>%
+      # set_align(2, 5, "center") %>%
+      # set_align(2, 7, "center") %>%
+      set_bottom_padding(2, everywhere, 1) %>% 
+      # set_left_padding(everywhere, 1, 1) %>% 
+      insert_row("Haupwohnbevölkerung (HWB)", "", "", "", "", "", "", "", "", after = 2) %>% 
+      insert_row("Bevölkerung nach Geschlecht", "", "", "", "", "", "", "", "", after = 4) %>% 
+      insert_row("Bevölkerung nach Migrationshintergrund", "", "", "", "", "", "", "", "", after = 7) %>% 
+      insert_row("Bevölkerung nach Altersgruppen", "", "", "", "", "", "", "", "", after = 12) %>% 
+      insert_row("Bevölkerung nach Familienstand", "", "", "", "", "", "", "", "", after = 22) %>% 
+      set_align(everywhere, 8, "right") 
+
+      # Tabllenrahmen
       # set_tb_borders()` to set top and bottom borders;
       # set_lr_borders() `to set left and right borders;
       # set_outer_borders()` to set borders around a group of cells.
       # set_right_border(everywhere, 1, 3) %>% 
       # set_right_border_style(everywhere, 1, "double") %>% 
       # set_right_border_color(everywhere, 1, "grey")
-      set_all_borders(brdr(0.4, "solid", "white"))  
- 
+      # set_all_borders(brdr(0.4, "solid", "white"))  %>% 
+      # set_bottom_border(1, everywhere) %>%  # bottom border for row 1, every column
+      # set_width(0.4) %>% # width of bottom border
+
 ```
 
+\renewcommand{\arraystretch}{1}
+\endgroup
