@@ -1,9 +1,9 @@
 ---
 # Dokument Informationen
-title: "Latex, YAML, RMarkdown"
-subtitle: "Options, packages and examples for PDF print"
-email: "info.statistik@stadtdo.de"
-author: "Dortmunder Statistik"
+# title: "Latex, YAML, RMarkdown"
+# subtitle: "Options, packages and examples for PDF print"
+# email: "info.statistik@stadtdo.de"
+# author: "Dortmunder Statistik"
 # documentclass: "article"
 # abstract:
 # subject:
@@ -12,16 +12,8 @@ author: "Dortmunder Statistik"
 # lot: no # Tabellenverzeichnis
 # lof: no # Abbildungsverzeichnis
 
-  
-# Schrift
-mainfont: "Verdana"
-# sansfont:
-# monofont:
-# mathfont:
-# linkcolor: "MidnightBlue" # Vorsicht: Links sind auch in Verzeichnissen
-# urlcolor: "MidnightBlue" # Vorsicht: Links sind auch in Verzeichnissen
+fontsize: 10pt
 
-  
 # Layout Optionen
 # margin_left: 
 # margin_right:
@@ -30,6 +22,9 @@ classoption: "twoside" # für unterschiedliche gerade und ungerade Seitenformati
 
 # Latex Optionen
 header-includes:
+  - \usepackage[utf8]{inputenc}
+  - \usepackage{fontspec}
+  - \setmainfont{Verdana}
   # Mehrspaltiges Layout
   # Abstand zwischen Spalten
   - \setlength{\columnsep}{18pt}
@@ -42,9 +37,7 @@ header-includes:
       \let\Begin\begin
       \let\End\end
       }
-      
-  # einseitiges multicol Format mit unterschiedlicher Spaltenbreite     
-  - \usepackage{vwcol}      
+
   
   # Farbpalette    
   - \definecolor{DoStat}{RGB}{4, 72, 145} # Farbdefinitionen zur weiteren Verwendung in YAML mit package xcolor (standardmäßig geladen)
@@ -54,11 +47,12 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[LE]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-  - \fancyhead[RO]{\itshape\nouppercase{\color{DoStat}\leftmark}}
-  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte}
-  - \fancyfoot[RO]{\color{DoStat} random\textbf{text}  • nr. 211 • RMarkdown, Latex und PDF • Erste Schritte \hspace{0.5cm} \thepage}
+  - \fancyhead[LE]{\color{DoStat}\textbf{\nouppercase\leftmark}}
+  - \fancyhead[RO]{\color{DoStat}\textbf{\nouppercase\leftmark}}
+  - \fancyfoot[LE]{\color{DoStat} \thepage \hspace{0.5cm} random\textbf{text} · nr. 211 · RMarkdown, Latex und PDF · Erste Schritte}
+  - \fancyfoot[RO]{\color{DoStat} random\textbf{text} · nr. 211 · RMarkdown, Latex und PDF · Erste Schritte \hspace{0.5cm} \thepage}
   - \setlength{\headheight}{12.74066pt}
+  - \renewcommand{\headrulewidth}{0pt}
 
   
   - \usepackage{graphicx} # für includegraphics
@@ -68,7 +62,7 @@ header-includes:
   - \usepackage[justification=RaggedRight,font=small,singlelinecheck=false]{caption}
   - \usepackage{color}
   - \DeclareCaptionFont{blue}{\color{DoStat}}
-  - \captionsetup{labelfont={blue,bf}}
+  - \captionsetup{labelfont={blue,footnotesize}}
   - \captionsetup[table]{belowskip=4pt}
   - \captionsetup[figure]{belowskip=4pt}
   - \captionsetup[table]{aboveskip=4pt}
@@ -76,7 +70,7 @@ header-includes:
   
 
   - \AtBeginDocument{\let\maketitle\relax} # keine Titelseite
-  - \newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}}
+  - \newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}} # Definition "boldDoStat", um gleichzeitig fett und eingefärbte Schrift zu ermöglichen
 
   # Tabellen Rahmen Farbe
   - \usepackage{colortbl}
@@ -89,18 +83,27 @@ header-includes:
   
   # TODO unskalierte Grafik Beschriftung
   # - \usepackage{tikz}
+  - \usepackage{tabularx}
   
   # Tabellen
   - \usepackage{makecell}
   - \renewcommand\cellgape{\Gape[4pt]}
+  
+  # Floats: Reduzierung von Abständen zwischen Grafiken und Text, um Verschwinden von Grafiken im 2-spaltigen Layout zu vermeiden
+  # im RMarkdown Chunk müssen dann folgende Parameter gesetzt werden:
+    # fig.cap= "Beschriftung", fig.pos="H",  
+  # https://bookdown.org/yihui/rmarkdown-cookbook/figure-placement.html
+  # https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc
+  - \usepackage{float}
+
+
 
   
 output: 
   pdf_document:
-    keep_tex: true # wirft zusätzlich eine .tex Datei aus
     latex_engine: "xelatex" # erlaubt die Verwendung lokal installierter Schrifttypen
     fig_caption: true
-    number_sections: true
+    number_sections: false
     # toc: true # es wird stattdessen \tableofcontents benutzt
     toc_depth: 4 # wieviele Überschriftsebenen sollen im Inhaltsverzeichnis angezeigt werden
 
@@ -115,35 +118,65 @@ output:
 \renewcommand{\listfigurename}{Abbildungsverzeichnis}
 \renewcommand{\listtablename}{Tabellenverzeichnis}
 
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, out.width = '100%', dpi=300)
-knitr::opts_chunk$set(dev = 'pdf')
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  message = FALSE,
+  warning = FALSE,
+  out.extra = "",
+  out.width = '100%', 
+  dpi=300,
+  dev = 'pdf'
+  )
+
 options(tinytex.verbose = TRUE)
 Sys.setenv(lang = "en_US")
 ```
 
-\tableofcontents 
-\addtocontents{toc}{~\hfill\textbf{Seite}\par}
+<!-- Erweitertung des Zeilenabstands für Impressum -->
 
+\renewcommand{\arraystretch}{2}
+\begin{table}[bh]
+  \begin{tabularx}{\textwidth}{r l}
 
+      \makecell[tr]{\boldDoStat{Impressum}} & \makecell[l]{} \\
+    \makecell[tr]{\textbf{Herausgeber}} &  \makecell[l]{Stadt Dortmund, 3/Dez - Stabsstelle Dortmunder Statistik, \\  44122 Dortmund, 07/2019} \\
+    \makecell[tr]{\textbf{Redaktion}} &  \makecell[l]{Berthold Haermeyer (verantwortlich), Manfred Gabriel,\\ Roland Scheebaum, Georg Schulte, Iwona Szargut } \\
+    \makecell[tr]{\textbf{Satz}} &  \makecell[l]{Rebecca Schluck} \\ 
+    \makecell[tr]{\textbf{Layout}} &  \makecell[l]{Gerd Schmedes, Gabak Solutions,\\Grafische Konstruktionen, Dortmund} \\
+    \makecell[tr]{\textbf{Kontakt}} &  \makecell[l]{InfoLine (0231) 50-22124, Telefax: (0231) 50-24777} \\
+    \makecell[tr]{\textbf{eMail}} &  \makecell[l]{info.statistik@stadtdo.de} \\
+    \makecell[tr]{\textbf{Internet}} &  \makecell[l]{www.statistik.dortmund.de} \\
+    \makecell[tr]{} & \makecell[l]{\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}} \\
+  \end{tabularx}
+\end{table}
 
-<!-- \cleardoublepage% Wichtig, weil sonst der Eintrag ggf. die falsche Seite zeigt. -->
-\listoffigures
-<!-- \addcontentsline{toc}{chapter}{List of Figures} -->
-
-
-
-\listoftables
-<!-- \addcontentsline{toc}{chapter}{List of Tables} -->
+<!-- Wiederherstellung der Standardeinstellungen -->
+\renewcommand{\arraystretch}{1}
 
 \newpage
 
-```{r library, Import, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
+
+\tableofcontents
+\newpage
+
+
+\listoffigures
+<!-- \addcontentsline{toc}{section}{List of Figures} -->
+\newpage
+
+\listoftables
+<!-- \addcontentsline{toc}{section}{List of Tables} -->
+
+<!-- \newpage -->
+
+```{r library, Import, results=FALSE}
 # library
 library(ggplot2) # plot/maps
 library(kableExtra) # tables
 library(wpp2015) # data für pop pyramid
-# library(bookdown) # package für Veröffentlichungen mit Rmarkdown  
+library(bookdown) # package für Veröffentlichungen mit Rmarkdown, hat einige feature für Latex (floats)
 library(tidyverse) # import/wrangle
 library(huxtable)
 
@@ -152,7 +185,7 @@ source("source.R")
 ```
 
 
-```{r data, echo = FALSE, message=FALSE, warning = FALSE, results=FALSE}
+```{r data, results = FALSE}
 # import und wrangle data
 Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")   %>% 
   mutate(
@@ -162,7 +195,7 @@ Bezirk <- readxl::read_excel("./data/Detailtab_Bezirk.xlsx", sheet = "Tabelle2")
 
 Gesamt <- readxl::read_excel("./data/Gesamt_Staat.xlsx")
 
-SB <- sf::st_read(dsn = "./shapes/SB/Stadtbezirke_DO.shp") %>% 
+SB <- sf::st_read(dsn = "./shapes/Stadtbezirke_DO.shp") %>% 
   mutate(
     stbeznr = stringr::str_pad(stbeznr, 3, pad = "0"),
     stbeznr = case_when(
@@ -190,7 +223,7 @@ HWBV <- readxl::read_excel("./data/HWBV.xlsx") %>%
 ```
 
 
-```{r wrangle, echo = FALSE, warning = FALSE, message = FALSE}
+```{r wrangle}
 # BEVÖLKERUNGSPYRAMIDE
 
 popFemal <- popF %>% mutate(gender = "F")
@@ -394,7 +427,7 @@ popLine <- popFL %>%
 ```
 
 
-```{r Map, echo = FALSE, message=FALSE, warning=FALSE, sanitize=FALSE}
+```{r Map}
 # Farbpalette
 col_scale <- c(
       "#d6ebff",
@@ -425,13 +458,13 @@ Plot_map_SB_ND <-
   # Beschriftung
   labs(
     # Titel
-    title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit",
-    # Untertitel
-    subtitle = "Stichtag 31.12.2018",
+    # title = "Anteil der Hauptwohnbevölkerung mit nicht-deutscher Staatsangehörigkeit",
+    # # Untertitel
+    # subtitle = "Stichtag 31.12.2018",
     # Fußnote
     caption = paste0("Stadtweiter Durchschnitt: ",mean),
     # Abbildungsnummer
-    tag = "Abb. 13",
+    # tag = "Abb. 13",
     # Legendentitel
     fill = "Anteil in ") +
   # Achsenbeschriftung
@@ -444,7 +477,7 @@ Plot_map_SB_ND <-
 ```
 
 
-```{r Pyramide, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Pyramide}
 
 data <- popPyData
 scale_variable <- c("percPop_country_gender")
@@ -503,7 +536,7 @@ Female <- ggplot(
 ```
 
 
-```{r Bar, echo = FALSE, message=FALSE, warning=FALSE}
+```{r Bar}
 factorlevel <- as.character(HWBV$Variable)
 scalemax <- max(HWBV$Wert)
 scalemin <- min(HWBV$Wert)
@@ -538,19 +571,19 @@ HWBVBarPlot <-   ggplot(HWBVBar) +
             clip = 'off')  +
     theme_minimal() + 
     theme(plot.margin = unit(c(0,5,1,1), "lines")) +
-    labs(
-      title = "Veränderung der Hauptwohlbevölkerung ",
-      subtitle = "in Stadtbezirken, 31.12.2019 bis 31.12.2020, in % und absolut",
-      caption = "",
-      tag = "",
-      fill = "") +
+    # labs(
+    #   title = "Veränderung der Hauptwohnbevölkerung",
+    #   subtitle = "in Stadtbezirken, 31.12.2019 bis 31.12.2020, in % und absolut",
+    #   caption = "",
+    #   tag = "",
+    #   fill = "") +
     xlab("") +
     ylab("") 
 
 ```
 
 
-```{r linechart, echo = FALSE, message=FALSE, warning=FALSE}
+```{r linechart}
 popLineData <- popLine %>%
   mutate(Anzahl = round(Anzahl/1000000,1)) %>% 
   group_by(country, Jahr) %>% 
@@ -612,7 +645,7 @@ popLineGraph <- ggplot(
 ```
 
 
-```{r kabledata, echo = FALSE, message=FALSE, warning=FALSE}
+```{r kabledata}
 tableKableData <- Bezirk %>% 
   mutate(
     Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
@@ -710,62 +743,34 @@ tableKableData <- Bezirk %>%
 
 \newpage
 
-# Ziel
+# Beispiele
 
-## Text
+## Eingefärbter Text, Bullet Points
 
-\textcolor{DoStat}{Heutiges Ziel:}
+\textcolor{DoStat}{Farbe Dostat}
 
-- erste Eindrücke von gelösten Layout-Problemstellungen in der Erstellung von RMarkdown/Latex basierten PDF Dokumenten
-- Plot Beispiele in 1- und 2 spaltigem Layout
+- \boldDoStat{fett, und eingefärbt}
+- Bullet Point Ebene 1
+  - Ebene 2
 
-\textcolor{DoStat}{Ziel des Prozesses:}
+\textbf{Fetter Text}
 
-- Plots basieren teilweise auf öffentlich abrufbaren Daten aus dem Jahresbericht Bevölkerung 2019, teilweise auf frei verfügbare Daten
-- sie dienen lediglich als \textcolor{DoStat}{erste Beispiele} und bedürfen noch umfangreicher Formatierung für einen einheitliches Layout
-- Als Lückenfüller dient im Folgenden Lorem ipsum Text
+- \underline{Bullet Point Ebene 1} 
+- \textit{Kursiver Text}
 
-\newpage
-
-
-\begin{table}[!bh]
-  \begin{tabular}{  r  l }
-    \multicolumn{2}{l}{\hspace{2cm}\boldDoStat{Impressum}} \\
-    \makecell[tr]{\hspace{2cm}\textbf{Herausgeber}} &  \makecell[l]{Stadt Dortmund, 3/Dez - Stabsstelle Dortmunder Statistik, \\  44122 Dortmund, 07/2019} \\
-    \makecell[tr]{\hspace{2cm}\textbf{Redaktion}} &  \makecell[l]{Berthold Haermeyer (verantwortlich), Manfred Gabriel,\\ Roland Scheebaum, Georg Schulte, Iwona Szargut } \\
-    \makecell[tr]{\hspace{2cm}\textbf{Satz}} &  \makecell[l]{Rebecca Schluck} \\ 
-    \makecell[tr]{\hspace{2cm}\textbf{Layout}} &  \makecell[l]{Gerd Schmedes, Gabak Solutions, Grafische Konstruktionen, Dortmund} \\
-    \makecell[tr]{\hspace{2cm}\textbf{Kontakt}} &  \makecell[l]{InfoLine (0231) 50-22124, Telefax: (0231) 50-24777} \\
-    \makecell[tr]{\hspace{2cm}\textbf{eMail}} &  \makecell[l]{info.statistik@stadtdo.de} \\
-    \makecell[tr]{\hspace{2cm}\textbf{Internet}} &  \makecell[l]{www.statistik.dortmund.de} \\
-    \multicolumn{2}{l}{\hspace{2cm}\boldDoStat{\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}}} \\
-  \end{tabular}
-\end{table}
-
-
-\newpage
-
-
-
-# Themen
-
-## Inhaltsverzeichnis {-}
-
-
-Nicht nummerierte Sektionen (siehe Inhaltsverzeichnis) können im Titel über \{-} bestimmt werden, also hier bspw. \#Inhaltsverzeichnis {-}
-
-\newpage
 
 ## 1- und 2- spaltiges Textlayout
 
-Texte sind im 1- und 2 spaltigen Layout frei mit integrierten Plots kombinierbar. Ebenso sind Kopf- und Fußzeile anpassbar und wechseln von gerade auf ungerade Seite.
+1 spaltiger Text über 2 Spalten Layout. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \Begin{multicols}{2}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 \columnbreak
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+- Bullets 2-spaltig
+  - Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
 
 \End{multicols}
 
@@ -775,20 +780,20 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 \Begin{multicols}{2}
 
-```{r Plot map, echo = FALSE, message=FALSE, warning=FALSE, fig.fullwidth=TRUE, fig.align = 'right'}
+```{r  fig.pos="H", fig.cap= "Karte in 2-spaltigem Layout"}
 Plot_map_SB_ND
 ```
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
-```{r echo = FALSE } 
+```{r fig.pos="H", fig.cap= "Plot mit gaaaanz ganz ganz ganz langem Titel"} 
 HWBVBarPlot
 ```
 
 
 \columnbreak
 
-```{r plot Pyramide 2-spaltig, echo = FALSE, warning = FALSE}
+```{r plot Pyramide, fig.pos="H", fig.cap= "Test"}
 
 title <- cowplot::ggdraw()  + 
   cowplot::draw_label(
@@ -809,18 +814,18 @@ plot <- cowplot::plot_grid(
   labels = c("weiblich", "männlich"))
 
 cowplot::plot_grid(
-  title, 
+  # title, 
   plot,
-  ncol = 1,
+  ncol = 1
   # rel_heights values control vertical title margins
-  rel_heights = c(0.1, 1)
+  # rel_heights = c(0.1, 1)
 )
 ```
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 
-```{r echo = FALSE } 
+```{r LineGraphPlot, fig.pos="H", fig.cap= "Test"} 
 popLineGraph
 ```
 
@@ -830,13 +835,13 @@ popLineGraph
 
 ## Plots 1 spaltig
 Hier eine Ansicht in maximaler Größe
-```{r, echo = FALSE, message=FALSE, warning=FALSE, sanitize=FALSE}
+```{r MapPlotFP}
 Plot_map_SB_ND
 ```
 
 \vspace{5mm}
 
-```{r plot Pyramide 1 spaltig, echo = FALSE}
+```{r pyramidPlotFP, fig.cap="Altersgruppen der Bevölkerung Deutschlands"}
 
 title <- cowplot::ggdraw()  + 
   cowplot::draw_label(
@@ -856,31 +861,31 @@ plot <- cowplot::plot_grid(
   labels = c("weiblich", "männlich"))
 
 cowplot::plot_grid(
-  title, 
+  # title, 
   plot,
-  ncol = 1,
-  # rel_heights values control vertical title margins
-  rel_heights = c(0.1, 1)
+  ncol = 1
+  # # rel_heights values control vertical title margins
+  # rel_heights = c(0.1, 1)
 )
 ```
 
 \newpage
 
-```{r echo = FALSE, fig.cap="blubb" } 
+```{r LineGraphFT, fig.pos="H", fig.cap= "Line Graph full size"} 
+popLineGraph
+```
+
+```{r BarPlot, fig.cap="Veränderung der Hauptwohnbevölkerung"} 
 HWBVBarPlot
 ```
 
-
-
-```{r echo = FALSE, fig.cap="Bevölkerungsentwicklung in Deutschland und Frankreich"} 
-popLineGraph
-```
 
 \newpage
 
 ## Tabelle Ganzseitig
 
-```{r Plot Kable, echo = FALSE}
+
+```{r Plot Kable}
 tableKable
 ```
 
@@ -888,17 +893,18 @@ tableKable
 \newpage
 
 
-\newpage
-
-```{r hux test, echo = FALSE}
-tableHux <- as_hux(Bezirk)
-```
 
 \begingroup
 \renewcommand{\arraystretch}{0}
 
-```{r echo = FALSE}
-tableHux %>% 
+```{r}
+tableHux <- as_hux(Bezirk)
+```
+
+
+```{r tableHux Plot}
+
+tableHux  %>% 
     # cell properties
       set_all_padding(0) %>% # sets padding, for single direction `left_padding`, `right_padding`, `top_padding` and `bottom_padding`
       set_outer_padding(0) %>%  # sets the padding around the outside of the huxtable, single = left_padding etc.
