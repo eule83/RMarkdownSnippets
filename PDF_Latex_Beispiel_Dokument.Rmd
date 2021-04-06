@@ -137,10 +137,13 @@ Sys.setenv(lang = "en_US")
 <!-- Erweitertung des Zeilenabstands für Impressum -->
 
 \renewcommand{\arraystretch}{2}
-\begin{table}[bh]
+
+$$\\[14cm]$$
+
+\begin{table*}[hb]
   \begin{tabularx}{\textwidth}{r l}
 
-      \makecell[tr]{\boldDoStat{Impressum}} & \makecell[l]{} \\
+    \makecell[tr]{\boldDoStat{Impressum}} & \makecell[l]{} \\
     \makecell[tr]{\textbf{Herausgeber}} &  \makecell[l]{Stadt Dortmund, 3/Dez - Stabsstelle Dortmunder Statistik, \\  44122 Dortmund, 07/2019} \\
     \makecell[tr]{\textbf{Redaktion}} &  \makecell[l]{Berthold Haermeyer (verantwortlich), Manfred Gabriel,\\ Roland Scheebaum, Georg Schulte, Iwona Szargut } \\
     \makecell[tr]{\textbf{Satz}} &  \makecell[l]{Rebecca Schluck} \\ 
@@ -150,12 +153,11 @@ Sys.setenv(lang = "en_US")
     \makecell[tr]{\textbf{Internet}} &  \makecell[l]{www.statistik.dortmund.de} \\
     \makecell[tr]{} & \makecell[l]{\boldDoStat{Nachdruck, auch auszugsweise, mit Quellenangabe gestattet.}} \\
   \end{tabularx}
-\end{table}
+\end{table*}
 
-<!-- Wiederherstellung der Standardeinstellungen -->
 \renewcommand{\arraystretch}{1}
 
-\newpage
+\clearpage
 
 
 \tableofcontents
@@ -646,6 +648,14 @@ popLineGraph <- ggplot(
 
 
 ```{r kabledata}
+# linesep function
+# https://stackoverflow.com/a/65844319
+linesep<-function(x,y=character()){
+  if(!length(x))
+    return(y)
+  linesep(x[-length(x)], c(rep('',x[length(x)]-1),'\\addlinespace\\addlinespace',y))  
+}
+
 tableKableData <- Bezirk %>% 
   mutate(
     Dif_201813 = replace_na(Dif_201813, "-$^{4}$"),
@@ -667,7 +677,7 @@ tableKableData <- Bezirk %>%
     align = c("l", "r", "r", "r", "r", "r", "r", "r", "r" ),
     # Without escape = F, characters with a special meaning to LaTeX (like \ & % { }) will be escaped with the result, 
     # that you have the character itself in your output document. 
-    linesep = "",
+    linesep = linesep(c(3,8,12,15,22)),
     caption = "Stadtbezirk Innenstadt-West: Bevölkerung im Zeitvergleich 2013 bis 2018",
     # label = "",
     col.names = linebreak(
