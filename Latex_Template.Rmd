@@ -1,0 +1,107 @@
+---
+###### METADATEN ######
+title: 
+author: 
+date: 
+# Hinweis: es wird keine Titelseite ausgegeben. Dies hat den Grund, dass diese bei Print-Produkten extern eingebunden über Adobe PDF eingebunden werden. Angaben zur Autorengruppe etc. finden sich im Impressum, welches als Tabelle in "beforebody.tex" gelayoutet wurde.
+
+###### PDF-FORMATIERUNG #####
+# Format
+papersize: "A4"
+# unterschiedliche Formatierung gerader und ungerader Seiten
+classoption: "twoside"
+# Schriftgrad
+fontsize: 10pt
+# Beschriftungen von Tabellen/Abbildungen
+fig_caption: true
+# kein automatisch generiertes Tabellenverzeichnis, da manuell angepasstes und platziertes Layout
+lot: false 
+# kein automatisch generiertes Abbildungsverzeichnis, da manuell angepasstes und platziertes Layout
+lof: false 
+
+
+
+###### OUTPUT OPTIONEN ######
+output:
+  bookdown::pdf_document2:
+    # kein automatisch generiertes Inhaltsverzeichnis, da manuell angepasst und in der Datei beforebody.tex platziert
+    toc: false
+    # Anzahl der im tiefsten Abschnittsgliederung, die im Inhaltsverzeichnis angezeigt wird
+    toc_depth: 4
+    # keine Abschnittsnummerierung
+    number_sections: false
+    # Xelatex, da Schriftgrade importiert werden
+    latex_engine: xelatex
+    includes:
+      # läd Latex packages und Optionen
+      in_header: preamble.tex
+      # läd Impressum, Inhalts-, Tabellen- und Abbildungsverzeichnis
+      before_body: beforebody.tex
+---
+
+```{r,  child="setup.Rmd"}
+# Chunk Einstellungen in "setup.Rmd"
+```
+
+```{r sources, include = FALSE}
+# packages
+source('scripts/packages.R')
+# Einstellung zum Corporate Design
+source('scripts/fonts_colors.R')
+# ggplot und kable themes
+source('scripts/themes.R')
+```
+
+# Einführung
+
+- Autor: Fabian Koch
+- Letztes Update: `r format(Sys.time(), '%d %B, %Y')`
+
+## To Dos
+
+- Texterstellung Kapitel "Latex Installation", "frutiger" und Erstellung eines Projektes
+- Erstellung von themes.R, Ablage der Themes aus Projekten in dieser Datei und Versionierung und Beschreibung der Themes in "Latex_Template.Rmd"
+- Finalisierung der Datei "fonts_colors.R" mit fertigen und abgestimmten Farbpaletten, Versionierung und Beschreibung der Paletten in "Latex_Template.Rmd"
+
+## Ziel
+
+Das Dokument beschreibt das Vorgehen zum Anlegen eines neuen R-Projektes mit dem Ziel einer Erstellung eines PDF-Print Produktes. Erstellt wird dieses Print Produkt in RMarkdown, das dabei, grob zusammengefasst, auf Latex zurückgreift. Sowohl für Latex als auch für RMarkdown lassen sich grundlegende Einstellungen definieren, die in jedem Projekt gleich sein sollten. Diese würden wurden in separate Dateien ausgelagert, die vom Basis Dokument "Latex_Template.Rmd" eingelesen werden. Ziel ist einerseits das Verkleinern des letztendlichen Markdown Dokuments aber auch das Systematisieren der Datenhaltung innerhalb fester Dateien, die einzeln referenziert bzw. kopiert werden.
+
+\boldDoStat{Beschriebene Schritte:}
+
+- Datei Struktur
+- Schritte zur Installation von Latex und Schrifttypen auf dem lokalen Rechner
+- Schritte in der Erstellung eines Projektes
+
+## Datei Struktur
+
+Das Template setzt sich aus unterschiedlichen Dateien zusammen. Diese müssen bei jedem neuen Projekt in den entsprechenden Projekt Ordner kopiert werden, damit dieses darauf zugreifen kann. Hier können dann auch Anpassungen stattfinden, wie z.B. die Versionierung der Kopf- und Fußzeile, des Impressums etc.
+
+Im Kopf des RMarkdown Dokuments befinden sich unter \textcolor{DoStat}{OUTPUT OPTIONEN}, unter output/includes die Import Funktion zu den Dateien \textcolor{DoStat}{preamble.tex} und \textcolor{DoStat}{beforebody.tex.}
+
+Ein neu angelegtes "Latex-Print Projekt" muss folgende Dateien beinhalten:
+
+
+1. \boldDoStat{RMarkdown:}
+
+- \textcolor{DoStat}{Latex\_template.Rmd:} das Ausgangsdokument, in dem später gearbeitet wird
+- \textcolor{DoStat}{setup.Rmd:} sämtliche Rmarkdown Einstellungen, die im ersten Chunk "Setup" geladen werden.
+
+2.  \boldDoStat{R-Skripte}
+- die Skripte liegen im Unterordner \textcolor{DoStat}{sources}, der mitkopiert werden muss
+- \textcolor{DoStat}{packages.R:} zu ladende bzw. zu installierende packages
+- \textcolor{DoStat}{fonts\_colors.R:} laden der Schrifttypen und Farbeinstellungen
+- \textcolor{DoStat}{themes.R:} ggplot und kableExtra/Huxtable Themes
+
+3. \boldDoStat{Latex:}
+
+- \textcolor{DoStat}{preamble.tex:} zu ladenden Latex packages und Einstellungen
+- \textcolor{DoStat}{beforebody.tex:} sich in sämtlichen Dokumenten wiederfindende Dokumentbausteine, die sich vor dem Textkörper befinden (Impressum, Verzeichnisse). Diese müssen an die jeweilige Publikation dort angepasst werden.
+- \textcolor{DoStat}{afterbody.tex:} existiert noch nicht, es muss noch abgestimmt werden, ob Bibliographien benötigt werden.
+
+## Latex Installation
+
+## Installation der Schrift "frutiger
+
+## Erstellung eines Projektes
+

@@ -40,7 +40,7 @@ theme_ggplot2_map_print_A4_1C <- function(...) {
     plot.title = element_text(size = 9, 
                               color = default_font_color
                               # face = "bold"
-                              ),
+    ),
     plot.subtitle = element_text(size = 7, 
                                  color = default_font_color,
                                  margin = margin(b = -0.1,
@@ -110,7 +110,7 @@ theme_ggplot2_popPy_print_A4_1C <- function(...) {
     plot.title = element_text(size = 7,
                               color = default_font_color
                               # face = "bold"
-                              ),
+    ),
     plot.subtitle = element_text(size = 7,
                                  color = default_font_color,
                                  margin = margin(b = -0.1,

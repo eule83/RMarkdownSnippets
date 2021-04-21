@@ -1,0 +1,149 @@
+% Stadt Dortmund, Dortmunder Statistik
+% Autor: Fabian Koch, fkoch@stadtdo.de
+
+
+% Dies ist eine Vorlage für eine RMardkown Präambel, ausgerichtet auf spezifische Kriterien von Printprodukten der Dortmunder Statistik
+% Sie bildet nur ein Bruchteil der verfügbaren Optionen ab
+
+% Kurzeinführung mit weiterführenden Links: https://bookdown.org/yihui/rmarkdown-cookbook/latex-template.html
+
+% Weiterführende Ressourcen:
+% Pandoc Template Anleitung mit allen Optionen: https://pandoc.org/MANUAL.html#templates
+
+% Zur Benutzung des Templates muss diese im YAML Header des RMarkdown Dokumentes integriert werden:
+% Beispiel:
+% output:
+%   bookdown::pdf_document2:
+%     includes:
+%       in_header: preamble.tex
+
+% Hinweise:
+% Die Präambel ist in KATEGORIEN unterteilt
+% Kommentare im Skript erfolgen jeweils über der jeweiligen Variable
+
+
+
+%%%%% SCHRIFT %%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+% hier ein Beispiel für den Import der Dortmunder CD Schrift "frutiger"
+% es wird entsprechend der Dateiname im Windows font Verzeichnis angegeben
+\setmainfont{LTe50331_0.ttf}[
+    BoldFont = LTe50333_0.ttf ,
+    ItalicFont = LTe50332_0.ttf ,
+    BoldItalicFont = LTe50332_0.ttf]
+
+% Hinweis:
+% das R package {{systemfonts}} zeigt installierte Schriften an
+% im Markdown Dokument müssen dann die Schriften geladen werden
+% im Markdown Dokument müssen dann die Schriften geladen werden
+% windowsFonts(sans="Frutiger LT 55 Roman")
+% loadfonts(device="win")
+% loadfonts(device="postscript")
+% dies geschieht im gelieferten Beispiel im Skript "fonts_colors" im Unterordner scripts
+
+
+%%%%% Seiten Layout %%%%%
+% das package {multicol} erlaubt mehrspaltige Seiten Layouts
+\usepackage{multicol}
+% Work around für pandoc markdown
+% https://stackoverflow.com/questions/40982836/latex-multicolumn-block-in-pandoc-markdown
+% \newcommand{\hideFromPandoc}[1]{#1}
+% \hideFromPandoc{
+%       \let\Begin\begin
+%       \let\End\end
+%       }
+% Spaltenabstand
+\setlength{\columnsep}{15pt}
+
+
+
+%%%%% FARBEN %%%%%
+% Farbdefinitionen zur weiteren Verwendung
+\definecolor{DoStat}{RGB}{0, 84, 189} 
+\definecolor{DoGray}{RGB}{33, 36, 39}
+% Definition  des Befehls "boldDoStat", um gleichzeitig fett und eingefärbte Schrift zu ermöglichen
+\newcommand\boldDoStat[1]{\textcolor{DoStat}{\textbf{#1}}} 
+% Tabellen Rahmen Farbe
+\usepackage{colortbl}
+\arrayrulecolor{DoGray}
+
+
+%%%%% KOPF-/FUßZEILEN
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\color{DoStat}\textbf{\nouppercase\leftmark}}
+\fancyhead[RO]{\color{DoStat}\textbf{\nouppercase\leftmark}}
+\fancyfoot[LE]{\color{DoStat} \textbf{\thepage} \hspace{0.5cm} stadt dortmund • Name der Veröffentlichung • Jahr}
+\fancyfoot[RO]{\color{DoStat} stadt dortmund • Name der Veröffentlichung • Jahr \hspace{0.5cm} \textbf{\thepage}}
+\setlength{\headheight}{12.8pt}
+\renewcommand{\headrulewidth}{0pt}
+
+
+%%%%% BESCHRIFTUNGEN %%%%%
+\usepackage[justification=RaggedRight,font=small,singlelinecheck=false]{caption}
+\usepackage{color}
+\DeclareCaptionFont{blue}{\color{DoStat}}
+\captionsetup{labelfont={blue,footnotesize}}
+\captionsetup[table]{belowskip=4pt}
+\captionsetup[figure]{belowskip=4pt}
+\captionsetup[table]{aboveskip=4pt}
+\captionsetup[figure]{aboveskip=4pt}
+
+% Positioniert Beschriftungen über Tabelle
+\usepackage{floatrow}
+\floatsetup[figure]{capposition=top}
+\floatsetup[table]{capposition=top}
+
+
+%%%%% FLOATS %%%%%
+% Das package Float erlaubt das freie Positionieren von Grafiken und Tabellen. 
+% insb. in Verbindung mit einem 2-spaltigem Layout und RMarkdown Beschriftungen mit fig.cap= "Beschriftung", werden  Grafiken "geschluckt". Das Umgehen von Floats ist ebenfalls wichtig, wenn 2-Grafiken zusammen auf eine Seite "gezwungen" werden sollen.
+% im RMarkdown Chunk müssen dann folgende Parameter gesetzt werden:
+% fig.cap= "Beschriftung", fig.pos="H"
+% https://bookdown.org/yihui/rmarkdown-cookbook/figure-placement.html
+% https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc
+\usepackage{float}
+
+
+%%%%% SONSTIGES %%%%%
+% erlaubt Einbindung von Grafiken über \includegraphics{}
+\usepackage{graphicx} 
+
+
+% Tabellen
+\usepackage{tabularx}
+
+\usepackage{makecell}
+\renewcommand\cellgape{\Gape[4pt]}
+
+
+% Falls Seiten im Querformat gewünscht sind
+\usepackage{lscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+
+% keine Titelseite, da diese in Dortmund extern entwickelt und angebunden wird
+\AtBeginDocument{\let\maketitle\relax} 
+
+
+\geometry{left=2.3cm,right=2.3cm,top=2.3cm,bottom=2.3cm}
+
+
+% deutsche Bezeichnung für Verzeichnisse und Beschriftungen
+\renewcommand{\figurename}{Abb.}
+\renewcommand{\tablename}{Tab.}
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
+
+% \renewcommand{\topfraction}{.85}
+% \renewcommand{\bottomfraction}{.7}
+% \renewcommand{\textfraction}{.15}
+% \renewcommand{\floatpagefraction}{.66}
+% \setcounter{topnumber}{3}
+% \setcounter{bottomnumber}{3}
+% \setcounter{totalnumber}{4}
+
